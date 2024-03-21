@@ -1,0 +1,28 @@
+Practica 1: tenicas algoritmicas
+
+Bactracking
+
+1) Las soluciones (candidatas) son los vectores a = (a1 , . . . , an ) de valores binarios; el subconjunto
+de C representado por a contiene a ci si y sólo si ai = 1.
+a es una solución válida cuando la suma del subconjunto es igual a k.
+
+(a) C = {6, 12, 6} y k = 12
+soluciones candidatas: a1 = (0, 0, 0)   a2 = (1, 0, 0)  a3 = (1, 1, 0)  a4 = (1, 0, 1)
+                       a5 = (1, 1, 1)   a6 = (0, 1, 1)  a7 = (0, 0, 1)  a8 = (0, 1, 0)     
+
+(b) C = {6, 12, 6} y k = 12
+soluciones validas: a1 = (0, 1, 0)  a2 = (1, 0, 1)
+
+(c) C = {6, 12, 6} y k = 12
+soluciones parciales: p1 = ()   -> p2 = (0) -> p3 = (0, 0) -> p4 = (0, 0, 0)
+                                                           -> p5 = (0, 0, 1)
+                                            -> p6 = (0, 1) -> p7 = (0, 1, 0)
+                                                           -> p8 = (0, 1, 1)
+                                -> p9 = (1) -> p10 = (1, 0) -> p11 = (1, 0, 0)
+                                                            -> p12 = (1, 0, 1)
+                                            -> p13 = (1, 1) -> p14 = (1, 1, 0)
+                                                            -> p15 = (1, 1, 1)
+
+(d) El arbol de backtracking es similar a las soluciones parciales, se empieza con la solucion vacia y se van agregando o no
+agregando elemntos al subconjunto, los nodos intermedios son soluciones parciales, y la hojas son soluciones candidatas.
+Las soluciones candidatas que sumen 12 seran las soluciones validas.
