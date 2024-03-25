@@ -1,28 +1,82 @@
-Practica 1: tenicas algoritmicas
+Practica 1: tecnicas algoritmicas
 
 Bactracking
 
-1) Las soluciones (candidatas) son los vectores a = (a1 , . . . , an ) de valores binarios; el subconjunto
-de C representado por a contiene a ci si y sólo si ai = 1.
-a es una solución válida cuando la suma del subconjunto es igual a k.
+1) SumaSubconjuntosBT       
+    Las soluciones (candidatas) son los vectores a = (a1 , . . . , an ) de valores binarios; el subconjunto
+    de C representado por a contiene a ci si y sólo si ai = 1.
+    a es una solución válida cuando la suma del subconjunto es igual a k.
 
-(a) C = {6, 12, 6} y k = 12
-soluciones candidatas: a1 = (0, 0, 0)   a2 = (1, 0, 0)  a3 = (1, 1, 0)  a4 = (1, 0, 1)
-                       a5 = (1, 1, 1)   a6 = (0, 1, 1)  a7 = (0, 0, 1)  a8 = (0, 1, 0)     
+    (a) C = {6, 12, 6} y k = 12
+    soluciones candidatas: a1 = (0, 0, 0)   a2 = (1, 0, 0)  a3 = (1, 1, 0)  a4 = (1, 0, 1)
+                        a5 = (1, 1, 1)   a6 = (0, 1, 1)  a7 = (0, 0, 1)  a8 = (0, 1, 0)     
 
-(b) C = {6, 12, 6} y k = 12
-soluciones validas: a1 = (0, 1, 0)  a2 = (1, 0, 1)
+    (b) C = {6, 12, 6} y k = 12
+    soluciones validas: a1 = (0, 1, 0)  a2 = (1, 0, 1)
 
-(c) C = {6, 12, 6} y k = 12
-soluciones parciales: p1 = ()   -> p2 = (0) -> p3 = (0, 0) -> p4 = (0, 0, 0)
-                                                           -> p5 = (0, 0, 1)
-                                            -> p6 = (0, 1) -> p7 = (0, 1, 0)
-                                                           -> p8 = (0, 1, 1)
-                                -> p9 = (1) -> p10 = (1, 0) -> p11 = (1, 0, 0)
-                                                            -> p12 = (1, 0, 1)
-                                            -> p13 = (1, 1) -> p14 = (1, 1, 0)
-                                                            -> p15 = (1, 1, 1)
+    (c) C = {6, 12, 6} y k = 12
+    soluciones parciales: p1 = ()   -> p2 = (0) -> p3 = (0, 0) -> p4 = (0, 0, 0)
+                                                            -> p5 = (0, 0, 1)
+                                                -> p6 = (0, 1) -> p7 = (0, 1, 0)
+                                                            -> p8 = (0, 1, 1)
+                                    -> p9 = (1) -> p10 = (1, 0) -> p11 = (1, 0, 0)
+                                                                -> p12 = (1, 0, 1)
+                                                -> p13 = (1, 1) -> p14 = (1, 1, 0)
+                                                                -> p15 = (1, 1, 1)
 
-(d) El arbol de backtracking es similar a las soluciones parciales, se empieza con la solucion vacia y se van agregando o no
-agregando elemntos al subconjunto, los nodos intermedios son soluciones parciales, y la hojas son soluciones candidatas.
-Las soluciones candidatas que sumen 12 seran las soluciones validas.
+    (d) El arbol de backtracking es similar a las soluciones parciales, se empieza con la solucion vacia y se van agregando o no
+    agregando elemntos al subconjunto, los nodos intermedios son soluciones parciales, y la hojas son soluciones candidatas.
+    Las soluciones candidatas que sumen 12 seran las soluciones validas.
+
+    (e) Me convence :)
+
+    (f) Me convence también :)
+
+    (g) árbol de llamadas recursivas: C = {6, 12, 6} y k = 12. Llamada: ss(C, |C|, k)
+
+    llamada recursiva: ss(C, i - 1, j) v ss(C, i - 1, j - C[i])
+
+    ss(C, 3, 12) -> ss(C, 2, 12)                                                  
+                -> ss(C, 1, 12)                   v                       ss(C, 1, 0)
+                    -> ss(C, 0, 12) v ss(C, 0, 6)                             -> ss(C, 0, 0) v ss(C, 0, -6)
+                        false       v     false                                   true (0,1,0) v false
+                v
+                -> ss(C, 2, 6)
+                -> ss(C, 1, 6)                   v                       ss(C, 1, -6)
+                    -> ss(C, 0, 6) v ss(C, 0, 0)                             -> ss(C, 0, -6) v ss(C, 0, -12)
+                        false       v true (1,0,1)                                false      v  false
+
+
+
+    (h) Me convence x3 :)
+
+    (i) Factibilidad: detener la exploración si la suma parcial supera T.
+    Optimalidad: si alcanzamos T antes de considerar todos los elementos, detenemos esa rama.
+
+    Poda de factibilidad: la suma de lo actual mas los restantes sean menor que k
+
+    (j) codeado
+
+
+2) MagiCuadrados
+
+    (a) Habría que generar n²! cuadrados para encontrar todos los cuadrados magicos con fuerza bruta.
+
+    (b) Foto 2b
+
+    (c) El primer nivel tiene n² nodos, cada nodo del primer nivel tiene n²-1 hijos, por lo que el segundo nivel tiene n²*(n²-1) nodos
+    y asi...n²*(n²-1)*(n²-2)*(n²-3)*...*1, luego el arbol de backtracking queda n²! nodos el peor caso.
+
+    (d) Se puede hacer para las columnas si se supiera el numero magico de forma precalculado.
+
+    (e) Demostrar que el número mágico de un cuadrado mágico de orden n es siempre (n³ + n)/2.
+
+    d/ Vamos a sumar de distinta forma todos los numeros de 1 a n².
+        -1- sumar todos los numeros de 1 a n² se puede hacer con la suma de gauss: sumaTotal = (n²(n²+1))/2
+        -2- como un cuadrado magico de orden n tiene n filas, entonces se puede: sumaTotal = nro magico * n
+        Igualamos ambas formulas y dividimos ambos lados n, queda (n³+n)/2 
+
+3) MaxiSubconjunto
+
+(a)
+
