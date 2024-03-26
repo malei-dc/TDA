@@ -78,5 +78,18 @@ Bactracking
 
 3) MaxiSubconjunto
 
-(a)
+    (a) Si tenemos orden 4, k = 3:
+                        las soluciones candidatas son: (1, 1, 1, 0), (1, 1, 0, 1), (1, 0, 1, 1), (0, 1, 1, 1)
+                        cada elem representa si el indice de su posicion esta o no esta
+                        las solucion/es validas son el conjunto de indices que maximice evaluando a la matriz
+                        las soluciones parciales son los conjuntos de indices que tienen menos que k elementos y aun hay para agregar
 
+    (b) Complejidad temporal: cada indice puede estar o no estar O(2^k) y cuando llego a una hoja calculo la sumatoria en O(n²) un total del
+        numero combinatorio(n,k). Luego en total queda: O(2^k * comb(n,k) * n²)
+
+        Complejidad espacial: uso solo un vector de booleanos de tamaño k, y una matriz de tamaño n*n. Queda O(k + n²)
+
+    (c) Poda de Optimalidad: si agregando todos los indices restantes no llego a k, detengo esa rama. Eso quiere decir que siguiendo por
+        esa rama no se llega a tener un conjunto de indices de tamaño k. 
+
+4) RutaMinima
