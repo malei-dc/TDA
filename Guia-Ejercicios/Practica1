@@ -85,11 +85,26 @@ Bactracking
                         las soluciones parciales son los conjuntos de indices que tienen menos que k elementos y aun hay para agregar
 
     (b) Complejidad temporal: cada indice puede estar o no estar O(2^k) y cuando llego a una hoja calculo la sumatoria en O(n²) un total del
-        numero combinatorio(n,k). Luego en total queda: O(2^k * comb(n,k) * n²)
+        numero combinatorio(n,k). Luego en total queda: O(2^k * comb(n,k) * n²) //esto no se si esta bien
 
         Complejidad espacial: uso solo un vector de booleanos de tamaño k, y una matriz de tamaño n*n. Queda O(k + n²)
 
     (c) Poda de Optimalidad: si agregando todos los indices restantes no llego a k, detengo esa rama. Eso quiere decir que siguiendo por
         esa rama no se llega a tener un conjunto de indices de tamaño k. 
+        
+        (edit+) Esta poda es correcta porque se basa en una cota superior del valor que podría alcanzar una solución parcial. 
+        Si esta cota no es mejor que la mejor solución encontrada hasta el momento, entonces sabemos que no necesitamos seguir 
+        explorando esa rama del espacio de soluciones.
 
 4) RutaMinima
+
+    (a) Una solucion candidata es un vector de tamaño n que contiene indices.
+        La solucion valida es la que minimiza la formula del ejercicio evaluando los indices del vector en la matriz. 
+        Una solucion parcial es cuando aun tengo indices para agregar cuando el tamaño del vector solucion no llega a n.
+
+    (b) La complejidad temporal es O(n!) en el peor caso ya que exploramos todas las permutaciones posibles de n elem.
+        La complejidad espacial es O(n) ya que almaceno solo una permutacion a la vez.
+
+    (c) Una poda por optimalidad podría ser descartar cualquier solución parcial cuyo valor ya exceda el valor de la mejor solución 
+        encontrada hasta el momento. Esto es correcto porque estamos buscando minimizar el valor, así que cualquier solución parcial 
+        que ya sea peor que una solución completa encontrada anteriormente no puede llevar a una solución óptima.
