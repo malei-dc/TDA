@@ -52,7 +52,7 @@ int main() {
     subsetSum(C, n, k);
     cout<<res;
 
-    /*SALIDA: Si es true, devuelve 1 y los indices de la solucion parcial EJ: C=[6,12,6] k = 12 devuelve "0 12 0" y "6 0 6" (el primero que encuentra)
+    /*SALIDA: Si es true, devuelve 1 y
             si es false devuelve solo 0
      */
     return 0;

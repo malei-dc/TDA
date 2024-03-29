@@ -111,36 +111,40 @@ Bactracking
 
 5) SumaDinámica
 
-(a) Me convence ;)
+    (a) Me convence ;)
 
-(b) Si tenemos {1, 2, 5, 5, 5} los elementos 5+1 se suman minimo 3 veces. 
+    (b) Si tenemos {1, 2, 5, 5, 5} los elementos 5+1 se suman minimo 3 veces. 
 
-(c) Considerado ;)
+    (c) Considerado ;)
 
-(d) La complejidad con enfoque dinamico tiene complejidad O(n*k) mientras que con backtracking es de O(2^n).
-    Si k<<2^n es mejor con dinamica, cuando k>>2^n es mejor con backtraking.
+    (d) La complejidad con enfoque dinamico tiene complejidad O(n*k) mientras que con backtracking es de O(2^n).
+        Si k<<2^n es mejor con dinamica, cuando k>>2^n es mejor con backtraking.
 
-(e) :)
+    (e) :)
 
-(f) No vimos bottom up aun :)
+    (f) No vimos bottom up aun :)
 
-(g) Demostrar que la función recursiva del inciso a) es correcta.
-                j == 0                                   si i = 0
-    ss’C(i,j) = ss’C(i-1, j)                            si i!=0 && c[i]>j
-                ss’C(i-1, j) || ss’C(i-1, j-c[i])       si no
+    (g) Demostrar que la función recursiva del inciso a) es correcta.
+                    j == 0                                   si i = 0
+        ss’C(i,j) = ss’C(i-1, j)                            si i!=0 && c[i]>j
+                    ss’C(i-1, j) || ss’C(i-1, j-c[i])       si no
 
-    d/ inducción en i que existe algún subconjunto de {c1 , . . . , ci } que suma j si y solo si ss’C (i, j) = V
-        
-        caso base: i = 0 ss’C(i, j) = j==0 es true si y solo si j==0 cumple.
-        paso inductivo: supongamos que la función ss’C es correcta para i desde 0 hasta k-1, qvq es correcta para i = k.
-            -Si HI es ciertam tenemos que para cualquier j y 0<=i<=k-1, ss’C(i, j) es V si existe un subconjunto {c_1, ..., c_n}
-            que sume j.
-            - suponemos 2 casos para ss’C(k, j):
-                1) si c[k]>j: debe ser F ya que ningún subconjunto que la suma se igual a j, agregando el elemento k puede sumar j
-                2) si c[k]<=j: segun la definicion de la función ss’C(k,j) = ss’C(k-1, j) || ss’C(k-1, j-c[k])
+        d/ inducción en i que existe algún subconjunto de {c1 , . . . , ci } que suma j si y solo si ss’C (i, j) = V
+            
+            caso base: i = 0 ss’C(i, j) = j==0 es true si y solo si j==0 cumple.
+            paso inductivo: supongamos que la función ss’C es correcta para i desde 0 hasta k-1, qvq es correcta para i = k.
+                -Si HI es ciertam tenemos que para cualquier j y 0<=i<=k-1, ss’C(i, j) es V si existe un subconjunto {c_1, ..., c_n}
+                que sume j.
+                - suponemos 2 casos para ss’C(k, j):
+                    1) si c[k]>j: debe ser F ya que ningún subconjunto que la suma se igual a j, agregando el elemento k puede sumar j
+                    2) si c[k]<=j: segun la definicion de la función ss’C(k,j) = ss’C(k-1, j) || ss’C(k-1, j-c[k])
 
-                Por HI sabemos que ss’C(k-1, j) es V sii hay un subconjunto que sume j y que ss’C(k-1, j-c[k]) es V si existe un 
-                subconjunto que sume j-c[k].
+                    Por HI sabemos que ss’C(k-1, j) es V sii hay un subconjunto que sume j y que ss’C(k-1, j-c[k]) es V si existe un 
+                    subconjunto que sume j-c[k].
 
-                Si ss’C(k,j) es V uno de los dos casos de arriba es V, si tomamos ambos subconjuntos alguno suma j.
-                Si ss’C(k,j) es F entonces no hay un subconjunto que sume j.
+                    Si ss’C(k,j) es V uno de los dos casos de arriba es V, si tomamos ambos subconjuntos alguno suma j.
+                    Si ss’C(k,j) es F entonces no hay un subconjunto que sume j.
+
+6) OptiPago
+
+(a)
