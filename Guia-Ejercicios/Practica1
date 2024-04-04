@@ -165,7 +165,29 @@ cc(B, c)=   <    <inf, inf>        si vacio?(B) & c>0               //cuando me 
 
                 cc(B- dameUno(b), c)
             
-             (*) El B-dameUno(B) es de cjto, c-dameUno(B) es resta enteros
+             (*) El B-dameUno(B) es de cjto, c-dameUno(B) es resta enteros, min de tuplas (minimiza 1° elem de la tupla -> 2° elem)
 
-(b) La complejidad es O(2^|B|).
+(b) La complejidad es O(2^|B|). -codeado-
 
+(c) cc’B (i, j) = cc({b1 , . . . , bi }, j) que implemente la idea anterior dejando fijo el parámetro B
+
+                _
+               |   <|e|,0>           si e < 0                        //devuelvo el exceso
+cc’B(i, e)=   <    <inf, inf>        si i < 0 & e > 0               //cuando me quedo sin billetes
+               |_  min[(1), (2)]     si no
+
+               (1) Usar el billete: <cc’B(i - 1, e - B[i])_0, 1 + cc’B(i -1, e - B[i])_1> 
+                                     1° parte de la tupla     2° parte de la tupla
+
+               (2) No usar billete: cc’B(i - 1, e)
+
+cc’B tiene la propiedad de superposición de subproblemas cuando tenemos que calcular valores de billetes repetidos para un mismo estado
+de e, ya que como estamos viendo el caso de usar o no usar tal billete, con los billetes del mismo valor, voy a estar calculando
+lo mismo varias veces. En el peor caso es que sean |B| cantidad de billetes diferentes con un estado e diferente. La cantidad de 
+estados en el peor caso es |B|*e <<< 2^(|b|/2). Conviene dinamica :)
+
+(d) Estructura de memoización para cc’B: matriz[i][j] con i = |B| y j = costo inicial a cubrir.
+
+(e) -codeado-
+
+(f) La llamada para resolver es cc’B(|B|-1, costo) y la complejidad del nuevo algoritmo es O(|B| * costo)

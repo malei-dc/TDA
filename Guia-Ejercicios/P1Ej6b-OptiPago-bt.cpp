@@ -45,7 +45,7 @@ int main() {
     }
     tuple<int, int> costo_cantUsados = optiPago(billetes, 0, costo);
 
-    cout<<"El minimo encontrado fue con costo excedente";
+    cout<<"El minimo encontrado fue con costo excedente ";
     cout<<get<0>(costo_cantUsados)<<" usando "<<get<1>(costo_cantUsados)<<" billetes.";
     return 0;
 }
