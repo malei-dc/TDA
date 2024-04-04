@@ -33,7 +33,8 @@ tuple<int, int> optiPago (vector<int> &billetes, int indice, int costo){
         if (get<1>(memoria[indice][costo]) != -1) {
             return memoria[indice][costo];
         }
-        tuple<int, int> contarBillete = {get<0>(optiPago(billetes, indice - 1, costo - billetes[indice])), 1 + get<1>(optiPago(billetes, indice - 1, costo - billetes[indice]))};
+        tuple<int, int> contarBillete = {get<0>(optiPago(billetes, indice - 1, costo - billetes[indice])), 
+                                            1 + get<1>(optiPago(billetes, indice - 1, costo - billetes[indice]))};
         tuple<int, int> noContarBillete = optiPago(billetes, indice - 1, costo);
         
         //3° guardo el resultado que calculé en este paso en la memoria
