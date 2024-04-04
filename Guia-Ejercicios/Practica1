@@ -147,4 +147,25 @@ Bactracking
 
 6) OptiPago
 
-(a)
+(a)función recursiva cc(B, c) para resolver el problema, donde cc(B, c) = (c′ , q) cuando el mínimo costo mayor o igual a c 
+que es posible pagar con los billetes de B es c′ y la cantidad de billetes mínima es q
+              _
+             |   <|c|,0>           si c<0                           //devuelvo el exceso
+cc(B, c)=   <    <inf, inf>        si vacio?(B) & c>0               //cuando me quedo sin billetes
+             |_  min[(1), (2)]   si no
+
+             (1) En esta llamada recursiva uso un billete y sumo la cantidad de billetes usados. Como es una tupla de costo y cantidad 
+             de billetes usados, necesito actualizar ambas partes de la tupla.
+
+                <(cc(B-dameUno(B), c-dameUno(B)))_0, (cc(B-dameUno(B), c-dameUno(B)))_1 +1 >
+                     1° parte de la tupla (_0)               2° parte de la tupla (_1)
+
+             (2) En esta parte de billete elijo no usar el billete en cuestion, no hace falta actualizar nada ya que la funcion como tal
+             devuelve una tupla.
+
+                cc(B- dameUno(b), c)
+            
+             (*) El B-dameUno(B) es de cjto, c-dameUno(B) es resta enteros
+
+(b) La complejidad es O(2^|B|).
+
