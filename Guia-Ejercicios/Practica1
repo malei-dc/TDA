@@ -221,9 +221,16 @@ Bactracking
         mgn(c, j) = <                   0                                                       si j == 0 y c == 0
                      |_ max(mgn(c - 1, j - 1) - P[j], mgn(c + 1, j - 1) + P[j], mgn(c, j-1))    si no
 
-(c) Llamada para resolver el problema: mgn(c, n).
+(c) Llamada para resolver el problema con esa funcion recursiva es: mgn(c, n).
 
 (d) -codeado-
-    Como se puede tener a lo sumo n/2 asteroides (si tiene mas no se llega a venderlos) los estados del problemas son en el peor caso
-    n/2 * n y por eso la complejidad temporal es de O(n²).
+    Como se puede tener a lo sumo n asteroides (en realidad menos) los estados del problemas son en el peor caso
+    n * n y por eso la complejidad temporal es de O(n²).
     Como uso una matriz de n² para la memorizacion, la complejidad espacial es de O(n²)
+
+    La eleccion de la estructura se basa en que nunca puede haber mas asteroides que dias, por eso usamos la cota
+    del dia para los asteroides, en realidad vendria a ser n/2 ya que si tiene n/2+1 de asteroides en cualquier momento,
+    no se llegaria a vender (es imposible tener (n/2)+1 en los primeros (n/2)-1 dias)
+
+    Otro cambio que hice en el código fue que la la llamada de recursion es de: MGN(0, 0) empezando en dia 0 con 0 asteroides.
+    No me salio hacerlo como en la recursion de arriba.
