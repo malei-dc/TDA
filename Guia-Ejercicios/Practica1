@@ -125,9 +125,10 @@ Bactracking
     (f) No vimos bottom up aun :)
 
     (g) Demostrar que la función recursiva del inciso a) es correcta.
-                    j == 0                                   si i = 0
-        ss’C(i,j) = ss’C(i-1, j)                            si i!=0 && c[i]>j
-                    ss’C(i-1, j) || ss’C(i-1, j-c[i])       si no
+                      _
+                     |  j == 0                                  si i = 0
+        ss’C(i,j) = <   ss’C(i-1, j)                            si i!=0 && c[i]>j
+                     |_ ss’C(i-1, j) || ss’C(i-1, j-c[i])       si no
 
         d/ inducción en i que existe algún subconjunto de {c1 , . . . , ci } que suma j si y solo si ss’C (i, j) = V
             
@@ -149,10 +150,10 @@ Bactracking
 
     (a)función recursiva cc(B, c) para resolver el problema, donde cc(B, c) = (c′ , q) cuando el mínimo costo mayor o igual a c 
     que es posible pagar con los billetes de B es c′ y la cantidad de billetes mínima es q
-                _
+                 _
                 |   <|c|,0>           si c<0                           //devuelvo el exceso
-    cc(B, c)=   <    <inf, inf>        si vacio?(B) & c>0               //cuando me quedo sin billetes
-                |_  min[(1), (2)]   si no
+    cc(B, c)=  <    <inf, inf>        si vacio?(B) & c>0               //cuando me quedo sin billetes
+                |_  min[(1), (2)]     si no
 
                 (1) En esta llamada recursiva uso un billete y sumo la cantidad de billetes usados. Como es una tupla de costo y cantidad 
                 de billetes usados, necesito actualizar ambas partes de la tupla.
@@ -171,20 +172,32 @@ Bactracking
 
     (c) cc’B (i, j) = cc({b1 , . . . , bi }, j) que implemente la idea anterior dejando fijo el parámetro B
 
-                    _
-                |   <|e|,0>           si e < 0                        //devuelvo el exceso
-    cc’B(i, e)=   <    <inf, inf>        si i < 0 & e > 0               //cuando me quedo sin billetes
-                |_  min[(1), (2)]     si no
+                     _
+                    |   <|e|,0>           si e < 0                       //devuelvo el exceso
+    cc’B(i, e)=    <    <inf, inf>        si i < 0 & e > 0              //cuando me quedo sin billetes y tengo costo que cubrir
+                    |_  min[(1), (2)]     si no
 
                 (1) Usar el billete: <cc’B(i - 1, e - B[i])_0, 1 + cc’B(i -1, e - B[i])_1> 
                                         1° parte de la tupla     2° parte de la tupla
 
                 (2) No usar billete: cc’B(i - 1, e)
 
+    Explicado con palabras: la funcion cc’B(i, e) calcula el minimo exceso posible usando los billetes del multiconjunto B, minimizando
+        también la cantidad de billetes, el resutado se representa como una tupla <exceso, cantBilletes>
+
+        Parámetros: i representa el i-esimo billete de B y e representa el costo que debe cubrir.
+
+        Casos base: explicado en comentarios
+
+        Caso recursivo: calcula el minimo entre contar el i-esimo billete o no. 
+                        (*) Si cuenta el i-esimo billete en la tupla_1 le resto a e el valor del i-esimo billete y a tupla_2 sumo uno la cantidad
+                        de billetes, y a ambos le resto el indice para seguir iterando.
+                        (*) Si no cuenta el i-esimo billete simplemente le resto un indice.
+
     cc’B tiene la propiedad de superposición de subproblemas cuando tenemos que calcular valores de billetes repetidos para un mismo estado
     de e, ya que como estamos viendo el caso de usar o no usar tal billete, con los billetes del mismo valor, voy a estar calculando
     lo mismo varias veces. En el peor caso es que sean |B| cantidad de billetes diferentes con un estado e diferente. La cantidad de 
-    estados en el peor caso es |B|*e <<< 2^(|b|/2). Conviene dinamica :)
+    estados en el peor caso es |B|*e <<< 2^(|B|/2). Conviene dinamica :)
 
     (d) Estructura de memoización para cc’B: matriz[i][j] con i = |B| y j = costo inicial a cubrir.
 
@@ -194,4 +207,23 @@ Bactracking
 
 7) AstroTrade
 
-(a) 
+(a) Quiero maximizar ganancia. Empezar y terminar sin asteroides.
+    si Astro Void tiene c asteroides al fin del día j, es:
+        indefinido (i.e., −∞) si c < 0 o c > j, o
+        el máximo entre:
+            la m.g.n. de finalizar el día j − 1 con c − 1 asteroides y comprar uno en el día j,
+            la m.g.n. de finalizar el día j − 1 con c + 1 asteroides y vender uno en el día j,
+            la m.g.n. de finalizar el día j − 1 con c asteroides y no operar el día j.
+
+(b) Función recursiva:
+                      _
+                     |                -Inf                                                      si c < 0 || c > j
+        mgn(c, j) = <                   0                                                       si j == 0 y c == 0
+                     |_ max(mgn(c - 1, j - 1) - P[j], mgn(c + 1, j - 1) + P[j], mgn(c, j-1))    si no
+
+(c) Llamada para resolver el problema: mgn(c, n).
+
+(d) -codeado-
+    Como se puede tener a lo sumo n/2 asteroides (si tiene mas no se llega a venderlos) los estados del problemas son en el peor caso
+    n/2 * n y por eso la complejidad temporal es de O(n²).
+    Como uso una matriz de n² para la memorizacion, la complejidad espacial es de O(n²)
