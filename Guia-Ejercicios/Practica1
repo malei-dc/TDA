@@ -207,30 +207,49 @@ Bactracking
 
 7) AstroTrade
 
-(a) Quiero maximizar ganancia. Empezar y terminar sin asteroides.
-    si Astro Void tiene c asteroides al fin del día j, es:
-        indefinido (i.e., −∞) si c < 0 o c > j, o
-        el máximo entre:
-            la m.g.n. de finalizar el día j − 1 con c − 1 asteroides y comprar uno en el día j,
-            la m.g.n. de finalizar el día j − 1 con c + 1 asteroides y vender uno en el día j,
-            la m.g.n. de finalizar el día j − 1 con c asteroides y no operar el día j.
+    (a) Quiero maximizar ganancia. Empezar y terminar sin asteroides.
+        si Astro Void tiene c asteroides al fin del día j, es:
+            indefinido (i.e., −∞) si c < 0 o c > j, o
+            el máximo entre:
+                la m.g.n. de finalizar el día j − 1 con c − 1 asteroides y comprar uno en el día j,
+                la m.g.n. de finalizar el día j − 1 con c + 1 asteroides y vender uno en el día j,
+                la m.g.n. de finalizar el día j − 1 con c asteroides y no operar el día j.
 
-(b) Función recursiva:
-                      _
-                     |                -Inf                                                      si c < 0 || c > j
-        mgn(c, j) = <                   0                                                       si j == 0 y c == 0
-                     |_ max(mgn(c - 1, j - 1) - P[j], mgn(c + 1, j - 1) + P[j], mgn(c, j-1))    si no
+    (b) Función recursiva:
+                          _
+                         |                -Inf                                                      si c < 0 || c > j
+            mgn(c, j) = <                   0                                                       si j == 0 y c == 0
+                         |_ max(mgn(c - 1, j - 1) - P[j], mgn(c + 1, j - 1) + P[j], mgn(c, j-1))    si no
 
-(c) Llamada para resolver el problema con esa funcion recursiva es: mgn(c, n).
+    (c) Llamada para resolver el problema con esa funcion recursiva es: mgn(c, n).
 
-(d) -codeado-
-    Como se puede tener a lo sumo n asteroides (en realidad menos) los estados del problemas son en el peor caso
-    n * n y por eso la complejidad temporal es de O(n²).
-    Como uso una matriz de n² para la memorizacion, la complejidad espacial es de O(n²)
+    (d) -codeado-
+        Como se puede tener a lo sumo n asteroides (en realidad menos) los estados del problemas son en el peor caso
+        n * n y por eso la complejidad temporal es de O(n²).
+        Como uso una matriz de n² para la memorizacion, la complejidad espacial es de O(n²)
 
-    La eleccion de la estructura se basa en que nunca puede haber mas asteroides que dias, por eso usamos la cota
-    del dia para los asteroides, en realidad vendria a ser n/2 ya que si tiene n/2+1 de asteroides en cualquier momento,
-    no se llegaria a vender (es imposible tener (n/2)+1 en los primeros (n/2)-1 dias)
+        La eleccion de la estructura se basa en que nunca puede haber mas asteroides que dias, por eso usamos la cota
+        del dia para los asteroides, en realidad vendria a ser n/2 ya que si tiene n/2+1 de asteroides en cualquier momento,
+        no se llegaria a vender (es imposible tener (n/2)+1 en los primeros (n/2)-1 dias)
 
-    Otro cambio que hice en el código fue que la la llamada de recursion es de: MGN(0, 0) empezando en dia 0 con 0 asteroides.
-    No me salio hacerlo como en la recursion de arriba.
+        Otro cambio que hice en el código fue que la la llamada de recursion es de: MGN(0, 0) empezando en dia 0 con 0 asteroides.
+        No me salio hacerlo como en la recursion de arriba.
+
+8) CortesEconomicos
+
+    (a) Queremos encontrar el mínimo costo posible de cortar una vara de longitud ℓ. Me convence :)
+
+    (b) Función recursiva:
+                          _
+                         |       0       si |C| = 0
+    corteMin(C, i, j) = <   
+                         |_     min     (corteMin(C - C[k], i, C[k]), corteMin(C - C[k], C[k], j)) + (j-i)     si no
+                   0 <= k < |C| && i <= C[k] < j
+
+    corteMin calcula el minimo costo de cortar una vara de longitud j. Los parametros de entrada son un vector de enteros que 
+    indican donde tienen que ser cortados, y dos enteros i, j que indican el limite de la vara en cuestión.
+    El caso base es cuando me quedo sin indicacion de donde se tiene que cortar, es decir cuando el vector esté vacio.
+    El caso recursivo consiste en explorar todas las permutaciones del vector C, calculando el minimo de quedarse con el trozo
+    derecho o izquierdo luego del corte. La complejidad de esto en el peor caso es de O(2^(|C|!))
+
+    
