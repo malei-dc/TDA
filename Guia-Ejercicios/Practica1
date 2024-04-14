@@ -246,10 +246,17 @@ Bactracking
                          |_     min     (corteMin(C - C[k], i, C[k]), corteMin(C - C[k], C[k], j)) + (j-i)     si no
                    0 <= k < |C| && i <= C[k] < j
 
-    corteMin calcula el minimo costo de cortar una vara de longitud j. Los parametros de entrada son un vector de enteros que 
-    indican donde tienen que ser cortados, y dos enteros i, j que indican el limite de la vara en cuestión.
-    El caso base es cuando me quedo sin indicacion de donde se tiene que cortar, es decir cuando el vector esté vacio.
-    El caso recursivo consiste en explorar todas las permutaciones del vector C, calculando el minimo de quedarse con el trozo
-    derecho o izquierdo luego del corte. La complejidad de esto en el peor caso es de O(2^(|C|!))
+    La semántica de esta formulación es que encontramos el mínimo costo de cortar la vara desde i hasta j considerando todos 
+    los posibles lugares de corte en el conjunto C. Para cada lugar de corte k, calculamos el costo total como la suma del costo de 
+    cortar desde i hasta k y el costo de cortar desde k hasta j, más el costo del corte en k.
 
-    
+    (c) -Codeado funciona mal-
+        El algoritmo de programación dinámica basado en esta formulación tendría una complejidad temporal de O(n³), donde n es la longitud de 
+        la vara, y una complejidad espacial auxiliar de O(n²). En un enfoque top-down, podríamos usar memoización para evitar recalcular 
+        subproblemas. Enfoque Bottom up ...  
+
+    (d) ...
+
+9) Travesía vital
+
+
