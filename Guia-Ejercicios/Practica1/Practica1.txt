@@ -259,4 +259,37 @@ Bactracking
 
 9) Travesía vital
 
+    (a) Un algoritmo backtracking seria recorrer todos los posibles caminos y al llegar a la meta checkear si la solucion es menor al menor actual.
+        En cada paso recursivo iría hacia abajo o hacia la derecha, si esta al extremo solo tiene una posibilidad, abajo o derecha.
+    
+    (b) Me convence :)
 
+    (c) Función recursiva para una matriz nxm
+                             _
+                            |   A[i][j]                             si i = n && j = m 
+                            |   minVida(A, i, j + 1) + A[i][j]      si i = n && j < m
+        minVida(A, i, j) = <    minVida(A, i + 1, j) + A[i][j]      si j = m && i < n
+                            |   min(minVida(A, i, j + 1),           si no
+                            |_      minVida(A, i + 1, j)) + A[i][j] 
+
+                       _
+                      |     1               si minVida(A, i, j) <= 0
+        f(A, i, j) = <
+                      |_minVida(A, i, j)    si no
+
+        La semantica de esta formulacion es que encontramos el minimo valor de recorrer todos los caminos desde la posicion (0,0) hasta (n, m) 
+        sumando los valores en cada posición que va recorriendo. Luego terminando de calcular eso, observa si el valor es negativo, si lo es, 
+        devuelve 1, si no el valor correspondiente al cálculo.
+        La solucion se resuelve llamando a f(A, 0, 0) con A la matriz de entrada. 
+
+    (d) -pendiente codigo-
+        Top-down: empiezo desde la posicion (0,0) y voy recorriendo recursivamente hasta (n,m) guardando los valores que ya recorrí.
+                  Complejidad temporal: O(n*m) ya que solo puedo ir abajo o izq
+                  Complejidad espacial: O(n*m) ya que guardo en memoria toda la matriz con el valor que fui recorriendo
+
+        Bottom-up: empiezo en (n,m) subiendo siempre por el minimo entre el valor de arriba o derecha. Si se encuentra en algun extremo solo tiene
+                   un valor posible.
+                   Complejidad temporal: O(n*m)
+                   Complejidad espacial: O(n*m)
+
+    (e) -pendiente-
