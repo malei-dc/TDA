@@ -293,3 +293,103 @@ Bactracking
                    Complejidad espacial: O(n*m)
 
     (e) -pendiente-
+
+13) ParejasdeBaile
+    Tenemos dos conjuntos de personas y para cada persona sabemos su habilidad de baile. Queremos
+    armar la máxima cantidad de parejas de baile, sabiendo que para cada pareja debemos elegir
+    exactamente una persona de cada conjunto de modo que la diferencia de habilidad sea menor o
+    igual a 1 (en módulo). Además, cada persona puede pertenecer a lo sumo a una pareja de baile.
+    Por ejemplo, si tenemos un multiconjunto con habilidades {1, 2, 4, 6} y otro con {1, 5, 5, 7, 9}, la
+    máxima cantidad de parejas es 3. Si los multiconjuntos de habilidades son {1, 1, 1, 1, 1} y {1, 2, 3},
+    la máxima cantidad es 2.
+
+    (a) Considerando que ambos multiconjuntos de habilidades estan ordenados en forma creciente, observar que la solución se puede obtener 
+    recorriendo los multiconjuntos en orden para realizar los emparejamientos.
+    -yep- :)
+
+    (b) Diseñar un algoritmo goloso basado en a) que recorra una única vez cada multiconjunto. Explicitar la complejidad temporal y espacial 
+    auxiliar.
+
+    sort(multi1), sort(multi2)              //ordeno los multiconj
+    int long1 = len(multi1)
+    int long2 = len(multi2)
+    int i, j = 0;
+    int res = 0;
+    while (i < long1 and j < long2)
+        valor1 = multi1[i]
+        valor2 = multi2[j]
+        if (valor1 < valor2 - 1)
+            i ++;
+        else if (valor2 < valor1 - 1)
+            j ++;
+        else
+            i ++; 
+            j ++;
+            res ++;
+    return res;
+
+    Complejidades: recorre cada vector exactamente una sola vez, sea n = len(multi1) y m = len(multi2) la complejidad temporal es de O(min(n,m)) 
+                    al igual que complejidad espacial ya que no usa estructuras extras más que variables acumuladores.
+
+
+    (c) Demostrar que el algoritmo dado en b) es correcto.
+        - Primero ordenamos los multiconjuntos, esto no afecta el resultado, solo permuta los valores de entrada.
+        - Luego iteramos hasta que algún multiconjunto se recorra en su totalidad (no hay potencial pareja si no hay personas).
+          En cada iteración tenemos 3 casos, sea i la variable que recorre multi1 y j la variable que recorre multi2:
+            *Si el i-esimo valor del multi1 es menor (diferencia más de 1) al j-esimo valor de multi2, tenemos que explorar valores mas grandes de multi1,
+            como el arreglo está ordenado, simplemente sigo recorriendo multi1 haciendo i++.
+            *Si el j-esimo valor de multi2 es menor (diferencia más de 1) al i-esimo velor de multi1, tenemos que hacer lo mismo para multi2 haciendo j++.
+            *Si no, es decir, cuando no tienen una diferencia de más de 1, se puede formar pareja, sumamos 1 al resultado y seguimos recorriendo los vectores.
+          El ciclo termina ya se avanza el iterador correspondiente en cada caso de a 1 y en algún momento terminará de recorrer algun vector cuando la guarda
+          no se cumpla.
+
+14) SumaSelectiva
+    Dado un conjunto X con |X| = n y un entero k ≤ n queremos encontrar el máximo valor que pueden sumar los elementos de un subconjunto S de X 
+    de tamaño k.
+
+    (a) Proponer un algoritmo greedy que resuelva el problema, demostrando su correctitud.
+        1. Ordenar el conjunto X en orden decreciente.
+        2. Seleccionar k elementos mas grandes para formar el sulconjunto S
+
+        Correctitud: Sea X={x1,x2,…,xn} el conjunto ordenado no decreciente. 
+                     Supongamos que S={xi1,xi2,…,xik} es el subconjunto de tamaño k con la suma máxima.
+                     Si S′={xi1,xi2,…,xik−1} es un subconjunto de tamaño k−1, entonces necesariamente xik​ es el mayor elemento de X que no está en S′.
+                     Por lo tanto, la suma de S′ será menor que la suma de S.
+                     Entonces, seleccionar los k elementos más grandes de X garantiza obtener la suma máxima para un subconjunto de tamaño k.
+
+    Extender el algoritmo para que también devuelva uno de los subconjuntos S que maximiza la suma.
+        -Guardo los valores en un vector-
+
+    (b) Dar una implementación del algoritmo del inciso a) con complejidad temporal O(n log n).
+
+    Podemos utilizar la estructura de datos binary heap. Utilizaremos un min-heap para mantener los k elementos más grandes del conjunto X.
+    int maxSubsetSum(vector<int>& X, int k) {
+        priority_queue<int, vector<int>, greater<int>> min_heap;
+        for (int i = 0; i < X.size(); ++i) {
+            if (min_heap.size() < k) {
+                min_heap.push(X[i]);
+            } else if (X[i] > min_heap.top()) {
+                min_heap.pop();
+                min_heap.push(X[i]);
+            }
+        }
+        int sum = 0;
+        while (!min_heap.empty()) {
+            sum += min_heap.top();
+            min_heap.pop();
+        }
+        return sum;
+    }
+    Mantenemos los k elementos más grandes del conjunto X. 
+    Primero, llenamos el min-heap con los primeros k elementos de X. Luego, para cada elemento restante en X, si el elemento es mayor que el 
+    elemento mínimo del min-heap, lo eliminamos del min-heap y agregamos el nuevo elemento. 
+    Finalmente, sumamos los elementos en el min-heap para obtener la suma máxima de un subconjunto de tamaño k.
+
+    Complejidad: la complejidad temporal de esta implementación es O(nlog⁡k), donde n es el tamaño del conjunto X y k es el tamaño del subconjunto 
+                    requerido. Como k puede ser menor que n, la complejidad resultante es O(nlogn).
+
+    (c) Dar una implementación del algoritmo del inciso a) con complejidad temporal O(n log k).
+    -Te la debo- :(
+        
+
+
