@@ -391,5 +391,79 @@ Bactracking
     (c) Dar una implementación del algoritmo del inciso a) con complejidad temporal O(n log k).
     -Te la debo- :(
         
+15) SumaGolosa
+    Queremos encontrar la suma de los elementos de un multiconjunto de números naturales. Cada suma se realiza exactamente entre
+    dos números x e y y tiene costo x + y.
+    Por ejemplo, si queremos encontrar la suma de {1, 2, 5} tenemos 3 opciones:
+        1 + 2 (con costo 3) y luego 3 + 5 (con costo 8), resultando en un costo total de 11;
+        1 + 5 (con costo 6) y luego 6 + 2 (con costo 8), resultando en un costo total de 14;
+        2 + 5 (con costo 7) y luego 7 + 1 (con costo 8), resultando en un costo total de 15.
+    Queremos encontrar la forma de sumar que tenga costo mínimo, por lo que en nuestro ejemplo la mejor forma sería la primera.
 
+    (a) Explicitar una estrategia golosa para resolver el problema.
+        La estrategia consiste en ordenar el multiconjunto de forma creciente, e ir sumando desde el principio hasta el final.
 
+    (b) Demostrar que la estrategia propuesta resuelve el problema.
+        Al ordenar el multiconjunto de manera no decreciente, siempre tomaremos los dos números más pequeños para sumarlos. 
+        Esto garantiza que la suma actual sea la más pequeña posible en comparación con otras posibles sumas con los mismos dos números.
+        Al sumar los dos números más pequeños, obtenemos una nueva suma que es la suma de los dos números originales. 
+        Este proceso continúa hasta que solo queda un número en el multiconjunto.
+        Por lo tanto, la estrategia golosa propuesta resuelve el problema al garantizar que cada suma parcial sea la más pequeña posible en comparación 
+        con otras posibles sumas parciales.
+
+    (c) Implementar esta estrategia en un algoritmo iterativo.
+
+        Creamos un min-heap a partir del multiconjunto dado y luego itera hasta que solo quede un elemento en el min-heap. 
+        En cada iteración, toma los dos elementos más pequeños del min-heap, los suma, y suma el costo de la operación al costo total. 
+        La complejidad temporal de esta implementación es O(nlog⁡n) debido a la construcción inicial del min-heap y a las operaciones de extracción
+        e inserción en el min-heap en cada iteración del bucle.
+
+        int minSum(vector<int>& nums) {
+            // Crear un min-heap para mantener el multiconjunto ordenado
+            priority_queue<int, vector<int>, greater<int>> min_heap(nums.begin(), nums.end());
+
+            int total_cost = 0;
+            while (min_heap.size() > 1) {
+                // Tomar los dos elementos más pequeños del min-heap
+                int x = min_heap.top();
+                min_heap.pop();
+                int y = min_heap.top();
+                min_heap.pop();
+
+                // Sumar los dos elementos y agregar el resultado al costo total
+                int sum = x + y;
+                total_cost += sum;
+            }
+
+            return total_cost;
+        }
+
+16) RutaEficiente
+    Tomás quiere viajar de Buenos Aires a Mar del Plata en su flamante Renault 12. Como está
+    preocupado por la autonomía de su vehículo, se tomó el tiempo de anotar las distintas estaciones
+    de servicio que se encuentran en el camino. Modeló el mismo como un segmento de 0 a M , donde
+    Buenos aires está en el kilómetro 0, Mar del Plata en el M , y las distintas estaciones de servicio
+    están ubicadas en los kilómetros 0 = x1 ≤ x2 ≤ . . . xn ≤ M .
+    Razonablemente, Tomás quiere minimizar la cantidad de paradas para cargar nafta. Él sabe que
+    su auto es capaz de hacer hasta C kilómetros con el tanque lleno, y que al comenzar el viaje este
+    está vacío.
+
+    (a) Proponer un algoritmo greedy que indique cuál es la cantidad mínima de paradas para cargar nafta que debe hacer Tomás, y que aparte 
+    devuelva el conjunto de estaciones en las que hay que detenerse. Probar su correctitud.
+
+    La idea es agarrar siempre la máxima estación alcanzable en C kilómetros, luego repetir lo mismo desde la estación en la que estamos hasta 
+    llegar al final. El algoritmo entonces queda:
+
+    int idx = 0;
+    vector<int> estaciones = {E[0]}; // Suponiendo que E es un vector de enteros que contiene las distancias entre estaciones
+    for (int i = 1; i < n; ++i) {
+        if (E[i] - E[idx] > C) {
+            idx = i - 1;
+            estaciones.push_back(E[i - 1]);
+        }
+    }
+
+    -Demo en handout.pdf-
+
+    (b) Dar una implementación de complejidad temporal O(n) del algoritmo del inciso a).
+    -Está arriba-
