@@ -1,0 +1,43 @@
+Práctica 3: Introducción a la teoría algorítmica de grafos
+
+1) Equilibrio Digrafo
+    Demostrar, usando inducción en la cantidad de aristas, que todo digrafo D satisface: 
+        SUM din(v) = SUM dout(v) = |E(D)|
+      v->V(D)      v->V(D)
+
+    d/ Hacemos inducción en la cantidad de aristas |E(D)| 
+        Caso base: si |E(D)| = 0 nuestro digrafo no tiene aristas, todos los nodos tiene grado de E/S 0. Vale.
+
+        Caso recursivo: qvq P(|E(D)|) => P(|E(D)| + 1). 
+                        La HI es que vale SUM din(v) = SUM dout(v) = |E(D)|
+                                         v->V(D)      v->V(D)
+                        
+                        Llamemos (s,t) a la nueva arista y sin perdida de generalidad nombremos a s como su nodo de salida y a t como su nodo de
+                        entrada. Y tenemos D' al nuevo grafo, es decir D' = (V(D), E(D) + {(s,t)}). 
+                        Por renombre, probar que vale P(|E(D)| + 1) es lo mismo que: SUM din(v) = SUM dout(v) = |E(D')|
+                                                                                    v->V(D')     v->V(D')
+                        - |E(D')| = |E(D) U (s,t)| = |E(D)| + 1
+
+                        - SUM din(v) = din(t_D') + SUM din(v) = 1 + [ din(t_D) + SUM din(v) ] = 1 + [ SUM din(v) ]
+                        v->V(D')               v->V(D'\{t_D'})               v->V(D\{t_D})          v->V(D)
+
+                        - SUM dout(v) = dout(s_D') + SUM dout(v) = 1 + [ dout(s_D) + SUM dout(v) ] = 1 + [ SUM dout(v) ]
+                        v->V(D')                 v->V(D'\{s_D'})                  v->V(D\{s_D})           v->V(D)
+
+                        Por HI sabemos que: SUM din(v) = SUM dout(v) = |E(D)|
+                                           v->V(D)      v->V(D)
+
+                        Sumamos 1 en cada lado: SUM din(v) + 1 = SUM dout(v) + 1 = |E(D)|
+                                               v->V(D)          v->V(D)
+
+                        Reemplazamos y nos queda que: SUM din(v) = SUM dout(v) = |E(D')|
+                                                     v->V(D')     v->V(D')
+                        Luego vale P(|E| + 1).
+
+2) Doble Grado
+    Demostrar, usando la técnica de reducción al absurdo, que todo grafo no trivial tiene al menos dos vértices del mismo grado. 
+
+    d/ Suponemos que en todo grafo no trivial no hay 2 vértices del mismo grado.
+       Ordenamos el grado de todos los nodos, sean V = {v0, v1, ..., vn} con d(v0) = 0, d(v1) = 1, d(v2) = 2, ..., d(vn) = n ya que no existe 2 vértices
+       con el mismo grado, tenemos que v0 no tiene aristas y como no es un multigrafo, se contradice con vn que tiene n atistas, lo que significa que
+       conecta con todos los vértices, ABS!
