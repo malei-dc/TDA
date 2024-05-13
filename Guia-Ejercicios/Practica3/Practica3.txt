@@ -41,3 +41,79 @@ Práctica 3: Introducción a la teoría algorítmica de grafos
        Ordenamos el grado de todos los nodos, sean V = {v0, v1, ..., vn} con d(v0) = 0, d(v1) = 1, d(v2) = 2, ..., d(vn) = n ya que no existe 2 vértices
        con el mismo grado, tenemos que v0 no tiene aristas y como no es un multigrafo, se contradice con vn que tiene n atistas, lo que significa que
        conecta con todos los vértices, ABS!
+
+3) Unicidad Digrafo
+  Un grafo orientado se obtiene a partir de un grafo no orientado dando una dirección a cada arista.
+  Demostrar en forma constructiva que para cada n existe un único grafo orientado cuyos vértices tienen todos grados de salida distintos.
+
+  d/ Notamos que el absurdo en el ej2 no se produce para un grafo orientado ya que a pesar de tener grado de entrada un nodo puede no tener grado de 
+     salida. Entonces contruimos n grafos según la cantidad de vértices. Observamos que para:
+     vértice = 1: tiene grado de salida 0 ya que no hay vértice con quien unir la arista, sad :(
+     vértices = 2: en este caso hay un vértice extra en comparación al grafo anterior. Tenemos dos opciones válidas que se repite (uno) hasta n:
+                   (a) Agregamos un vértice con grado de salida 0 y hacemos que desde los vértices restantes se agreguen una arista que apunte al nuevo.
+                   (b) Dejamos los vertices restantes con el mismo grado de salida y desde el nuevo vértice le sacamos 1 arista apuntando a todos los vértices
+                       restantes.
+        . . . 
+     vértices = n: si fuimos por la opción (a), agregamos un vértice de grado de salida 0 y de todos los vértices restantes agregamos una arista que apunte
+                   hacia el nuevo nodo. Como la temporalidad del agregado de nodos es diferente en cada nodo (voy agregando 1 arista a todos c/vez que ingreso 
+                   un vértice), el vértice "mas antiguo" tendrá n - 1 grado de salida, el vértice "mas antiguo + 1" tendrá n - 2 grado de salida, y así cada
+                   uno tiene un grado de salida diferente.
+
+                   si fuimos por la opción (b), agregamos un vértice con grado n - 1 apuntando al resto de los vértices. De esta forma el grado de salida de
+                   cada vértice es diferente por la razón explicado en (a).
+
+     Siguiendo esta construcción queda demostrado que para cada n existe un único grafo orientado cuyos vértices tienen todos grados de salida distintos.
+
+4) ArteConexo
+  Un vértice v de un grafo G es un punto de articulación si G − v tiene más componentes conexas que G.
+  Por otro lado, un grafo es biconexo si es conexo y no tiene puntos de articulación.
+
+  (a) Demostrar, usando inducción en la cantidad de vértices, que todo grafo de n vértices que tiene más de (n − 1)(n − 2)/2 aristas es conexo.
+
+  Sea el grafo G = (V, E), tenemos |V| = n cantidad de vértices y |E| = m cantidad de aristas.
+  Usamos inducción en la cantidad de vértices.
+  Casos bases:
+    - n = 1 que tiene más de (1 − 1)(1 − 2)/2 = 0 aristas es conexo. Se cumple ya que tengo solo 1 vértice.
+    - n = 2 que tiene más de (2 − 1)(2 − 2)/2 = 0 aristas es conexo. Se cumple ya que con solo 1 arista el grafo es conexo.
+  Caso recursivo: 
+    Supongamos que vale P(n): grafo de n vértices que tiene más de (n − 1)(n − 2)/2 aristas es conexo.
+    Queremos ver que vale P(n + 1): grafo de n + 1 vértices que tiene más de (n * (n - 1))/2 aristas es conexo.
+    
+    Vamos a considerar el grafo G con n + 1 vértices, y para usar la HI vamos a sacar un vértice cualquiera junto con todas las aristas que los une.
+    Este nuevo grafo G' con n vertice, si tiene más de (n − 1)(n − 2)/2 aristas entonces sabemos que es conexo según la HI.
+    Para agregar de nuevo el vértice en G' tiene que estar conectado con al menos 1 vértice para no aumentar la cantidad de componentes conexas, ya
+    que queremos que sea conexa. Entonces le sumamo uno a la fórmula, 
+      (n − 1)(n − 2)/2 + 1 = (n² - 3n + 2)/2 + 1 = 1/2n² - 3/2n + 1 + 1 =  1/2n² - 3/2n + 2       (1)
+    por otro lado si desarrollamos la formula de P(n + 1) tenemos
+      (n * (n - 1))/2 = (n² - n)/2 = 1/2n² - 1/2n                                                 (2)
+
+    Se cumple que (1) > (2) para todo n natural. Por lo tanto es equivalente decir que un grafo de n + 1 vértices que tiene más de 
+    (n * (n - 1))/2 aristas es conexo. Probando así que vale para todo n vértices.
+    
+
+   Opcionalmente, puede demostrar la misma propiedad usando otras técnicas de demostración.
+   -nel- ლ(ಠ益ಠლ)
+
+   (b) Demostrar por medio de una reducción al absurdo que todo grafo de n vértices que tenga al menos 2 + (n − 1)(n − 2)/2 aristas es biconexo.
+
+   - Comenzaremos suponiendo que el grafo no es biconexo a pesar de tener al menos esa cantidad de aristas. Que el grafo no es biconexo implica 
+   que o bien no es conexo o bien tiene al menos un punto de articulación.
+
+      (1) Supongamos primero que el grafo no es conexo: Esto entraría en contradicción directamente con el punto (a) que dice que cualquier grafo  
+          con más de (n-1)(n-2)/2 aristas es necesariamente conexo. ABS! 
+
+      (2) Supongamos ahora que el grafo es conexo pero tiene al menos un punto de articulación:
+          - Si eliminamos un punto de articulación de un grafo de n vértices que tenga al menos 2 + (n − 1)(n − 2)/2 aristas, el grafo resultante 
+          con n - 1 vértices que debería tener al menos (n − 2)(n − 3)/2 aristas para seguir siendo conexo. Restamos la cantidad de aristas en ambos
+          estados:  
+            2 + (n − 1)(n − 2)/2 - (n − 2)(n − 3)/2 = 2 + (n² - 3n + 2)/2 - (n² - 5n + 6)/2 = 2 + (n² - 3n + 2 - n² - 5n + 6)/2 =
+            = 2 + (2n - 4)/2 = 2 + n - 2 = n
+          Esto quiere decir que como inicialmente se tiene esa cantidad de aristas, sacando el punto de articulación (aunque éste esté conectado con 
+          todos los demás vértices con n-1 aristas) se sigue cumpliendo que el grafo resultante tiene más de (n − 2)(n − 3)/2 aristas cumpliendo así
+          como un grafo conexo por (a) ABS! 
+
+   - Con esto queda demostrado que todo grafo de n vértices que tenga al menos 2 + (n − 1)(n − 2)/2 aristas es biconexo
+
+  (c) ¿Se pueden dar cotas mejores que funcionen a partir de algún n0? Es decir, ¿existe c(n) < 1 + (n − 1)(n − 2)/2 
+  (resp. c(n) < 2 + (n − 1)(n − 2)/2) tal que todo grafo de n >= n0 vértices que tenga al menos c(n) aristas sea conexo (resp. biconexo)?
+  -Pendiente (?- 
