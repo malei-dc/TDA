@@ -116,4 +116,44 @@ Práctica 3: Introducción a la teoría algorítmica de grafos
 
   (c) ¿Se pueden dar cotas mejores que funcionen a partir de algún n0? Es decir, ¿existe c(n) < 1 + (n − 1)(n − 2)/2 
   (resp. c(n) < 2 + (n − 1)(n − 2)/2) tal que todo grafo de n >= n0 vértices que tenga al menos c(n) aristas sea conexo (resp. biconexo)?
-  -Pendiente (?- 
+
+  -Te la debo- 
+
+5) CicloCompartido
+  Sean P y Q dos caminos distintos de un grafo G que unen un vértice v con otro w. Demostrar en forma directa que G tiene un ciclo cuyas 
+  aristas pertenecen a P o Q. Ayuda: denotar P = v0 , . . . , vp y Q = w0 , . . . , wq con v0 = w0 = v y vp = wq = w.
+  Definir explícitamente cuáles son los subcaminos de P y Q cuya unión forman un ciclo.
+
+  P = v0 , . . . , vp
+  Q = w0 , . . . , wq
+  v0 = w0 = v y vp = wq = w.
+
+  Supongamos sin pérdida de generalidad que hay un vértice u que es el último vértice en común entre los caminos de P y Q que no sea w. 
+  Notar que si los caminos no tienen vértices en común entonces u = v pues ambos caminos comienzan en v y terminan en w. 
+  Con esto dicho podemos definir subcaminos: P1 que va desde v0 a vu (v a u), P2 que va desde vu a vp (u a w)
+                                             Q1 que va desde w0 a wu (v a u), Q2 que va desde wu a wq (u a w)
+  Debido a que u es el último punto en común antes de llegar a w en ambos caminos, para ambos caminos no tienen vértices en común aparte de u y w.
+  Así que la unión entre los subcaminos de P2 y Q2 se obtiene un recorrido de vu, ..., vp = wq = w, ..., wu donde wu = vu = u y salvo por u no 
+  repiten vértices cumpliendo así la definición de ciclo.
+
+  Se puede hacer el mismo argumento analoga con P1 y Q1 definiendo un vértice s como el primero que comparten entre ambos caminos que no sea v. 
+  Con esto queda demostrado que G tiene un ciclo cuyas aristas pertenecen a P o Q.
+
+6) Intersección Máxima
+  Sea G un grafo conexo. Demostrar por el contrarrecíproco que todo par de caminos simples de longitud máxima de G tienen un vértice en común. 
+  Ayuda: suponer que hay dos caminos disjuntos en vértices de igual longitud y definir explícitamente un camino que sea más largo que ellos.
+
+  Demostrar: si dos caminos simples en G tienen la longitud máxima, entonces tienen un vértice en común
+  Contrarrecíproco: si dos caminos simples en G no tienen un vértice en común, entonces al menos uno no tienen la longitud máxima
+
+  - Suponemos que hay dos caminos disjuntos en vértices de igual longitud. Llememoslo caminos P y Q en G donde tienen longitud m y ambos tienen la 
+  longitud máxima.
+  - Dado que (G) es un grafo conexo, debe haber al menos un camino en (G) que conecte un vértice del final de (P) con un vértice del inicio 
+  (o final) de (Q) sin pasar por los vértices que ya están en (P) o (Q) (ya que son disjuntos). Llamamos a este camino R.
+  - El camino (R) puede no ser simple si conecta directamente el final de (P) con el inicio de (Q), pero su existencia permite formar un camino 
+  (P + R + Q) (o alguna variación de este, dependiendo de cómo se conecten exactamente). Importante, la longitud de (R) debe ser al menos 1 porque
+  conecta dos caminos disjuntos, lo que significa que el nuevo camino (P + R + Q) tiene una longitud (> m), lo cual es una contradicción porque
+  hemos supuesto que (m) es la longitud máxima para un camino en (G).
+  - Por lo tanto, nuestra suposición inicial de que (P) y (Q) pueden ser disjuntos y ambos de longitud máxima es falsa. Esto implica que cualquier
+  par de caminos simples de longitud máxima en (G) debe tener al menos un vértice en común, completando la demostración por contrarrecíproco.
+
