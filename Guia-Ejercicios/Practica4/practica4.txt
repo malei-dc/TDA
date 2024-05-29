@@ -26,7 +26,7 @@ Práctica 4: Recorridos y Árboles
         3. Verificación de ciclo impar: la clave para verificar si el grafo es bipartito está en observar las aristas E(G) \ E(T), 
             es decir, las aristas que no son parte del árbol DFS generado. Cada vez que encuentres una arista que conecte dos vértices en el 
             mismo conjunto V o W, habrá encontrado un ciclo impar. Si encuentra tal arista, el algoritmo debería terminar y retornar este ciclo 
-            impar.
+            impar reconstruyendolo con el vector padre generado por el DFS para ambos vértices.
         4. Construcción de la Bipartición o Ciclo Impar: Si después de explorar todo el grafo no encuentra ninguna arista que conecte dos vértices 
             dentro del mismo conjunto, entonces confirmamos que el grafo es bipartito, y los conjuntos V y W representan una bipartición válida del 
             grafo. En este caso, el algoritmo debe retornar esta bipartición.
@@ -36,3 +36,20 @@ Práctica 4: Recorridos y Árboles
         Generalización a Grafos No Conexos: Para extender el algoritmo a grafos no necesariamente conexos, simplemente ejecuta el DFS modificado 
         desde cada vértice no visitado del grafo. Esto asegura que explorarás cada componente conexa. Si encuentras un ciclo impar en cualquier 
         componente, el grafo no es bipartito. De lo contrario, el grafo es bipartito, y hay una bipartición válida para cada componente.
+
+2)PuentesDFS
+    Una arista de un grafo G es puente si su remoción aumenta la cantidad de componentes conexas de G. Sea T un árbol DFS de un grafo conexo G.
+    (a) Demostrar que vw es un puente de G si y solo si vw no pertenece a ningún ciclo de G.
+        ->) vw es un puente de G entonces vw no pertenece a ningún ciclo de G
+        Mostramos por el absurdo, supongamos que vw es un puente y pertenece a un ciclo, ahora sacamos vw, por definición de puente se tiene que
+        generar más componentes conexas, en particular v y w tienen que pertenecer a distintas componentes conexas. Pero como la arista vw pertenecía
+        a un ciclo, aún existe camino desde v a w, ya que la existencia de un ciclo garantiza que la eliminación de una arista no puede aumentar el
+        número de componentes conexas, porque siempre habrá al menos un camino alternativo que mantiene unidos a todos los vértices del ciclo.
+        Por lo tanto vw no era puente. ABS! 
+        <-) vw no pertenece a ningún ciclo de G entonces vw es puente
+        Si vw no pertenece a ningún ciclo, significa que es la única vía de conexión directa entre v y w. Por lo tanto, su remoción inevitablemente 
+        separa el grafo en al menos dos componentes conexas, ya que no hay ruta alternativa que mantenga unidos a v y w, cumpliendo con la definición 
+        de puente. La inexistencia de un ciclo implica directamente que la arista es crítica para la conectividad entre v y w, y su remoción 
+        efectivamente particiona el grafo
+        
+    (b) Demostrar que si vw ∈ E(G) \ E(T ), entonces v es un ancestro de w en T o viceversa.
