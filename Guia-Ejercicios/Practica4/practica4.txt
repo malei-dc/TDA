@@ -1,0 +1,38 @@
+Práctica 4: Recorridos y Árboles
+
+1) Bipartición y ciclos
+    Sea T un árbol generador de un grafo (conexo) G con raíz r, y sean V y W los vértices que están a distancia par e impar de r, respectivamente.
+    (a) Observar que si existe una arista vw ∈ E(G) \ E(T) tal que v, w ∈ V o v, w ∈ W , entonces el único ciclo de T ∪ {vw} tiene longitud impar.
+        Si v, w están en V donde todos los vértices están a distancia par, entonces el ciclo de incluir vw consiste partiendo desde r hacia
+        v (par) y r hacia w (par), más la arista vw que no está en T, formando así un ciclo de longitud impar.
+        Análogamente si v, w estan en W donde todos los vertices están a distancia impar. Entonces impar + impar + 1 es impar.
+
+    (b) Observar también que si toda arista de E(G) \ E(T) une un vértice de V con otro de W, entonces (V, W) es una bipartición de G y, por lo 
+    tanto, G es bipartito. 
+        En un grafo bipartito no hay aristas que conecten vértices dentro del mismo conjunto. En este caso V y W. 
+        Como T  es un árbol generador de G, sabemos que T conecta todos los vértices de G sin formar ciclos. Cumple con la definición de bipartito.
+        Al agregar más aristas que no están en T  pero que siguen conectando con vértices de V con W, simplemente se está reforzando la bipartición
+        sin introducir nuevos ciclos pares ni conexión dentro del mismo conjunto.
+        Esto nos indica que el grafo es bipartito.
+    
+    (c) A partir de las observaciones anteriores, diseñar un algoritmo lineal para determinar si un grafo conexo G es bipartito. 
+    En caso afirmativo, el algoritmo debe retornar una bipartición de G. 
+    En caso negativo, el algoritmo debe retornar un ciclo impar de G.
+    Explicitar cómo es la implementación del algoritmo; no es necesario incluir el código.
+        1. Inicialización: inicializar conjuntos V y W que representarán los vértices a distancia par e impar de la raíz r. 
+            Un vector de visitados para marcar los vértices que ya se han explorado durante el DFS indicando el nivel en lugar de un booleano.
+        2. DFS modificado: cada vez que visites un vértice, decide si debe ir al conjunto V o al conjunto W basándose en su profundidad (nivel) 
+            en el árbol DFS. Si la profundidad es par, el vértice va al conjunto V; si es impar, va al conjunto W.
+        3. Verificación de ciclo impar: la clave para verificar si el grafo es bipartito está en observar las aristas E(G) \ E(T), 
+            es decir, las aristas que no son parte del árbol DFS generado. Cada vez que encuentres una arista que conecte dos vértices en el 
+            mismo conjunto V o W, habrá encontrado un ciclo impar. Si encuentra tal arista, el algoritmo debería terminar y retornar este ciclo 
+            impar.
+        4. Construcción de la Bipartición o Ciclo Impar: Si después de explorar todo el grafo no encuentra ninguna arista que conecte dos vértices 
+            dentro del mismo conjunto, entonces confirmamos que el grafo es bipartito, y los conjuntos V y W representan una bipartición válida del 
+            grafo. En este caso, el algoritmo debe retornar esta bipartición.
+    
+    (d) Generalizar el algoritmo del inciso anterior a grafos no necesariamente conexos observando que un grafo G es bipartito si y solo si sus 
+    componentes conexas son bipartitas.
+        Generalización a Grafos No Conexos: Para extender el algoritmo a grafos no necesariamente conexos, simplemente ejecuta el DFS modificado 
+        desde cada vértice no visitado del grafo. Esto asegura que explorarás cada componente conexa. Si encuentras un ciclo impar en cualquier 
+        componente, el grafo no es bipartito. De lo contrario, el grafo es bipartito, y hay una bipartición válida para cada componente.
