@@ -50,6 +50,55 @@ Práctica 4: Recorridos y Árboles
         Si vw no pertenece a ningún ciclo, significa que es la única vía de conexión directa entre v y w. Por lo tanto, su remoción inevitablemente 
         separa el grafo en al menos dos componentes conexas, ya que no hay ruta alternativa que mantenga unidos a v y w, cumpliendo con la definición 
         de puente. La inexistencia de un ciclo implica directamente que la arista es crítica para la conectividad entre v y w, y su remoción 
-        efectivamente particiona el grafo
+        efectivamente particiona el grafo.
         
-    (b) Demostrar que si vw ∈ E(G) \ E(T ), entonces v es un ancestro de w en T o viceversa.
+    (b) Demostrar que si vw ∈ E(G) \ E(T), entonces v es un ancestro de w en T o viceversa.
+        Sé que vw pertenece a G pero no a T que es un árbol DFS, por propiedad de la construcción del árbol DFS sabemos que es una backedge, de lo 
+        contrario estaría en T. Luego v es ancestro de w o viceversa.
+        En un árbol DFS, una backedge siempre conecta un vértice con otro vértice que es su ancestro dentro del árbol, porque el recorrido en 
+        profundidad garantiza que antes de explorar un nuevo vértice, se explora completamente cada uno de los vértices descubiertos (incluyendo todos 
+        sus descendientes en el árbol). Por lo tanto, cuando encuentras una backedge, esta necesariamente conecta un vértice con otro que ya había 
+        sido explorado, y dado el recorrido en profundidad, el vértice previamente explorado tiene que ser un ancestro del más recientemente descubierto.
+    
+    (c) Sea vw ∈ E(G) una arista tal que el nivel de v en T es menor o igual al nivel de w en T. 
+    Demostrar que vw es puente si y solo si v es el padre de w en T y ninguna arista de G \ {vw} une a un descendiente de w (o a w) 
+    con un ancestro de v (o con v).
+        - Esto es basicamente la definición de covertura: Decimos que una backward edge b cubre a una tree edge (u, v) de un árbol DFS T con u padre
+        de v si b conecta un descendiente de u con un ancestro de v en T.
+        - Entonces traduciendo el ejercicio con la definición de covertura queda:
+            Una tree edge de un árbol DFS T de un grafo conexo G es un puente si y sólo si no hay ninguna backward edge que la cubra.
+        (La demo está en el pdf de puentes Lema 3).
+
+    (d) Dar un algoritmo lineal basado en DFS para encontrar todas las aristas puente de G.
+        (En el pdf de puentes)
+
+5)GeoBFS
+    Un árbol generador T de un grafo G es v-geodésico si la distancia entre v y w en T es igual a la distancia entre v y w en G para todo w ∈ V(G). 
+    Demostrar que todo árbol BFS de G enraizado en v es v-geodésico. 
+    Dar un contraejemplo para la vuelta, i.e., mostrar un árbol generador v-geodésico de un grafo G que no pueda ser obtenido cuando BFS se 
+    ejecuta en G desde v.
+
+    Veamos como funciona BFS: inicia desde un vértice v y explora todos sus vecinos a distancia 1, luego todos los vecinos de estos a distancia 2,
+    y así sucesivamente. Esto significa que cuando un vértice w es visitado y agregado al árbol BFS, la ruta desde v hasta w es la más corta 
+    posible en G, ya que de haber una más corta, w habría sido visitado antes.
+
+    Su relación con v-geodésico: dado que BFS explora gradualmente los vértices de G en orden de distancia creciente desde v, cuando un vértice w 
+    se agrega a T, la ruta de v a w en T es igual a la distancia más corta de v a w en G. Por lo tanto, el árbol BFS enraizado en v es 
+    v-geodésico, ya que conserva la distancia mínima entre v y todos los demás vértices en G.
+
+    Contraejemplo para la vuelta: la propiedad de ser v-geodésico no es exclusiva de los árboles BFS; otros métodos podrían generar un árbol 
+    generador v-geodésico que no siga el orden específico de un BFS. Considera un grafo G que es un cuadrado con vértices A, B, C, D y 
+    aristas AB, BC, CD, y AD, y una diagonal AC. Si eliges A como el vértice raíz para un BFS, el árbol resultante podría ser A-B-C-D 
+    (asumiendo que el orden de visita es de izquierda a derecha), que es A-geodésico. Sin embargo, otro árbol generador A-geodésico podría ser 
+    simplemente tomar las aristas AB, AC y AD, el cual no es obtenible por un BFS desde A, ya que BFS siempre producirá un árbol sin la arista AC
+    debido a su naturaleza de exploración en anchura.
+
+8)GrillaMágica
+    Se tiene una grilla con m × n posiciones, cada una de las cuales tiene un número entero en [0, k), para un k ∈ N dado. 
+    Dado un valor objetivo w ∈ N y una posición inicial (x1 , y1 ), que tiene un valor inicial v1 , queremos determinar la mínima cantidad 
+    de movimientos horizontales y verticales que transformen v1 en w, teniendo en cuenta que el i-ésimo movimiento transforma 
+    a vi por vi+1 = (vi + z) mód k, donde z es el valor que se encuentra en la casilla de destino del movimiento. 
+
+    Modelar este problema como un problema de grafos que se resuelva usando BFS en O(kmn) tiempo.
+
+    
