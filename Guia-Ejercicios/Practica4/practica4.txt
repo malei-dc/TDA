@@ -101,4 +101,21 @@ Práctica 4: Recorridos y Árboles
 
     Modelar este problema como un problema de grafos que se resuelva usando BFS en O(kmn) tiempo.
 
+    Consideramos cada posición de la grilla como un nodo y para cada nodo consideramos movimiento posible horizontal y vertical. Si el movimiento
+    es válido, siendo z el valor del destino establecemos arista.
+    Corremos BFS: -Nodo inicial (x1, y1) con valor v1, cola visitados
+                  -Mientras cola no vacía: extraer nodo de cola, ver si valor es w, si es, encontramos y terminamos. Si no, encolamos los vecinos
+                                            no visitados y actualizamos valor con la fórmula.
+                  -Si terminamos BFS sin encontrar w, no es posible obtenerlo partiendo de v1
+    Obtención de cantidad mínima de movimientos: al obtener w podemos rastrear el nodo objetivo hacia el nodo inicial con un vector de padres. 
+
+    La complejidad es O(kmn) ya que en el peor de los caos la ejecución recorre nm nodos y obtención de cant de movimientos también es O(nm).
+
+10)SecuenciasConectadas
+    Se define la distancia entre dos secuencias de naturales X = x1 , . . . , xk e Y = y1 , . . . , yk como
+    d(X, Y) = SUM desde 1 a k de |xi − yi|. Dado un conjunto de secuencias X1 , . . . , Xn , cada una de tamaño k,
+    su grafo asociado G tiene un vértice vi por cada 1 ≤ i ≤ n y una arista vi vj de peso d(Xi , Xj )
+    para cada 1 ≤ i < j ≤ n. Proponer un algoritmo de complejidad O(kn2 ) que dado un conjunto
+    de secuencias encuentre el árbol generador mínimo de su grafo asociado.
+
     
