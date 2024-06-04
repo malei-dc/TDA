@@ -37,7 +37,7 @@ Práctica 4: Recorridos y Árboles
         desde cada vértice no visitado del grafo. Esto asegura que explorarás cada componente conexa. Si encuentras un ciclo impar en cualquier 
         componente, el grafo no es bipartito. De lo contrario, el grafo es bipartito, y hay una bipartición válida para cada componente.
 
-2)PuentesDFS
+2) PuentesDFS
     Una arista de un grafo G es puente si su remoción aumenta la cantidad de componentes conexas de G. Sea T un árbol DFS de un grafo conexo G.
     (a) Demostrar que vw es un puente de G si y solo si vw no pertenece a ningún ciclo de G.
         ->) vw es un puente de G entonces vw no pertenece a ningún ciclo de G
@@ -72,7 +72,7 @@ Práctica 4: Recorridos y Árboles
     (d) Dar un algoritmo lineal basado en DFS para encontrar todas las aristas puente de G.
         (En el pdf de puentes)
 
-5)GeoBFS
+5) GeoBFS
     Un árbol generador T de un grafo G es v-geodésico si la distancia entre v y w en T es igual a la distancia entre v y w en G para todo w ∈ V(G). 
     Demostrar que todo árbol BFS de G enraizado en v es v-geodésico. 
     Dar un contraejemplo para la vuelta, i.e., mostrar un árbol generador v-geodésico de un grafo G que no pueda ser obtenido cuando BFS se 
@@ -93,7 +93,7 @@ Práctica 4: Recorridos y Árboles
     simplemente tomar las aristas AB, AC y AD, el cual no es obtenible por un BFS desde A, ya que BFS siempre producirá un árbol sin la arista AC
     debido a su naturaleza de exploración en anchura.
 
-8)GrillaMágica
+8) GrillaMágica
     Se tiene una grilla con m × n posiciones, cada una de las cuales tiene un número entero en [0, k), para un k ∈ N dado. 
     Dado un valor objetivo w ∈ N y una posición inicial (x1 , y1 ), que tiene un valor inicial v1 , queremos determinar la mínima cantidad 
     de movimientos horizontales y verticales que transformen v1 en w, teniendo en cuenta que el i-ésimo movimiento transforma 
@@ -111,7 +111,7 @@ Práctica 4: Recorridos y Árboles
 
     La complejidad es O(kmn) ya que en el peor de los caos la ejecución recorre nm nodos y obtención de cant de movimientos también es O(nm).
 
-10)SecuenciasConectadas
+10) SecuenciasConectadas
     Se define la distancia entre dos secuencias de naturales X = x1 , . . . , xk e Y = y1 , . . . , yk como
     d(X, Y) = SUM desde 1 a k de |xi − yi|. Dado un conjunto de secuencias X1 , . . . , Xn , cada una de tamaño k,
     su grafo asociado G tiene un vértice vi por cada 1 ≤ i ≤ n y una arista vi vj de peso d(Xi , Xj )
@@ -120,3 +120,59 @@ Práctica 4: Recorridos y Árboles
 
     Modelamos las secuencias X1 , . . . , Xn como nodos, y para calcular la distancia entre nodos hacemos la sumatoria para el peso de las aristas.
     Enlazamos todos con todos lo que nos cuesta O(kn²) y luego corremos prim o kruskal que es O(n²). Nos queda complejidad O(kn²).
+
+11) AnchoBandMax
+    Una empresa de comunicaciones modela su red usando un grafo G donde cada arista tiene una
+    capacidad positiva que representa su ancho de banda. El ancho de banda de la red es el máximo
+    k tal que Gk es conexo, donde Gk es el subgrafo generador de G que se obtiene de eliminar las
+    aristas de peso menor a k
+
+    (a) Proponer un algoritmo eficiente para determinar el ancho de banda de una red dada.
+        1. Ordena todas las aristas de acuerdo a su peso de forma descendente. Esto dará una lista de posibles valores de k. 
+        2. Búsqueda binaria sobre la lista de pesos de aristas. Para cada peso k seleccionado por la búsqueda binaria, eliminas todas las 
+        aristas de peso menor a k de G y luego verifica si el grafo resultante Gk es conexo con DFS. 
+        3. Si Gk es conexo, entonces se puede intentar con un valor de k más alto (hacia la derecha en la lista ordenada). Si Gk no es conexo, 
+        hay que probar con un valor más bajo (hacia la izquierda en la lista ordenada). 
+        4. El proceso termina cuando la búsqueda binaria no puede encontrar un valor de k más alto que mantenga Gk conexo. El último valor de 
+        k encontrado es el ancho de banda de la red.
+
+    La empresa está dispuesta a hacer una inversión que consiste en actualizar algunos enlaces (aris-
+    tas) a un ancho de banda que, para la tecnología existente, es virtualmente infinito. Antes de
+    decidir la inversión, quieren determinar cuál es el ancho de banda que se podría obtener si se
+    reemplazan i aristas para todo 0 ≤ i < n.
+
+    (b) Proponer un algoritmo que dado G determine el vector a0 , . . . , an−1 tal que ai es el ancho de banda máximo que se puede obtener si se 
+    reemplazan i aristas de G.
+        Reemplazar i aristas por otras con "ancho de banda infinito", estamos, de hecho, asegurando que ciertos caminos dentro del grafo permanecerán 
+        siempre conectados, sin importar el valor de k que elijamos para el subgrafo Gk. Esto podría mejorar significativamente el ancho de banda de 
+        la red al permitir que más nodos permanezcan conectados incluso cuando se eliminan aristas de menor capacidad.
+
+        1.Ordenar las aristas por capacidad: Primero, necesitamos ordenar todas las aristas del grafo G por su capacidad, de menor a mayor. 
+        Esto nos permitirá entender cuáles son los "cuellos de botella" en la red actual.
+
+        2.Uso de Algoritmos de Conectividad: Para cada valor de i (desde 0 hasta n-1), vamos a simular el reemplazo de las i aristas de menor 
+        capacidad por aristas de capacidad infinita. Aquí, podríamos utilizar un algoritmo de conectividad, como el algoritmo de Kruskal o Prim 
+        (adaptados para considerar estas nuevas aristas infinitas), para entender cómo cambia la conectividad del grafo.
+
+        3.Evaluación de Conectividad: Para cada versión modificada del grafo, evaluamos la conectividad del mismo, determinando el "nuevo" ancho de 
+        banda, es decir, el máximo k tal que el grafo modificado sigue siendo conexo.
+
+        4.Construcción del Vector a: Finalmente, para cada i, el valor de k encontrado que mantiene la conectividad del grafo modificado se 
+        almacena en el vector a, en la posición correspondiente a ai.
+
+13) PrioriKruskal
+    El algoritmo de Kruskal (resp. Prim) con orden de selección es una variante del algoritmo de
+    Kruskal (resp. Prim) donde a cada arista e se le asigna una prioridad q(e) además de su peso
+    p(e). Luego, si en alguna iteración del algoritmo de Kruskal (resp. Prim) hay más de una arista
+    posible para ser agregada, entre esas opciones se elige alguna de mínima prioridad.
+    (a) Demostrar que para todo árbol generador mínimo T de G, si las prioridades de asignación están definidas por la función
+                   __
+                  |    0 si e ∈ T
+        qT(e)=   <
+                  |__  1 si e !∈ T
+    entonces se obtiene T como resultado del algoritmo de Kruskal (resp. Prim) con orden de selección ejecutado sobre G (resp. cualquiera sea 
+    el vértice inicial en el caso de Prim).
+
+    (b) Usando el inciso anterior, demostrar que si los pesos de G son todos distintos, entonces G tiene un único árbol generador mínimo.
+
+    
