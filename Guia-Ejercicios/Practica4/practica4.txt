@@ -115,7 +115,8 @@ Práctica 4: Recorridos y Árboles
     Se define la distancia entre dos secuencias de naturales X = x1 , . . . , xk e Y = y1 , . . . , yk como
     d(X, Y) = SUM desde 1 a k de |xi − yi|. Dado un conjunto de secuencias X1 , . . . , Xn , cada una de tamaño k,
     su grafo asociado G tiene un vértice vi por cada 1 ≤ i ≤ n y una arista vi vj de peso d(Xi , Xj )
-    para cada 1 ≤ i < j ≤ n. Proponer un algoritmo de complejidad O(kn2 ) que dado un conjunto
+    para cada 1 ≤ i < j ≤ n. Proponer un algoritmo de complejidad O(kn²) que dado un conjunto
     de secuencias encuentre el árbol generador mínimo de su grafo asociado.
 
-    
+    Modelamos las secuencias X1 , . . . , Xn como nodos, y para calcular la distancia entre nodos hacemos la sumatoria para el peso de las aristas.
+    Enlazamos todos con todos lo que nos cuesta O(kn²) y luego corremos prim o kruskal que es O(n²). Nos queda complejidad O(kn²).
