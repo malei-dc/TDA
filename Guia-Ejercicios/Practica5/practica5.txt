@@ -28,4 +28,56 @@ Práctica 5: Recorrido mínimo
         la exclusión (o la no elección) de las aristas st-eficientes. Esto podría implicar ajustar el algoritmo de Dijkstra para que ignore estas 
         aristas marcadas durante su ejecución.
     
-2) 
+2) Arista max en ruta de peso c
+    Diseñar un algoritmo eficiente que, dado un digrafo G con pesos no negativos, dos vértices s y t y una cota c, determine una arista de peso 
+    máximo de entre aquellas que se encuentran en algún recorrido de s a t cuyo peso (del recorrido, no de la arista) sea a lo sumo c. 
+    Demostrar que el algoritmo propuesto es correcto.
+
+        Algoritmo:
+            1. Dijkstra desde s en G para calcular d(s,v) para todo v con arista menor a c. (ya que los pesos son positivos)
+            2. Dijkstra desde t en G con las aristas invertidas para calcular d(w,t) para todo w con arista menor a c. (ya que los pesos son positivos)
+            3. Ordenar todas las aristas (v,w) según peso decreciente.
+            4. Para cada arista ordenado: si d(s,v) + c(v,w) + d(w,t) <= c devolver arista.
+            5. Devolver null.
+        
+        Demostración:
+            - El algoritmo devuelve la arista que cumple con los criterios, en 4 se itera todas las aristas y si se cumple la condición devuelve
+            arista, me asegura que es max ya que está ordenado y empiezo a recorrer desde los de más alto valor.
+            - El algoritmo termina y no deja ningún arista sin verificar, examina cada arista exactamente 1 vez y Dijkstra me garantiza que las
+            distancias son correctos sin pasar por alto ninguno, termina cuando encuentra o recorre todos.
+
+3) Max 1 arista negativa
+    Diseñar un algoritmo eficiente que, dado un digrafo pesado G y dos vértices s y t, determine el recorrido minimo de s a t que pasa por a lo 
+    sumo una arista de peso negativo. 
+    Demostrar que el algoritmo propuesto es correcto.
+
+        Antes del algoritmo preparamos un G' que es un subgrafo de G sin aristas negativas.
+        Algoritmo:
+            1. Inicializamos dos estructuras para G', uno para d_G'(s,v) o otro para d_G'(v,t) para todos v en V.
+            2. Ejecutamos Dijkstra dos veces, una desde s en G' y otra en t en G' con aristas invertidas.
+            3. Inicializo variable minDist en infinito para el seguimiento del camino mínimo.
+            4. Para c/arista en G donde c(v,w) < 0 verifica si la suna de d_G'(s,v) + c(v,w) + d_G'(w,t) es menor que "minDist", si lo es,
+            actualizo y sigo recorriendo.
+            5. Finalmente hago min(d_G'(s,t), minDist) y reconstuyo el camino mínimo que resulte.
+            
+            Complejidad: Dijkstra tiene una complejidad de O((V+E) log V) usando un montículo de Fibonacci. Entonces, ejecutarlo dos veces 
+            sería O(2(V+E) log V) y revisar todas las aristas negativas añade O(E) en el peor caso. Así que sería (O((V+E) log V + E)), 
+            considerando V vértices y E aristas en total.
+
+            Para reconstruir el camino mínimo una vez encontrado:
+                Durante la ejecución de Dijkstra: mantiene un arreglo de predecesores para cada nodo. Es decir, para cada nodo v, guarda el nodo 
+                previo u en el camino mínimo desde s a v (y similarmente para el camino de t a v con las aristas invertidas).
+                
+                Al encontrar el camino mínimo que incluye una arista negativa: Si el camino mínimo pasa por una arista negativa (v, w), entonces 
+                hay que combinar tres partes:
+                    - El camino desde s a v utilizando el arreglo de predecesores desde s.
+                    - La arista negativa (v, w).
+                    - El camino desde w a t, que se obtiene invirtiendo el camino reconstruido desde t a w usando el arreglo de predecesores 
+                    hacia t.
+
+        Demostración:
+            - Corrección parcial: caminos mínimos en G', al usar Dijkstra nos garantiza los subcaminos minimos de s hacia todos los nodos, y
+            desde cualquier nodo hacia t. Ya que en G' no hay aristas de peso negativo.
+            - Corrección global: vemos el caso de los caminos que usan una arista negativa, checkeando todas las aristas negativas en función de 
+            los subcaminos mínimos calculados en G' (sin arista negativos) 
+            - Finalmente, comparamos el minimo entre no usar arista negativa con una solo 1 arista negativa.
