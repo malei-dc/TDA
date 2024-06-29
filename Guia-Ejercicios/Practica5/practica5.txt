@@ -7,12 +7,15 @@ Práctica 5: Recorrido mínimo
     (a) Demostrar que v → w es st-eficiente si y sólo si d(s, v) + c(v → w) + d(w, t) = d(s, t).
 
         ->) supongamos que v->w es st-eficiente. Esto significa que v->w pertenece a algún camino mínimo de s y t, lo que implica que 
-        d(s,t) = d(s,v) + d(v,w) + d(w,t), lo cual es consecuencia directa de que v->w está en camino mínimo de s a t.
+        d(s,t) = d(s,v) + c(v → w) + d(w,t), lo cual es consecuencia directa de que v->w está en camino mínimo de s a t.
 
         <-) supongamos que d(s,v) + c(v->w) + d(w,t) = d(s,t). Para ver que v->w es st-eficiente, necesitamos ver que está en un camino mínimo
         de s a t.
         Podemos descomponer los tramos de s,v y w,t si no es camino mínimo entonces existiría un dalt(s,t) < d(s,t) lo que contradice la hipótesis,
         luego v->w es st-eficiente.
+        No puede existir un camino más corto de s a t que no pase por v->w, ya que eso contradiría la definición de d(s, t) como el peso de 
+        un camino mínimo. La idea es que bajo esta condición, cualquier desviación aumentaría el costo total del camino, asegurando que v->w debe 
+        ser parte de un camino mínimo.
 
     (b) Usando el inciso anterior, proponga un algoritmo eficiente que encuentre el mínimo de los caminos entre s y t que no use aristas 
     st-eficientes. Si dicho camino no existe, el algoritmo retorna ⊥.
@@ -20,5 +23,9 @@ Práctica 5: Recorrido mínimo
         1. Ejecuta Dijkstra en D desde s para calcular d(s,v) para todo v.
         2. Ejecuta Dijkstra en D complemento desde t para calcular d(w,t) para todo w (D complemento es dar vuelta todas las aristas)
         3. Para c/ arista v->w en D verifica d(s,v) + c(v->w) + d(w,t) = d(s,t)
-        4. Las aristas que cumplan se sacan.
-        5. Corro Dijkstra otra vez en D desde s a t y es el resultado.
+        4. Marcar estas aristas como no elegibles para el cálculo de la ruta mínima en el siguiente paso.
+        5. Corro Dijkstra otra vez en D desde s a t y es el resultado.  Antes de hacer esto, necesito asegurarme de que el grafo ha sido modificado para reflejar 
+        la exclusión (o la no elección) de las aristas st-eficientes. Esto podría implicar ajustar el algoritmo de Dijkstra para que ignore estas 
+        aristas marcadas durante su ejecución.
+    
+2) 
