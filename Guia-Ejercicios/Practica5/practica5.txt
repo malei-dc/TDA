@@ -81,3 +81,57 @@ Práctica 5: Recorrido mínimo
             - Corrección global: vemos el caso de los caminos que usan una arista negativa, checkeando todas las aristas negativas en función de 
             los subcaminos mínimos calculados en G' (sin arista negativos) 
             - Finalmente, comparamos el minimo entre no usar arista negativa con una solo 1 arista negativa.
+
+4) Aristas que mejoran
+    Sea G un digrafo con pesos positivos que tiene dos vértices especiales s y t. Para una arista e ̸∈ E(G) con peso positivo, definimos G + e 
+    como el digrafo que se obtiene de agregar e a G. Decimos que e mejora el camino de s a t cuando dG (s, t) > dG+e (s, t). 
+    Diseñar un algoritmo eficiente que, dado un grafo G y un conjunto de aristas E ̸∈ E(G) con pesos positivos, determine cuáles aristas de E 
+    mejoran el camino de s a t en G. 
+    Demostrar que el algoritmo es correcto.
+
+        Algoritmo:
+            1. Inicio un conjunto para guardar las aristas que mejoran.
+            2. Ejecuto Dijkstra en G para encontrar d(s,t).
+            3. Para cada arista e en E (que son de pesos positivos), la agrego al grafo G generando el grafo G+e y ejecuto Dijkstra.
+            Si dG+e(s,t) < d(s,t) lo agrego al conjunto que mejora.
+            4. Saco la arista e del grafo y sigo recorriendo el conjunto E.
+
+            Complejidad: O(|E| * min(n², m log(n))) ya que hago Dijkstra |E| veces.
+
+        (alternativa mejor): si calculamos d(s,v) y d(v,w) para todos los nodos v en G reduce drasticamente la cantidad de ejecución de Dijkstra.
+                            Entonces por cada arista de E, al tener los dos extremos y el costo, calcular el CM de dG+e(s,t) es O(1) ya que es 
+                            una cuenta y no es necesario la inserción/sacado de la arista en sí. 
+        
+        Demostración: pruebo cada arista de |E| y veo si mejora el camino minimo.
+
+5) Aristas críticas
+    Sea G un digrafo con pesos positivos que tiene dos vértices especiales s y t. Decimos que una arista e ∈ E(G) es crítica para s y t cuando 
+    dG (s, t) < dG−e (s, t). Diseñar un algoritmo eficiente que, dado G, determine las aristas de G que son críticas para s y t. 
+    Demostrar que el algoritmo es correcto. Ayuda: pensar en el subgrafo P de G que está formado por las aristas de caminos mínimos de G 
+    (el "grafo de caminos mínimos").
+
+        Algoritmo:
+            1. Ejecuto Dijkstra de s a t para obtener d(s,v) para todos los v en G.
+            2. Ejecuto Dijkstra de t a s con las aristas invertidas para obtener d(v,t) para todos los v en G.
+            3. Para cada arista de G, recorremos verificando la ecuación de d(s,v) + c(v->w) + d(w,t) = d(s,t). Las aristas que cumplen serán
+            posibles aristas críticas. Usamos esta info para construir un subgrafo P que consiste exclusivamente en las aristas que forman parte 
+            de algún camino mínimo de s a t. Todas las aristas de P son candidatas a ser críticas, la razón es que, por definición, si una arista 
+            no está en un camino mínimo desde s a t, su eliminación no puede afectar la distancia mínima entre estos dos puntos.
+            4. Usamos la propiedad de los predecesores/sucesores, para cada arista (v, w) en el camino mínimo, mira si existe otra ruta de v a w 
+            que no sea más larga que la arista original. Esto puede hacerse manteniendo y consultando una estructura de datos que almacene caminos 
+            alternativos y sus respectivos pesos durante la construcción de P. Si no existe tal ruta alternativa, entonces la arista es crítica.
+
+            (optimización): Para evitar la reconstrucción del grafo y la repetición de Dijkstra, se puede precalcular y almacenar las distancias 
+            mínimas entre todos los pares de vértices usando el algoritmo de Floyd-Warshall o repetir Dijkstra desde cada vértice. Aunque esto 
+            tiene una complejidad temporal mayor (O(n³) para Floyd-Warshall y O(n*m\log(n)) para Dijkstra repetido), te permite responder 
+            inmediatamente si la eliminación de cualquier arista aumentaría la distancia mínima de s a t. Esta estrategia es especialmente útil 
+            si el grafo no cambia frecuentemente y se hacen muchas consultas sobre aristas críticas.
+        
+        Demostración: las aristas que cumplen con la ecuación pertenecen a algún camino minimo. Como pueden haber varios caminos mínimos, esto no
+        significa que al removerse pasaría que dG(s,t) < dG-e(s,t). Entonces pueden pasar los siguientes casos:
+            1. Al removerla existe otro camino minimo de mismo peso.
+            2. Al remover existe otro camino de mayor peso.
+            3. No hay otro camino y st quedan en dos componentes conexas.
+
+6) Pesos probabilisticos
+    No se incluye un ejercicio en particular de este tema debido a que Estadística Computacional no es correlativa con TDA. :)
