@@ -135,3 +135,64 @@ Práctica 5: Recorrido mínimo
 
 6) Pesos probabilisticos
     No se incluye un ejercicio en particular de este tema debido a que Estadística Computacional no es correlativa con TDA. :)
+
+Algoritmo de Bellman-Ford y SRDs
+
+7) Ciclos Puré
+    Para organizar el tráfico, la ciudad de Ciclos Positivos ha decidido implementar las cabinas de peaje inverso. La idea de estas cabinas es 
+    incentivar la circulación de vehículos por caminos alternativos, estableciendo un monto que se le paga a le conductore de un vehículo. 
+    Estas cabinas inversas se suman a las cabinas regulares, donde le conductore paga. La ciudad sabe que estas nuevas cabinas pueden dar lugar al 
+    negocio del "ciclo puré", que consiste en transitar eternamente por la ciudad a fin de obtener una ganancia infinito. Para evitar esta 
+    situación, que genera costos y tráfico adicional, la ciudad quiere evaluar distintas alternativas antes de llevar a la práctica.
+
+    (a) Modelar el problema de determinar si la ciudad permite el negocio del ciclo puré cuando el costo de transitar por cada cabina i de peaje 
+    es ci (ci < 0 si la cabina es inversa) y el costo que cuesta viajar de forma directa de cada cabina i a cada cabina j es cij > 0.
+
+        Modelamos: cabinas como vértices en un digrafo y arista representa el costo de viajar entre cabinas. El peso de las arista representa
+        el precio a pagar en el nodo destino, que representa una cabina, las aristas que tenga como destino una cabina regular tendrá peso positivo
+        y las que tenga una cabina inversa como destino tienen peso negativo.
+
+    (b) Dar un algoritmo para resolver el problema del inciso anterior, indicando su complejidad temporal. 
+
+        Algoritmo: para encontrar un ciclo negativo en principio Bellman Ford no sirve pues si el nodo inicial no alcanza todas los nodos se
+        podría perder algún ciclo. Por eso:
+            1. Agrego un nodo extra y conecto a todos los vértices con costo 0
+            2. Aplico Bellman Ford desde el nuevo nodo que agregué para buscar un ciclo negativo.
+            3. Si encuentra, es posible ciclo pure.
+            4. Si no, es imposible.
+
+            Complejidad: depende de Bellman Ford O(n*m)
+
+    El sistema arrojó que ninguna de las configuraciones deseadas para desincentivar el tráfico evita el negocio de los ciclos puré. A fin de 
+    obtener cierto rédito, sugieren transformar la idea de cabinas inversas en cabinas mixtas. Cuando un vehículo pasa por una cabina mixta, 
+    se le paga a le conductore si se le cobró a le conductore en la cabina anterior; caso contrario, le conductore paga. Obviamente, sugieren que 
+    se le pague a le conductore cuando la cabina mixta sea la primera cabina recorrida.
+
+    (c) Modelar el problema de determinar si la ciudad permite el negocio de los ciclos puré cuando se aplica la nueva configuración para las 
+    cabinas. Además de la información utilizada para el problema original, ahora se conoce cuáles cabinas son mixtas: notar que el monto de cobro
+    es ci y el monto de pago es −ci para la cabina mixta i (con ci > 0).
+
+        Modelado: seguimos con el formato de cabina como nodos y aristas como la unión entre dos cabinas. Solo que ahora las cabinas serán
+        representado como el par(int, bool) donde el int identifica la cabina y el bool si se pago en la cabina anterior. Es decir si el bool
+        es true, el conductor pagó en la cabina anterior y si es false, el conductor cobró. Vamos a duplicar los nodos que sean las cabinas mixtas
+        ({cabina, true} y {cabina, false}). Así al momento de conectar las aristas, si una cabina normal conecta hacia una cabina mixta, solo se hará
+        la conexion con {cabina, false}, en cambio si una mixta conecta con una normal no tiene restricción en la conexión. En el caso de que se 
+        conecten dos cabinas mixtas, {cabina1, false} conecta con {cabina2, true} y viceversa, dependiendo de la acción (cobrar o pagar) 
+        realizada en la cabina de origen.
+        Y los pesos de cada arista de cabina mixta se asigna según el valor del bool en el nodo destino.
+
+        Para calcular ciclos negativos es la misma idea del inciso anterior agregando un nodo (c0, false) ya que el primero se cobra.
+
+8) SRD
+    Un sistema de restricciones de diferencias (SRD) es un sistema S que tiene m inecuaciones y n incógnitas x1 , . . . , xn . Cada inecuación es 
+    de la forma xi − xj ≤ cij para una constante cij ∈ R; por cada par i, j existe a lo sumo una inecuación (por qué?). Para cada SRD S se puede 
+    definir un digrafo pesado D(S) que tiene un vértice vi por cada incógnita xi de forma tal que vj → vi es una arista de peso cij cuando 
+    xi − xj ≤ cij es una inecuación de S. Asimismo, S tiene un vértice v0 y una arista v0 → vi de peso 0 para todo 1 ≤ i ≤ n.
+
+    (a) Demostrar que si D(S) tiene un ciclo de peso negativo, entonces S no tiene solución.
+
+    (b) Demostrar que si D(S) no tiene ciclos de peso negativo, entonces {xi = d(v0 , vi ) | 1 ≤ i ≤ n} es una solución de D(S). 
+    Acá d(v0 , vi ) es la distancia desde v0 a vi en D(S).
+
+    (c)A partir de los incisos anteriores, proponer un algoritmo que permita resolver cualquier SRD. En caso de no existir solución, el 
+    algoritmo debe mostrar un conjunto de inecuaciones contradictorias entre sí.
