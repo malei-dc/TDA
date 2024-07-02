@@ -223,10 +223,24 @@ Algoritmo de Bellman-Ford y SRDs
         Si BF devuelve True -> el ciclo negativo es un conjunto de valores que hace contradictoria el sistema.
         Si BF devuelve False -> el camino mínimo a todos los nodos es una solución del sistema.
 
+Algoritmo de Floyd-Warshall y recorrido mínimo en DAGs
+
 13) Matriz FW
     Decimos que una matriz cuadrada, simétrica y positiva M ∈ N² es de Floyd-Warshall (FW) si existe un grafo G tal que M es el resultado de 
     aplicar FW a G. Describir un algoritmo para decidir si una matriz M es FW. En caso afirmativo, el algoritmo debe retornar un grafo G con la
     mínima cantidad de aristas posibles tal que el resultado de FW sobre G sea M . En caso negativo, el algoritmo debe retornar alguna evidencia 
     que pruebe que M no es FW.
 
-        
+        Algoritmo:
+            1. Chequear si M es simétrico, tiene 0 en la diagonal y tiene la propiedad de triangulo de desigualdad (que para todo trío de índices
+            i, j, k, la distancia directa de i a j no sea mayor que la suma de las distancias de (i a k) y de (k a j)). Si se encuentra
+            M[i][j] > M[i][k] + M[k][j] no puede ser resultado de aplicar Floyd-Warshall, ya que esta condición violaría la lógica de encontrar 
+            el camino más corto entre los nodos.
+            2. Si M satisface 1 construimos grafo, comenzar con un grafo sin aristas y luego, iterar sobre cada par i, j y agregar la arista 
+            i->j con peso M[i][j] solo si esa es la única manera de alcanzar la distancia mínima entre esos puntos, es decir, si no existe un k tal 
+            que M[i][k] + M[k][j] = M[i][j]. Esto garantizará que solo se añadan las aristas esenciales para preservar las distancias mínimas.
+            3. Si M no satisface la simetría, tiene valores no nulos en la diagonal, o viola la propiedad del triángulo de desigualdad, debería 
+            ser capaz de identificar y devolver el conjunto de índices que violan estas condiciones como evidencia de que M no puede ser resultado 
+            del algoritmo de Floyd-Warshall.
+
+14) 
