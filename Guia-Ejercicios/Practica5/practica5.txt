@@ -243,4 +243,29 @@ Algoritmo de Floyd-Warshall y recorrido mínimo en DAGs
             ser capaz de identificar y devolver el conjunto de índices que violan estas condiciones como evidencia de que M no puede ser resultado 
             del algoritmo de Floyd-Warshall.
 
-14) 
+14) st-eficiente en matriz
+    Dado un digrafo D con pesos c : E(D) → R que no tiene ciclos de peso negativo, queremos encontrar la arista v → w que sea st-eficiente para la 
+    mayor cantidad de pares s y t. Proponer un algoritmo eficiente y "simple de programar" para resolver este problema.
+
+        Algoritmo:
+            1. Corremos Floyd-Warshall para obtener el camino mínimo todos a todos en la estructura de dist (O(n³))
+            2. Iniciamos un diccionario de aristas para encontrar el mayor st-eficiente.
+            3. Lo que necesitamos verificar es si la presencia de la arista v->w en el camino mínimo de s a t realmente hace que ese camino sea 
+            único o eficiente en términos de coste.
+            Para esto, podríamos necesitamos asegurarnos de que no exista un camino alternativo de s a t que no pase por v->w y tenga el mismo 
+            costo mínimo. Esto implica verificar si la eliminación de la arista v->w y recalculando el camino mínimo entre s y t resulta en un 
+            camino de mayor costo o no. Para hacerlo eficiente y no estar sacando arista para recalcular el camino minimo nuevo, hacemos:
+
+                a. Durante la ejecución de Floyd-Warshall, además de calcular las distancias mínimas, podría almacenar los caminos mínimos. 
+                Esto se puede hacer manteniendo una matriz de predecesores. Por cada par de nodos (i, j), almacena el nodo predecesor de j en el 
+                camino mínimo desde i hasta j. Esto te permitirá reconstruir el camino mínimo sin tener que recalcular las distancias.
+
+                b. Una vez se tiene los caminos mínimos, puedo verificar si la arista v->w es parte de estos caminos. Para cada par (s, t), 
+                reconstruye el camino mínimo usando la matriz de predecesores y verifica si la arista v->w está en ese camino.
+
+                c. Si dist[s][v] + peso(v, w) + dist[w][t] = dist[s][t] entonces sabemos que cualquier camino mínimo de s a t debe pasar por v->w. 
+                Si se elimina la arista v->w, entonces, por definición, el camino mínimo de s a t tendría que ser diferente y por lo tanto, de 
+                mayor costo, dado que no existen ciclos de peso negativo en el grafo.
+                
+                d. Registro en un diccionario la frecuencia con que cada arista cumple la condición establecida anteriormente para todos los pares (s, t).
+            4. Devuelvo el max del diccionario.
