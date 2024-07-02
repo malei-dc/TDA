@@ -191,8 +191,42 @@ Algoritmo de Bellman-Ford y SRDs
 
     (a) Demostrar que si D(S) tiene un ciclo de peso negativo, entonces S no tiene solución.
 
+        Dato: por c/par i,j existe a lo sumo 1 inecuación porque en caso contrario tenemos 2 inecuaciones contradictoria o redundante, lo que 
+        implica solución no única o inconsistente.
+
+        Lo demostramos por el absurdo:
+            Supongamos que D(S) tiene un ciclo de peso negativo y existe una solución única.
+            Supongamos que el ciclo incluye los nodos c = (v1, v2, ..., vk) donde vk = v1. El nodo v0 no puede ser parte de ciclos pues no tiene
+            arista entrante. El ciclo corresponde a la siguiente sistema de inecuaciones:
+                x2 - x1 <= w(v1, v2)
+                x3 - x2 <= w(v2, v3)
+                ...
+                xk-1 - xk-2 <= w(vk-2, vk-1)
+                xk - xk-1 <= w(vk-1, vk)
+            La solución también debe satisfacer a la suma de las k inecuaciones.
+            Si sumamos la izquierda cada término xi aparece sumando y restando 1 vez (pues vk = v1), es igual a 0.
+            Si sumamos la derecha tenemos w(c).
+            Como suponemos que c es un ciclo negativo, nos queda que 0 <= w(c) < 0 ABS!!
+
+            Entonces si D(S) tiene ciclo negativo, no tiene solución.
+
     (b) Demostrar que si D(S) no tiene ciclos de peso negativo, entonces {xi = d(v0 , vi ) | 1 ≤ i ≤ n} es una solución de D(S). 
-    Acá d(v0 , vi ) es la distancia desde v0 a vi en D(S).
+    Acá d(v0 , vi) es la distancia desde v0 a vi en D(S).
+
+        Consideremos cualquier arista (vi, vj) en E(S). Por la inecuación d(v0, vj) <= d(v0,vi) + w(vi,vj) entonces d(v0, vj) - d(v0,vi) <= w(vi,vj)
+        Si igualamos xi = d(v0,vi) y xj = d(v0, vj) satisface la inecuación xj - xi <= w(vi,vj) que corresponde a la arista (vi,vj).
 
     (c)A partir de los incisos anteriores, proponer un algoritmo que permita resolver cualquier SRD. En caso de no existir solución, el 
     algoritmo debe mostrar un conjunto de inecuaciones contradictorias entre sí.
+
+        Usamos algoritmo de busqueda de ciclos negativo desde v0 (Bellman Ford).
+        Si BF devuelve True -> el ciclo negativo es un conjunto de valores que hace contradictoria el sistema.
+        Si BF devuelve False -> el camino mínimo a todos los nodos es una solución del sistema.
+
+13) Matriz FW
+    Decimos que una matriz cuadrada, simétrica y positiva M ∈ N² es de Floyd-Warshall (FW) si existe un grafo G tal que M es el resultado de 
+    aplicar FW a G. Describir un algoritmo para decidir si una matriz M es FW. En caso afirmativo, el algoritmo debe retornar un grafo G con la
+    mínima cantidad de aristas posibles tal que el resultado de FW sobre G sea M . En caso negativo, el algoritmo debe retornar alguna evidencia 
+    que pruebe que M no es FW.
+
+        
