@@ -1,0 +1,9 @@
+Práctica 6: Flujo en redes
+
+Propiedades de los flujos en redes
+
+1) Demos
+    Para cada una de las siguientes sentencias sobre el problema de flujo máximo en una red N: demostrar que es verdadera o dar un contraejemplo.
+
+    (a) Si la capacidad de cada arista de N es par, entonces el valor del flujo máximo es par.
+        
