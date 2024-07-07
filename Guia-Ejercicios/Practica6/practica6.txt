@@ -6,4 +6,40 @@ Propiedades de los flujos en redes
     Para cada una de las siguientes sentencias sobre el problema de flujo máximo en una red N: demostrar que es verdadera o dar un contraejemplo.
 
     (a) Si la capacidad de cada arista de N es par, entonces el valor del flujo máximo es par.
+        Verdadero. 
+        Usamos el teorema que dice que flujo max = corte min.
+        Un corte min es la suma de todas las capacidades de las aristas que cruzan el corte y tiene que ser igual al flujo max, siendo todos los
+        pesos pares, la suma también es par ENTONCES flujo max es par.
+
+    (b) Si la capacidad de cada arista de N es par, entonces existe un flujo máximo en el cual el flujo sobre cada arista de N es par.
+        Verdadero.
+        Lo demostramos por inducción en las iteraciones de ford-fulkerson. Miramos cuello botella en cada iteración:
+            Caso base: inicialmente el flujo en la red es 0 y por lo tanto todas tienen sus capacidades disponibles que es par y su flujo es 0.
+            Paso inductivo: el flujo en cada arista es par
+                            Si existe camino de aumento, el cuello botella será par.
+                            Al actualizar las capacidades de las aristas del camino de aumento, éstas son pares pues restamos flujo par a capacidad
+                            par. 
+                            La clave aquí radica en el hecho de que, dado que todas las capacidades son pares, y está incrementando el flujo a 
+                            través de un camino de aumento según la capacidad más pequeña restante (el cuello de botella), este incremento será 
+                            par, ya que sería el mínimo de un conjunto de números pares (las capacidades restantes en el camino), y por lo tanto, 
+                            también par.
+        Este argumento se basa en el algoritmo de Ford-Fulkerson y cómo el proceso de búsqueda de caminos de aumento y actualización de flujos 
+        garantiza que, si empezamos con capacidades pares, cualquier flujo máximo encontrado respetará la condición de que cada flujo sobre cada 
+        arista sea par.
+
+    (c) Si la capacidad de cada arista de N es impar, entonces el valor del flujo máximo es impar.
+        Falso.
+
+        *--3/3--*--3/3--*--6/7--* 
+        |               |
+        |--3/3--*--3/3--
+
+    (d) Si la capacidad de cada arista de N es impar, entonces existe un flujo máximo en el cual el flujo sobre cada arista de N es impar.
+
+    (e) Si todas las aristas de N tienen capacidades racionales, entonces el flujo máximo es racional.
+
+3) Edmonds y Karp
+    Determinar la complejidad del algoritmo de Edmonds y Karp para encontrar el flujo máximo de una red N cuando:
+
+    (a) No hay información acerca de las capacidades de las aristas de N.
         
