@@ -32,7 +32,7 @@ Propiedades de los flujos en redes
 
         *--3/3--*--3/3--*--6/7--* 
         |               |
-        |--3/3--*--3/3--
+        ---3/3--*--3/3--
 
     (d) Si la capacidad de cada arista de N es impar, entonces existe un flujo máximo en el cual el flujo sobre cada arista de N es impar.
 
@@ -42,4 +42,29 @@ Propiedades de los flujos en redes
     Determinar la complejidad del algoritmo de Edmonds y Karp para encontrar el flujo máximo de una red N cuando:
 
     (a) No hay información acerca de las capacidades de las aristas de N.
+
+        O(m*min{F, nm})
+    
+    (b) todas las aristas de N tienen capacidad a lo sumo q ≪ n.
+
+        O(nm²)
+
+    (c) el flujo máximo de N tiene un valor F ≪ mn.
+
+        O(mF)
+
+4) Corte capacidad min
+    Proponer un algoritmo lineal que dada una red N y un flujo de valor máximo, encuentre un corte de capacidad mínima de N .
+
+        - Sabiendo el flujo sobre cada arista, podemos reconstruir el grafo residual en O(m + n), ya que necesito revisar cada arista para determinar 
+        su capacidad residual.
+        - Corremos BFS desde s en el grafo residual O(n + m).
+        - Todos los vértices que son alcanzables desde s están en el corte mínimo. Las aristas que salen del corte mínimo son las que cortan y la 
+        suma de sus capacidades es igual al flujo max.
+
+Problemas de modelado I: caminos disjuntos en un grafo
+
+5) FlujosDisjuntos
+    Sea G un digrafo con dos vértices s y t.
+    (a) Proponer un modelo de flujo para determinar la máxima cantidad de caminos disjuntos en aristas que van de s a t.
         
