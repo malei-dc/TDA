@@ -11,7 +11,7 @@ Para cada una de las siguientes sentencias sobre el problema de flujo máximo en
 >Usamos el teorema que dice que flujo max = corte min.
 >Un corte min es la suma de todas las capacidades de las aristas que cruzan el corte y tiene que ser igual al flujo max, siendo todos los pesos pares, la suma también es par ENTONCES flujo max es par.
 
-(b) Si la capacidad de cada arista de N es par, entonces existe un flujo máximo en el cual el flujo sobre cada arista de N es par.
+(b) Si la capacidad de cada arista de $N$ es par, entonces existe un flujo máximo en el cual el flujo sobre cada arista de $N$ es par.
 
 >Verdadero.
 >Lo demostramos por inducción en las iteraciones de ford-fulkerson. Miramos cuello botella en cada iteración:
@@ -28,13 +28,13 @@ Para cada una de las siguientes sentencias sobre el problema de flujo máximo en
 
 >Falso.
 
-Foto
+![](https://github.com/malei-dc/TDA/blob/main/Guia-Ejercicios/Practica6/Imgs/ej1c.png)
 
 (d) Si la capacidad de cada arista de $N$ es impar, entonces existe un flujo máximo en el cual el flujo sobre cada arista de $N$ es impar.
 
 >Falso.
 
-Foto
+![](https://github.com/malei-dc/TDA/blob/main/Guia-Ejercicios/Practica6/Imgs/ej1d.png)
 
 >Lo importante es notar que la estructura de la red y la distribución del flujo pueden crear situaciones donde, incluso si todas las capacidades son impares, no necesariamente se requiere que cada flujo en el camino máximo sea impar para alcanzar el flujo máximo.
 >
@@ -48,22 +48,22 @@ Foto
 >Cualquier valor de flujo calculado, incluido el flujo máximo, conserva la propiedad de ser un número racional.
 
 ## 2) Ford-Fulkerson
-Para todo $F  \in \mathds{N}$, construir una red con 4 vértices y 5 aristas en la que el método de *Ford y Fulkerson* necesite $F$ iteraciones en peor caso para obtener el flujo de valor máximo (partiendo de un flujo inicial con valor 0).
+Para todo $F  \in N$, construir una red con 4 vértices y 5 aristas en la que el método de *Ford y Fulkerson* necesite $F$ iteraciones en peor caso para obtener el flujo de valor máximo (partiendo de un flujo inicial con valor 0).
 
-foto
+![](https://github.com/malei-dc/TDA/blob/main/Guia-Ejercicios/Practica6/Imgs/ej2.png)
 
 ## 3) Edmonds y Karp
-Determinar la complejidad del algoritmo de Edmonds y Karp para encontrar el flujo máximo de una red N cuando:
+Determinar la complejidad del algoritmo de Edmonds y Karp para encontrar el flujo máximo de una red $N$ cuando:
 
-(a) No hay información acerca de las capacidades de las aristas de N.
+(a) No hay información acerca de las capacidades de las aristas de $N$.
 
->$O(m x min{F, nm})$
+>$O(m * min \{ F, nm \})$
     
-(b) todas las aristas de N tienen capacidad a lo sumo q ≪ n.
+(b) todas las aristas de $N$ tienen capacidad a lo sumo $q \ll n$.
 
 >$O(nm²)$
 
-(c) el flujo máximo de N tiene un valor F ≪ mn.
+(c) el flujo máximo de $N$ tiene un valor $F \ll mn$.
 
 >$O(mF)$
 
@@ -71,5 +71,5 @@ Determinar la complejidad del algoritmo de Edmonds y Karp para encontrar el fluj
 Proponer un algoritmo lineal que dada una red $N$ y un flujo de valor máximo, encuentre un corte de capacidad mínima de $N$.
 
 >- Sabiendo el flujo sobre cada arista, podemos reconstruir el grafo residual en $O(m + n)$, ya que necesito revisar cada arista para determinar su capacidad residual.
->- Corremos BFS desde s en el grafo residual O(n + m).
+>- Corremos BFS desde s en el grafo residual $O(n + m)$.
 >- Todos los vértices que son alcanzables desde s están en el corte mínimo. Las aristas que salen del corte mínimo son las que cortan y la suma de sus capacidades es igual al flujo max.
