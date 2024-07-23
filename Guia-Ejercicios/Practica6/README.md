@@ -57,7 +57,7 @@ Determinar la complejidad del algoritmo de Edmonds y Karp para encontrar el fluj
 
 (a) No hay información acerca de las capacidades de las aristas de $N$.
 
->$O(m * min \{ F, nm \})$
+>$O(m * min (F, nm))$
     
 (b) todas las aristas de $N$ tienen capacidad a lo sumo $q \ll n$.
 
