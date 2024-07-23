@@ -68,3 +68,18 @@ Problemas de modelado I: caminos disjuntos en un grafo
     Sea G un digrafo con dos vértices s y t.
     (a) Proponer un modelo de flujo para determinar la máxima cantidad de caminos disjuntos en aristas que van de s a t.
         
+        Tenemos digrafo G = (V, E) para nuestra red N = (E_n = E, V_n = V)
+    
+    (b) Dar una interpretación a cada unidad de flujo y cada restricción de capacidad.
+        
+        En este problema cada unidad de flujo representa un camino, como queremos pasar solo una vez por cada arista, la capacidad es 1. 
+        Entonces el flujo F serían los caminos disjuntos que van desde s a t.
+
+    (c) Demostrar que el modelo es correcto.
+        
+        Quiero ver que existe un flujo válido de valor F sii Existen F caminos disjuntos en aristas de G
+        <-) Sean c1, ... c_f los caminos disjuntos en aristas de G. Definimos una funcion de flujo:
+
+            f(e) = 1 e pertenece c_i con 1 <= i <= F
+                   0 si No
+        Ahora quiero ver que f es válido (que cumpla la restricción de capacidad y la conservación de flujos) y f = F
