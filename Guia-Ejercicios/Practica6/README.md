@@ -2,7 +2,7 @@
 
 ## Propiedades de los flujos en redes
 
-## 1) Demos
+### 1) Demos - propiedades
 Para cada una de las siguientes sentencias sobre el problema de flujo máximo en una red $N$: demostrar que es verdadera o dar un contraejemplo.
 
 (a) Si la capacidad de cada arista de $N$ es par, entonces el valor del flujo máximo es par.
@@ -47,12 +47,12 @@ Para cada una de las siguientes sentencias sobre el problema de flujo máximo en
 >Las operaciones realizadas para calcular el flujo (sumas y restas) no alteran la naturaleza racional de los números involucrados.
 >Cualquier valor de flujo calculado, incluido el flujo máximo, conserva la propiedad de ser un número racional.
 
-## 2) Ford-Fulkerson
-Para todo $F  \in N$, construir una red con 4 vértices y 5 aristas en la que el método de *Ford y Fulkerson* necesite $F$ iteraciones en peor caso para obtener el flujo de valor máximo (partiendo de un flujo inicial con valor 0).
+### 2) Ford-Fulkerson
+Para todo $F \in N$, construir una red con 4 vértices y 5 aristas en la que el método de *Ford y Fulkerson* necesite $F$ iteraciones en peor caso para obtener el flujo de valor máximo (partiendo de un flujo inicial con valor 0).
 
 ![](https://github.com/malei-dc/TDA/blob/main/Guia-Ejercicios/Practica6/Imgs/ej2.png)
 
-## 3) Edmonds y Karp
+### 3) Edmonds y Karp
 Determinar la complejidad del algoritmo de Edmonds y Karp para encontrar el flujo máximo de una red $N$ cuando:
 
 (a) No hay información acerca de las capacidades de las aristas de $N$.
@@ -67,9 +67,45 @@ Determinar la complejidad del algoritmo de Edmonds y Karp para encontrar el fluj
 
 >$O(mF)$
 
-## 4) Corte capacidad min
+### 4) Corte capacidad min
 Proponer un algoritmo lineal que dada una red $N$ y un flujo de valor máximo, encuentre un corte de capacidad mínima de $N$.
 
 >- Sabiendo el flujo sobre cada arista, podemos reconstruir el grafo residual en $O(m + n)$, ya que necesito revisar cada arista para determinar su capacidad residual.
 >- Corremos BFS desde s en el grafo residual $O(n + m)$.
 >- Todos los vértices que son alcanzables desde s están en el corte mínimo. Las aristas que salen del corte mínimo son las que cortan y la suma de sus capacidades es igual al flujo max.
+
+## Problemas de modelado I: caminos disjuntos en un grafo
+
+### 5) FlujosDisjuntos
+Sea $G$ un digrafo con dos vértices $s$ y $t$.
+
+(a) Proponer un modelo de flujo para determinar la máxima cantidad de caminos disjuntos en aristas que van de $s$ a $t$.
+
+>Tenemos digrafo $G = (V, E)$ para nuestra red $N = (E_n = E, V_n = V)$
+
+(b) Dar una interpretación a cada unidad de flujo y cada restricción de capacidad.
+
+>En este problema cada unidad de flujo representa un camino, como queremos pasar solo una vez por cada arista, la capacidad es 1. Entonces el flujo $F$ serían los caminos disjuntos que van desde $s$ a $t$.
+
+(c) Demostrar que el modelo es correcto.
+
+> Queremos ver que existe un flujo válido de valor $F$ $\Longleftrightarrow$ existen $F$ caminos disjuntos en aristas de $G$
+>
+>$\Leftarrow$) Sean $c_1, ..., c_F$ los caminos disjuntos en aristas de $G$. Definimos una función de flujo:
+
+![](https://github.com/malei-dc/TDA/blob/main/Guia-Ejercicios/Practica6/Imgs/ej5FuncionDemo.png)
+
+>Ahora quiero ver que la función $f$ es válido (que cumpla la restricción de capacidad y la conservación de flujo) y que $\sum_{w \in N⁺(s)} f(w)$ = $F$.
+>
+>- Restricción de capacidad: $f(e) \leq c(e)$ $\forall e \in E(G)$. Se cumple pues $f_e \leq 1$ = $c_e$
+>- Restricción de conservación de flujo: para cualquier vértice $v \neq s, t$, el flujo entrante es igual al flujo saliente. Esto se debe a que cada camino que entra a $v$ debe salir de $v$ para continuar hacia $t$, garantizando así la conservación del flujo. Dado que estamos considerando caminos disjuntos en aristas, ningún vértice intermedio $v$ puede recibir más flujo del que envía, excepto $s$ y $t$, precisamente porque cada camino $c_i$ es disjunto en aristas y, por lo tanto, atraviesa cada vértice a lo sumo una vez (exceptuando $s$ y $t$).
+>- $\sum_{w \in N⁺(s)} f(w)$ = $F$. Se cumple pues $s$ pertenece a todos los caminos mínimos disjuntos.
+>
+>$\Rightarrow$) Vamos a ir construyendo caminos disjuntos a partir de flujo $F$. Demostración inductiva:
+>$f$ es un flujo de valor $F$, sé que estan conectados $s$ con $t$ por aristas $e$ con $f(e) = 1$ en un camino $P$. Si saco el camino $P$, como $f(e) = 1$ entonces el valor del flujo $f'=f - P=F-1$, $f'$ sigue válido. Luego si repito con otro $P'$, como $c(e) = 1$ para todas las aristas, no compartía camino con $P$, así que repito esto $F$ veces para obtener $F$ caminos disjuntos de $G$.
+
+(d) Determinar la complejidad de resolver el modelo resultante con el algoritmo de Edmonds y Karp.
+
+>$O(VE^2)$, donde $V$ es el número de vértices y $E$ es el número de aristas en el digrafo. La razón de esta complejidad radica en cómo el algoritmo encuentra el camino de aumento más corto en cada iteración usando BFS (Búsqueda en Anchura) y cómo actualiza los flujos a través de la red.
+
+## Problemas de modelado II: asignación
