@@ -132,7 +132,7 @@ determine una asignación que respete las tradiciones sabiendo que:
 >- Las aristas con capacidad $c_{ij}$ limitan los solteros de cada familia en la misma mesa $m_j$.
 >- Las aristas $m_j$ restringen la capacidad max de cada mesa.
 >
->Por conservación de flujo $\sum_{j = i}^{|m|} c_{ij}$ = $f_i$, solo asignamos $f_i$ solteros a mesas.  
+>Por conservación de flujo $\sum_{j = i}{|m|} c_{ij}$ = $f_i$, solo asignamos $f_i$ solteros a mesas.  
 
 (c) Determinar la complejidad de resolver el modelo resultante con el algoritmo de Edmonds y Karp.
 
