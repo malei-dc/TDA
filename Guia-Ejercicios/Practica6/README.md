@@ -113,8 +113,7 @@ Sea $G$ un digrafo con dos vértices $s$ y $t$.
 ### 6) FiestaSolteres
 Las fiestas de casamiento son muy peculiares y extrañamente frecuentes. Cada persona invitada asiste siempre con todes sus familiares solteres, a quienes se les reservan mesas especiales de solteres. Además, hay una regla no escrita que establece un límite $c_{ij}$ a la cantidad de solteres de la familia $i$ que pueden sentarse en la mesa $j$. Asignasonia requiere un algoritmo que resuelva el problema de asignación de les solteres a sus mesas.
 
-(a) Proponer un modelo de flujo que dados los conjuntos $F$ = {$f_1, ..., f_{|F|}$}, $M =$ {$m_1, ..., m_{|M|}$}
-y $C$ = {$c_{ij} / 1 \leq i \leq |F|, 1 \leq j \leq |M|$} determine una asignación que respete las tradiciones sabiendo que:
+(a) Proponer un modelo de flujo que dados los conjuntos $$F =\{f_1, ..., f_{|F|}\}, M = \{m_1, ..., m_{|M|}\}, C = \{c_{ij} / 1 \leq i \leq |F|, 1 \leq j \leq |M|\}$$ determine una asignación que respete las tradiciones sabiendo que:
 
 - la familia i esta formada por fi personas solteres,
 - la mesa j tiene mj lugares disponibles para solteres, y
