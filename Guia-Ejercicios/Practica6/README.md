@@ -113,8 +113,8 @@ Sea $G$ un digrafo con dos vértices $s$ y $t$.
 ### 6) FiestaSolteres
 Las fiestas de casamiento son muy peculiares y extrañamente frecuentes. Cada persona invitada asiste siempre con todes sus familiares solteres, a quienes se les reservan mesas especiales de solteres. Además, hay una regla no escrita que establece un límite $c_{ij}$ a la cantidad de solteres de la familia $i$ que pueden sentarse en la mesa $j$.Asignasonia requiere un algoritmo que resuelva el problema de asignación de les solteres a sus mesas.
 
-(a) Proponer un modelo de flujo que dados los conjuntos $F =$ {$f_1 , . . . , f_{|F|}$}, $M =$ {$m_1, ..., m_{|M|}$}
-y $C = ${$c_{ij} / 1 \leq i \leq |F|, 1 ≤ j ≤ |M|$} determine una asignación que respete las tradiciones sabiendo que:
+(a) Proponer un modelo de flujo que dados los conjuntos $F =$ {$f_1$ , . . . , $f_{|F|}$}, $M =$ {$m_1$, ..., $m_{|M|}$}
+y $C = ${$c_{ij}$ / $1 \leq i \leq |F|$, $1 \leq j \leq |M|$} determine una asignación que respete las tradiciones sabiendo que:
 
 - la familia i esta formada por fi personas solteres,
 - la mesa j tiene mj lugares disponibles para solteres, y
@@ -129,7 +129,7 @@ y $C = ${$c_{ij} / 1 \leq i \leq |F|, 1 ≤ j ≤ |M|$} determine una asignació
 >- Las aristas con capacidad $c_{ij}$ limitan los solteros de cada familia en la misma mesa $m_j$.
 >- Las aristas $m_j$ restringen la capacidad max de cada mesa.
 >
->Por conservación de flujo $\sum_{j = i}^{|m|}c_{ij} = f_i$, solo asignamos $f_i$ solteros a mesas.  
+>Por conservación de flujo $\sum_{j = i}^{|m|}$ $c_{ij}$ = $f_i$, solo asignamos $f_i$ solteros a mesas.  
 
 (c) Determinar la complejidad de resolver el modelo resultante con el algoritmo de Edmonds y Karp.
 
