@@ -120,7 +120,7 @@ y $C = ${$c_{ij} / 1 \leq i \leq |F|, 1 ≤ j ≤ |M|$} determine una asignació
 - la mesa j tiene mj lugares disponibles para solteres, y
 - en la mesa j solo pueden sentarse cij solteres de la familia i.
 
-![]()
+![](https://github.com/malei-dc/TDA/blob/main/Guia-Ejercicios/Practica6/Imgs/ej6.png)
 
 (b) Dar una interpretación a cada unidad de flujo y cada restricción de capacidad.
 
