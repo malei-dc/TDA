@@ -132,7 +132,7 @@ determine una asignación que respete las tradiciones sabiendo que:
 >- Las aristas con capacidad $c_{ij}$ limitan los solteros de cada familia en la misma mesa $m_j$.
 >- Las aristas $m_j$ restringen la capacidad max de cada mesa.
 >
->Por conservación de flujo $\sum_{j = i}{|m|} c_{ij}$ = $f_i$, solo asignamos $f_i$ solteros a mesas.  
+>Por conservación de flujo $\sum_{j = i}^{|m|}$ $c_{ij}$ = $f_i$, solo asignamos $f_i$ solteros a mesas.  
 
 (c) Determinar la complejidad de resolver el modelo resultante con el algoritmo de Edmonds y Karp.
 
@@ -141,3 +141,37 @@ determine una asignación que respete las tradiciones sabiendo que:
 >$m = |F| + |F||M|+|M| \Rightarrow m = O(FM)$
 >
 >$n = |F| + |M| = O(F+M)$ 
+
+### 7) FlujoMatricial
+Sean $r_1$ , ..., $r_m$ y $c_1$ , ..., $c_n$ números naturales. Se quiere asignar los valores de las celdas de una matriz de $m × n$ con números naturales de forma tal que la *i*-ésima fila sume $r_i$ y la i-ésima columna sume $c_i$.
+
+(a) Modelar el problema de asignación como un problema de flujo.
+
+![](https://github.com/malei-dc/TDA/blob/main/Guia-Ejercicios/Practica6/Imgs/ej7.png)
+
+(b) Dar una interpretación a cada unidad de flujo y cada restricción de capacidad.
+
+>Cada unidad de flujo equivale a sumarle una unidad a esa celda en la matriz.
+>- Las restricciones de capacidad $r_i$ y $c_j$ $\forall i \in$ {1, ..., m}, $\forall j \in$ {1, ..., n} indican cuánto deben sumar la fila $r_i$ y la columna $c_j$ respectivamente.
+>- Las restricciones de capacidad $\infty$ indican que no hay restricción para el valor que puede tener una celda individual. 
+
+(c) Demostrar que el modelo es correcto.
+
+> Queremos ver que $\exists$ "asignación posible" para A $\in N^{m \times n}$ $\Leftrightarrow \exists f$ función de flujo máximo en $G = (V, E)$ tal que $|F| = \sum_{i=1}^{m} r_i$.
+>
+>Donde "asignacion" es la matriz es de $m \times n$ y en cada celda hay un número natural y "posible" es:
+>1. $\sum_{j=1}^{n} A_{ij} = r_i \forall i \in$ {1, ..., m}
+>2. $\sum_{i=1}^{m} A_{ij} = c_j \forall j \in$ {1, ..., m}
+>
+>$\Leftarrow$) Sea $f$ una función de flujo máximo en el modelo tal que $|F| = \sum_{i=1}^{m} r_i$. Construyo la "asignación posible" $A_{ij} = F(r_i, c_j)$
+>- Veamos que es asignación: $i \in$ {1, ..., m} y $j \in$ {1, ..., n} $\rightarrow$ hay $m \times n$ pares $(r_i, c_j) \rightarrow A$ tendrá dimensión $m \times n$ y $A_{ij} \in N$ porque es el codominio de $F$.
+>- Veamos que es posible:
+>   1. Como $|F| = \sum_{i=1}^{m} r_i \rightarrow$ cada arista $(s, r_i)$ está saturada porque estoy sumando el total de su capacidad al flujo. $\rightarrow$ por conservación de flujo: "flujo que entra al nodo $r_i$" $\forall i \in $ {1, ..., m} $r_i = \sum_{j=1}^{n} F(r_i, c_j)$ "flujo que sale del nodo $r_i$" $= \sum_{j=1}^{n}A_{ij}$ "Aplico la asignación que hice" $\rightarrow$ se cumple **1**  
+>   2. Con el mismo argumento de arriba pero ahora para los nodos $c_j$ concluimos que se cumple **2**.
+>
+>Luego existe "asignación posible" para $A \in N^{m \times n}$
+>
+>
+>$\Rightarrow$) 
+
+(d) Determinar la complejidad de resolver el modelo resultante con el algoritmo de Edmonds y Karp.
