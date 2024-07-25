@@ -172,6 +172,26 @@ Sean $r_1$ , ..., $r_m$ y $c_1$ , ..., $c_n$ números naturales. Se quiere asign
 >Luego existe "asignación posible" para $A \in N^{m \times n}$
 >
 >
->$\Rightarrow$) 
-
+>$\Rightarrow$) Sea $A \in N^{m \times n}$ una  matriz que cumple "asignación posible". Constryo la función de flujo máximo $F/ |F| = \sum_{i=1}^{m} r_i$
+>
+>![](https://github.com/malei-dc/TDA/blob/main/Guia-Ejercicios/Practica6/Imgs/ej7funcionDemo.png)
+>
+>- Veamos que $f$ es función de flujo:
+>   - Quiero ver que $f$ cumple capacidades: **sí**, porque las únicas aristas con capacidad finita son las $(s, v)$ y $(u, t)$, y en todas ellas el flujo es igual a la capacidad $\Rightarrow$ es $\leq$ a la capacidad $\Rightarrow f$ cumple capacidades.
+>   - Quiero ver que conserva flujo:
+>       - Quiero ver que los nodos $r_i$ conservan flujo: o sea, $f(s, r_i) = \sum_{j=1}^{n} f(r_i, c_j)$. Comienzo con $f(s, r_i)$ "por f" $= r_i$ "por asignación posible" $= \sum_{j=1}^{n} A_{ij}$ "por f" $= \sum_{j=1}^{n} f(r_i, c_j) \Rightarrow$ Los nodos $r_i$ conservan flujo.
+>       - Quiero ver que los nodos $c_j$ conservan flujo: siguiendo la idea de arriba con concluyo que los nocos $c_j$ conservan flujo.
+>
+>   Como todos los nodos distintos a $s$ y $t$ conservan flujo $\Rightarrow f$ conserva flujo
+>
+>   $\Rightarrow$ como $f$ cumple capacidades y conserva flujo $\Rightarrow f$ es función de flujo. 
+>- Veamos que $|F| = \sum_{i=1}^{m} r_i$: comenzamos; por definición de flujo $|F|$ es igual a la cantidad de flujo que sale del nodo $s \Rightarrow |F| = \sum_{i=1}^{m} f(s, r_i)$ "por f" $= \sum_{i=1}^{n} r_i$ .
+>- Veamos que $f$ es de flujo máximo: comienzo; como $f(s, r_i) = r_i$ y la capacidad de la arista $(s, r_i)$ es $r_i \forall i \in$ {1, ...,m}, cada arista $(s, r_i)$ está saturada y no es posible enviar más flujo que el que se está enviando, porque todas las aristas salientes de $s$ están saturadas $\Rightarrow f$ es de flujo máximo. 
+>
+>Luego existe una $f$ función de flujo máximo en $G = (V, E)$ tal que $|F| = \sum_{i=1}^{m} r_i$. $\square$ 
+ 
 (d) Determinar la complejidad de resolver el modelo resultante con el algoritmo de Edmonds y Karp.
+
+> Sea $G=(V, E)$ el modelo, tenemos que $|V|=m+n+2$ y $|E|=m+m*n+n$
+>
+> Como la complejidad de Edmonds y Karp es $O(VE²)$ nos queda $O((m+n+2)(m+m*n+n)²) \Rightarrow O((n+m)(nm)²)$  
