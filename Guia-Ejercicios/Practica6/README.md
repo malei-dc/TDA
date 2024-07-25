@@ -166,7 +166,7 @@ Sean $r_1$ , ..., $r_m$ y $c_1$ , ..., $c_n$ números naturales. Se quiere asign
 >$\Leftarrow$) Sea $f$ una función de flujo máximo en el modelo tal que $|F| = \sum_{i=1}^{m} r_i$. Construyo la "asignación posible" $A_{ij} = F(r_i, c_j)$
 >- Veamos que es asignación: $i \in$ {1, ..., m} y $j \in$ {1, ..., n} $\rightarrow$ hay $m \times n$ pares $(r_i, c_j) \rightarrow A$ tendrá dimensión $m \times n$ y $A_{ij} \in N$ porque es el codominio de $F$.
 >- Veamos que es posible:
->   1. Como $|F| = \sum_{i=1}^{m} r_i \rightarrow$ cada arista $(s, r_i)$ está saturada porque estoy sumando el total de su capacidad al flujo. $\rightarrow$ por conservación de flujo: "flujo que entra al nodo $r_i$" $\forall i \in $ {1, ..., m} $r_i = \sum_{j=1}^{n} F(r_i, c_j)$ "flujo que sale del nodo $r_i$" $= \sum_{j=1}^{n}A_{ij}$ "Aplico la asignación que hice" $\rightarrow$ se cumple **1**  
+>   1. Como $|F| = \sum_{i=1}^{m} r_i \rightarrow$ cada arista $(s, r_i)$ está saturada porque estoy sumando el total de su capacidad al flujo. $\rightarrow$ por conservación de flujo: "flujo que entra al nodo $r_i$" $\forall i \in$ {1, ..., m} $r_i = \sum_{j=1}^{n} F(r_i, c_j)$ "flujo que sale del nodo $r_i$" $= \sum_{j=1}^{n}A_{ij}$ "Aplico la asignación que hice" $\rightarrow$ se cumple **1**  
 >   2. Con el mismo argumento de arriba pero ahora para los nodos $c_j$ concluimos que se cumple **2**.
 >
 >Luego existe "asignación posible" para $A \in N^{m \times n}$
