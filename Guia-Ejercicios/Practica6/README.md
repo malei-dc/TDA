@@ -160,8 +160,11 @@ Sean $r_1$ , ..., $r_m$ y $c_1$ , ..., $c_n$ números naturales. Se quiere asign
 > Queremos ver que $\exists$ "asignación posible" para A $\in N^{m \times n}$ $\Leftrightarrow \exists f$ función de flujo máximo en $G = (V, E)$ tal que $|F| = \sum_{i=1}^{m} r_i$.
 >
 >Donde "asignacion" es la matriz es de $m \times n$ y en cada celda hay un número natural y "posible" es:
->1. ```math $\sum_{j=1}^{n} A_{ij} = r_i \forall i \in$ {1, ..., m}```
->2. ```math $\sum_{i=1}^{m} A_{ij} = c_j \forall j \in$ {1, ..., m}```
+
+```math 
+$\sum_{j=1}^{n} A_{ij} = r_i \forall i \in$ {1, ..., m} 
+$\sum_{i=1}^{m} A_{ij} = c_j \forall j \in$ {1, ..., m}
+```
 >
 >$\Leftarrow$) Sea $f$ una función de flujo máximo en el modelo tal que $|F| = \sum_{i=1}^{m} r_i$. Construyo la "asignación posible" $A_{ij} = F(r_i, c_j)$
 >- Veamos que es asignación: $i \in$ {1, ..., m} y $j \in$ {1, ..., n} $\rightarrow$ hay $m \times n$ pares $(r_i, c_j) \rightarrow A$ tendrá dimensión $m \times n$ y $A_{ij} \in N$ porque es el codominio de $F$.
