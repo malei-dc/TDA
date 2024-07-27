@@ -164,7 +164,7 @@ Sean $r_1$ , ..., $r_m$ y $c_1$ , ..., $c_n$ números naturales. Se quiere asign
 
 ```math 
 \sum_{j=1}^{n} A_{ij} = r_i \forall i \in \{1, ..., m\} 
-\\
+\endline
 \sum_{i=1}^{m} A_{ij} = c_j \forall j \in \{1, ..., m\} 
 ```
 >
