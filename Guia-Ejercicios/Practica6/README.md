@@ -162,8 +162,9 @@ Sean $r_1$ , ..., $r_m$ y $c_1$ , ..., $c_n$ números naturales. Se quiere asign
 >Donde "asignacion" es la matriz es de $m \times n$ y en cada celda hay un número natural y "posible" es:
 
 ```math 
-$\sum_{j=1}^{n} A_{ij} = r_i \forall i \in$ {1, ..., m} 
-$\sum_{i=1}^{m} A_{ij} = c_j \forall j \in$ {1, ..., m}
+\sum_{j=1}^{n} A_{ij} = r_i \forall i \in {1, ..., m}
+ 
+\sum_{i=1}^{m} A_{ij} = c_j \forall j \in {1, ..., m}
 ```
 >
 >$\Leftarrow$) Sea $f$ una función de flujo máximo en el modelo tal que $|F| = \sum_{i=1}^{m} r_i$. Construyo la "asignación posible" $A_{ij} = F(r_i, c_j)$
