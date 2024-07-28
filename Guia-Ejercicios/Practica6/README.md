@@ -190,7 +190,7 @@ Sean $r_1$ , ..., $r_m$ y $c_1$ , ..., $c_n$ números naturales. Se quiere asign
 >- Veamos que $|F| = \sum_{i=1}^{m} r_i$: comenzamos; por definición de flujo $|F|$ es igual a la cantidad de flujo que sale del nodo $s \Rightarrow |F| = \sum_{i=1}^{m} f(s, r_i)$ "por f" $= \sum_{i=1}^{n} r_i$ .
 >- Veamos que $f$ es de flujo máximo: comienzo; como $f(s, r_i) = r_i$ y la capacidad de la arista $(s, r_i)$ es $r_i \forall i \in$ {1, ...,m}, cada arista $(s, r_i)$ está saturada y no es posible enviar más flujo que el que se está enviando, porque todas las aristas salientes de $s$ están saturadas $\Rightarrow f$ es de flujo máximo. 
 >
->Luego existe una $f$ función de flujo máximo en $G = (V, E)$ tal que <span>$|F| = \sum_{i=1}^{m} r_i$. $\square$</span> 
+>Luego existe una $f$ función de flujo máximo en $G = (V, E)$ tal que $|F| = \sum_{i=1}^{m} r_i$. $\square$ 
  
 (d) Determinar la complejidad de resolver el modelo resultante con el algoritmo de Edmonds y Karp.
 
