@@ -53,7 +53,7 @@ Una arista de un grafo $G$ es puente si su remoción aumenta la cantidad de comp
 >- Entonces traduciendo el ejercicio con la definición de covertura queda:
 Una tree edge de un árbol DFS $T$ de un grafo conexo $G$ es un puente $\Leftrightarrow$ no hay ninguna backward edge que la cubra.
 >
->(La demo está en el pdf de [puentes]((https://github.com/malei-dc/TDA/blob/main/Practicas/07-01puentes.pdf)) Lema 3).
+>(La demo está en el pdf de [puentes](https://github.com/malei-dc/TDA/blob/main/Practicas/07-01puentes.pdf) Lema 3).
 
 (d) Dar un algoritmo lineal basado en DFS para encontrar todas las aristas puente de G.
 
