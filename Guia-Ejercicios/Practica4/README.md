@@ -115,28 +115,18 @@ La empresa está dispuesta a hacer una inversión que consiste en actualizar alg
 >4. **Construcción del Vector $a$**: Finalmente, para cada $i$, el valor de $k$ encontrado que mantiene la conectividad del grafo modificado se almacena en el vector $a$, en la posición correspondiente a $a_i$.
 
 ### 13) PrioriKruskal
-El algoritmo de Kruskal (resp. Prim) con orden de selección es una variante del algoritmo de Kruskal (resp. Prim) donde a cada arista e se le asigna una prioridad q(e) además de su peso p(e). Luego, si en alguna iteración del algoritmo de Kruskal (resp. Prim) hay más de una arista posible para ser agregada, entre esas opciones se elige alguna de mínima prioridad.
+El algoritmo de Kruskal (resp. Prim) con orden de selección es una variante del algoritmo de Kruskal (resp. Prim) donde a cada arista $e$ se le asigna una prioridad $q(e)$ además de su peso $p(e)$. Luego, si en alguna iteración del algoritmo de Kruskal (resp. Prim) hay más de una arista posible para ser agregada, entre esas opciones se elige alguna de mínima prioridad.
 
-(a) Demostrar que para todo árbol generador mínimo T de G, si las prioridades de asignación están definidas por la función
-                   __
-                  |    0 si e ∈ T
-        qT(e)=   <
-                  |__  1 si e !∈ T
-    entonces se obtiene T como resultado del algoritmo de Kruskal (resp. Prim) con orden de selección ejecutado sobre G (resp. cualquiera sea 
-    el vértice inicial en el caso de Prim).
-        Kruskal o Prim conecta todos los vértices con el menor peso total posible sin formar ciclos.
-        Bajo esta función qT, cualquier arista que pertenezca a T tiene prioridad 0 (la más alta), asegurando que, si es posible, será seleccionada 
-        antes que las aristas no pertenecientes a T.
-        Debido a esta asignación de prioridades, en cada paso del algoritmo, cuando se enfrentan a una decisión entre múltiples aristas con el mismo 
-        peso, las aristas que forman parte de T siempre serán elegidas primero (si están disponibles), ya que tienen la prioridad más alta. Esto 
-        garantiza que el algoritmo "sigue" el árbol T siempre que sea posible.
-        Debido a esta estrategia de selección basada en la prioridad qT(e), el algoritmo de Kruskal (o Prim, dependiendo del vértice inicial) construirá 
-        el árbol T paso a paso, seleccionando siempre aristas que pertenezcan a T sobre las que no, asegurando así que el resultado final sea el árbol 
-        generador mínimo T.
+(a) Demostrar que para todo árbol generador mínimo $T$ de $G$, si las prioridades de asignación están definidas por la función
 
-    (b) Usando el inciso anterior, demostrar que si los pesos de G son todos distintos, entonces G tiene un único árbol generador mínimo.
-        Si todos los pesos son distintos, no puede haber dos aristas con el mismo peso compitiendo para ser agregadas en el mismo paso, lo que elimina 
-        la necesidad de desempate por prioridad y, por ende, garantiza que el árbol generador mínimo generado sea único, ya que no hay ambigüedad en la 
-        selección de aristas en ningún paso.
+![](https://github.com/malei-dc/TDA/blob/main/Guia-Ejercicios/Practica4/imgs/ej13.png)
 
-    
+entonces se obtiene $T$ como resultado del algoritmo de Kruskal (resp. Prim) con orden de selección ejecutado sobre $G$ (resp. cualquiera sea el vértice inicial en el caso de Prim).
+
+>Kruskal o Prim conecta todos los vértices con el menor peso total posible sin formar ciclos.
+>Bajo esta función $q_T$, cualquier arista que pertenezca a $T$ tiene prioridad 0 (la más alta), asegurando que, si es posible, será seleccionada antes que las aristas no pertenecientes a $T$.
+>Debido a esta asignación de prioridades, en cada paso del algoritmo, cuando se enfrentan a una decisión entre múltiples aristas con el mismo peso, las aristas que forman parte de $T$ siempre serán elegidas primero (si están disponibles), ya que tienen la prioridad más alta. Esto garantiza que el algoritmo "sigue" el árbol $T$ siempre que sea posible. Debido a esta estrategia de selección basada en la prioridad $q_T(e)$, el algoritmo de Kruskal (o Prim, dependiendo del vértice inicial) construirá el árbol $T$ paso a paso, seleccionando siempre aristas que pertenezcan a $T$ sobre las que no, asegurando así que el resultado final sea el árbol generador mínimo $T$.
+
+(b) Usando el inciso anterior, demostrar que si los pesos de $G$ son todos distintos, entonces $G$ tiene un único árbol generador mínimo.
+
+>Si todos los pesos son distintos, no puede haber dos aristas con el mismo peso compitiendo para ser agregadas en el mismo paso, lo que elimina la necesidad de desempate por prioridad y, por ende, garantiza que el árbol generador mínimo generado sea único, ya que no hay ambigüedad en la selección de aristas en ningún paso.
