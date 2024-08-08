@@ -1,28 +1,31 @@
-Practica 1: tecnicas algoritmicas
+# Practica 1: tecnicas algoritmicas
 
-Bactracking
+## Bactracking
 
-1) SumaSubconjuntosBT       
-    Las soluciones (candidatas) son los vectores a = (a1 , . . . , an ) de valores binarios; el subconjunto
-    de C representado por a contiene a ci si y sólo si ai = 1.
-    a es una solución válida cuando la suma del subconjunto es igual a k.
+### 1) SumaSubconjuntosBT
+Dado un multiconjunto $C = \{c_1 , ... , c_n \}$ de números naturales y un natural $k$, queremos determinar si existe un subconjunto de $C$ cuya sumatoria sea $k$. Vamos a suponer fuertemente que $C$ está ordenado de alguna forma arbitraria pero conocida (i.e., $C$ está implementado como
+la secuencia $c_1 , ... , c_n$ o, análogamente, tenemos un iterador de $C$).Las soluciones (candidatas) son los vectores $a = (a_1 , ... , a_n)$ de valores binarios; el subconjunto de $C$ representado por $a$ contiene a $c_i$ si y sólo si $a_i = 1$. Luego, a es una solución válida cuando $\sum_{i=1}^n a_i c_i = k$. Asimismo, una solución parcial es un vector $p = (a_1 , ... , a_i)$ de números binarios con $0 \leq i \leq n$. Si $i < n$, las soluciones sucesoras de $p$ son $p \oplus 0$ y $p \oplus 1$, donde $\oplus$ indica la concatenación.
 
-    (a) C = {6, 12, 6} y k = 12
-    soluciones candidatas: a1 = (0, 0, 0)   a2 = (1, 0, 0)  a3 = (1, 1, 0)  a4 = (1, 0, 1)
-                        a5 = (1, 1, 1)   a6 = (0, 1, 1)  a7 = (0, 0, 1)  a8 = (0, 1, 0)     
+(a) Escribir el conjunto de soluciones candidatas para $C = \{6, 12, 6\}$ y $k = 12$.
 
-    (b) C = {6, 12, 6} y k = 12
-    soluciones validas: a1 = (0, 1, 0)  a2 = (1, 0, 1)
+>Soluciones candidatas: 
+>- $a_1 = (0, 0, 0)$
+>- $a_2 = (1, 0, 0)$
+>- $a_3 = (1, 1, 0)$
+>- $a_4 = (1, 0, 1)$
+>- $a_5 = (1, 1, 1)$
+>- $a_6 = (0, 1, 1)$
+>- $a_7 = (0, 0, 1)$
+>- $a_8 = (0, 1, 0)$    
 
-    (c) C = {6, 12, 6} y k = 12
-    soluciones parciales: p1 = ()   -> p2 = (0) -> p3 = (0, 0)  -> p4 = (0, 0, 0)
-                                                                -> p5 = (0, 0, 1)
-                                                -> p6 = (0, 1)  -> p7 = (0, 1, 0)
-                                                                -> p8 = (0, 1, 1)
-                                    -> p9 = (1) -> p10 = (1, 0) -> p11 = (1, 0, 0)
-                                                                -> p12 = (1, 0, 1)
-                                                -> p13 = (1, 1) -> p14 = (1, 1, 0)
-                                                                -> p15 = (1, 1, 1)
+(b) Escribir el conjunto de soluciones válidas para $C = \{6, 12, 6\}$ y $k = 12$.
+
+>Soluciones validas: $a_1 = (0, 1, 0)$ y $a_2 = (1, 0, 1)$
+
+(c) Escribir el conjunto de soluciones parciales para $C = \{6, 12, 6\}$ y $k = 12$.
+
+![]()
+      
 
     (d) El arbol de backtracking es similar a las soluciones parciales, se empieza con la solucion vacia y se van agregando o no
     agregando elemntos al subconjunto, los nodos intermedios son soluciones parciales, y la hojas son soluciones candidatas.
