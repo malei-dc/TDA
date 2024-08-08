@@ -390,7 +390,7 @@ tiene un número entero $A_{i,j}$ que nos modificará el nivel de vida sumándon
 >- Complejidad temporal: $O(n*m)$
 >- Complejidad espacial: $O(n*m)$
 
-(e) Dar un algoritmo bottom-up cuya complejidad temporal sea $O(m * n)$ y la espacial auxiliar sea $O(mı́n(m, n))$.
+(e) Dar un algoritmo bottom-up cuya complejidad temporal sea $O(m * n)$ y la espacial auxiliar sea $O(min(m, n))$.
 
 -pendiente-
 
@@ -427,7 +427,7 @@ Por ejemplo, si tenemos un multiconjunto con habilidades {1, 2, 4, 6} y otro con
 
 > Complejidades: recorre cada vector exactamente una sola vez, sea $n$ = len(multi1) y $m$ = len(multi2) la complejidad temporal es de $O(min(n,m))$ al igual que complejidad espacial ya que no usa estructuras extras más que variables acumuladores.
 >
->Edit: la complejidad de ordenar es $O(n*log(n))$, por lo tanto la complejidad temporal es $O(n*log(n)+min(n,m))$
+>Edit: la complejidad de ordenar es $O(n*log(n))$ , por lo tanto la complejidad temporal es $O(n*log(n)+min(n,m))$
 
 (c) Demostrar que el algoritmo dado en b) es correcto.
 
@@ -480,7 +480,7 @@ Extender el algoritmo para que también devuelva uno de los subconjuntos S que m
 >- Luego, para cada elemento restante en $X$, si el elemento es mayor que el elemento mínimo del min-heap, lo eliminamos del min-heap y agregamos el nuevo elemento. 
 >- Finalmente, sumamos los elementos en el min-heap para obtener la suma máxima de un subconjunto de tamaño $k$.
 >
->Complejidad: la complejidad temporal de esta implementación es $O(n*log(⁡k))$, donde $n$ es el tamaño del conjunto $X$ y $k$ es el tamaño del subconjunto requerido. Como $k$ puede ser menor que $n$, la complejidad resultante es $O(n*log(n))$.
+>Complejidad: la complejidad temporal de esta implementación es $O(n*log(⁡k))$ , donde $n$ es el tamaño del conjunto $X$ y $k$ es el tamaño del subconjunto requerido. Como $k$ puede ser menor que $n$ , la complejidad resultante es $O(n*log(n))$ .
 
 (c) Dar una implementación del algoritmo del inciso a) con complejidad temporal $O(n*log (k))$.
 
