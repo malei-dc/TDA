@@ -37,9 +37,9 @@ la secuencia $c_1 , ... , c_n$ o, análogamente, tenemos un iterador de $C$).Las
 
 (f) Convencerse de que la siguiente es una implementación recursiva de ss en un lenguaje imperativo y de que retorna la solución para $C$, $k$ cuando se llama con $C$, $|C|$, $k$. ¿Cuál es su complejidad?
 
-1. $subset\_ sum(C, i, j)$:  // implementa $ss(\{c_1 ,... , c_i\}, j)$
+1. $subsetsum(C, i, j)$:  // implementa $ss(\{c_1 ,... , c_i\}, j)$
 2. Si $i = 0$, retornar $(j = 0)$
-3. Si no, retornar $subset\_ sum(C, i − 1, j) \lor subset\_ sum(C, i − 1, j − C[i])$
+3. Si no, retornar $subsetsum(C, i − 1, j) \lor subsetsum(C, i − 1, j − C[i])$
 
 >Me convence también :)
 
@@ -61,10 +61,10 @@ la secuencia $c_1 , ... , c_n$ o, análogamente, tenemos un iterador de $C$).Las
 
 
 (h) Considerar la siguiente regla de factibilidad: $p = (a_1 , ... , a_i)$ se puede extender a una solución válida sólo si $\sum_{q=1}^i a_q c_q \leq k$. Convencerse de que la siguiente implementación incluye la regla de factibilidad.
-1. $subset\_ sum(C, i, j):$ // implementa $ss(\{c_1 , ... , c_i\}, j)$
+1. $subsetsum(C, i, j):$ // implementa $ss(\{c_1 , ... , c_i\}, j)$
 2. Si $j < 0$, retornar $falso$ // regla de factibilidad
 3. Si $i = 0$, retornar $(j = 0)$
-4. Si no, retornar $subset\_ sum(C, i − 1, j) ∨ subset\_ sum(C, i − 1, j − C[i])$
+4. Si no, retornar $subsetsum(C, i − 1, j) ∨ subsetsum(C, i − 1, j − C[i])$
 
 >Me convence x3 :)
 
