@@ -427,7 +427,7 @@ Por ejemplo, si tenemos un multiconjunto con habilidades {1, 2, 4, 6} y otro con
 
 > Complejidades: recorre cada vector exactamente una sola vez, sea $n$ = len(multi1) y $m$ = len(multi2) la complejidad temporal es de $O(min(n,m))$ al igual que complejidad espacial ya que no usa estructuras extras más que variables acumuladores.
 >
->Edit: la complejidad de ordenar es $O(n*log(n))$ , por lo tanto la complejidad temporal es $O(n*log(n)+min(n,m))$
+>Edit: la complejidad de ordenar es $O(nlog(n))$ , por lo tanto la complejidad temporal es $O(nlog(n)+min(n,m))$
 
 (c) Demostrar que el algoritmo dado en b) es correcto.
 
@@ -453,7 +453,7 @@ Extender el algoritmo para que también devuelva uno de los subconjuntos S que m
 
 >-Guardo los valores en un vector-
 
-(b) Dar una implementación del algoritmo del inciso a) con complejidad temporal $O(n*log(n))$.
+(b) Dar una implementación del algoritmo del inciso a) con complejidad temporal $O(nlog(n))$.
 
 >Podemos utilizar la estructura de datos binary heap. Utilizaremos un min-heap para mantener los $k$ elementos más grandes del conjunto $X$.
 
@@ -480,9 +480,9 @@ Extender el algoritmo para que también devuelva uno de los subconjuntos S que m
 >- Luego, para cada elemento restante en $X$, si el elemento es mayor que el elemento mínimo del min-heap, lo eliminamos del min-heap y agregamos el nuevo elemento. 
 >- Finalmente, sumamos los elementos en el min-heap para obtener la suma máxima de un subconjunto de tamaño $k$.
 >
->Complejidad: la complejidad temporal de esta implementación es $O(n*log(⁡k))$ , donde $n$ es el tamaño del conjunto $X$ y $k$ es el tamaño del subconjunto requerido. Como $k$ puede ser menor que $n$ , la complejidad resultante es $O(n*log(n))$ .
+>Complejidad: la complejidad temporal de esta implementación es $O(nlog(⁡k))$ , donde $n$ es el tamaño del conjunto $X$ y $k$ es el tamaño del subconjunto requerido. Como $k$ puede ser menor que $n$ , la complejidad resultante es $O(nlog(n))$ .
 
-(c) Dar una implementación del algoritmo del inciso a) con complejidad temporal $O(n*log (k))$.
+(c) Dar una implementación del algoritmo del inciso a) con complejidad temporal $O(nlog (k))$.
 
 >-Te la debo- :(
         
@@ -511,7 +511,7 @@ Queremos encontrar la forma de sumar que tenga costo mínimo, por lo que en nues
 >Creamos un min-heap a partir del multiconjunto dado y luego itera hasta que solo quede un elemento en el min-heap. 
 >En cada iteración, toma los dos elementos más pequeños del min-heap, los suma, y suma el costo de la operación al costo total. 
 >
->La complejidad temporal de esta implementación es $O(n*log(⁡n))$ debido a la construcción inicial del min-heap y a las operaciones de extracción e inserción en el min-heap en cada iteración del bucle.
+>La complejidad temporal de esta implementación es $O(nlog(⁡n))$ debido a la construcción inicial del min-heap y a las operaciones de extracción e inserción en el min-heap en cada iteración del bucle.
 
         int minSum(vector<int>& nums) {
             // Crear un min-heap para mantener el multiconjunto ordenado
