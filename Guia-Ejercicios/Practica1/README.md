@@ -27,108 +27,156 @@ la secuencia $c_1 , ... , c_n$ o, análogamente, tenemos un iterador de $C$).Las
 ![](https://github.com/malei-dc/TDA/blob/main/Guia-Ejercicios/Practica1/imgs/ej1parciales.png)
       
 
-    (d) El arbol de backtracking es similar a las soluciones parciales, se empieza con la solucion vacia y se van agregando o no
-    agregando elemntos al subconjunto, los nodos intermedios son soluciones parciales, y la hojas son soluciones candidatas.
-    Las soluciones candidatas que sumen 12 seran las soluciones validas.
+(d) Dibujar el árbol de backtracking correspondiente al algoritmo descrito arriba para $C = \{6, 12, 6\}$ y $k = 12$, indicando claramente la relación entre las distintas componentes del árbol y los conjuntos de los incisos anteriores.
 
-    (e) Me convence :)
+>El arbol de backtracking es similar a las soluciones parciales, se empieza con la solucion vacia y se van agregando o no agregando elemntos al subconjunto, los nodos intermedios son soluciones parciales, y la hojas son soluciones candidatas. Las soluciones candidatas que sumen 12 seran las soluciones validas.
 
-    (f) Me convence también :)
+(e) Convencerse de que $ss(C, k) = V$ si y sólo si el problema de subconjuntos tiene una solución válida para la entrada $C$, $k$ (ver [enunciado](https://github.com/malei-dc/TDA/blob/main/Guia-Ejercicios/Practica1/Pr%C3%A1ctica%201%20-%20Backtracking%2C%20Programaci%C3%B3n%20Din%C3%A1mica%2C%20Algoritmos%20Greedy.pdf) )
 
-    (g) árbol de llamadas recursivas: C = {6, 12, 6} y k = 12. Llamada: ss(C, |C|, k)
+>Me convence :)
 
-    llamada recursiva: ss(C, i - 1, j) v ss(C, i - 1, j - C[i])
+(f) Convencerse de que la siguiente es una implementación recursiva de ss en un lenguaje imperativo y de que retorna la solución para $C$, $k$ cuando se llama con $C$, $|C|$, $k$. ¿Cuál es su complejidad?
 
-    ss(C, 3, 12) -> ss(C, 2, 12)                                                  
-                -> ss(C, 1, 12)                   v                       ss(C, 1, 0)
-                    -> ss(C, 0, 12) v ss(C, 0, 6)                             -> ss(C, 0, 0) v ss(C, 0, -6)
-                        false       v     false                                   true (0,1,0) v false
-                v
+1. $subset\_sum(C, i, j)$:  // implementa $ss(\{c_1 ,... , c_i\}, j)$
+2. Si $i = 0$, retornar $(j = 0)$
+3. Si no, retornar $subset\_sum(C, i − 1, j) \lor subset\_sum(C, i − 1, j − C[i])$
+
+>Me convence también :)
+
+(g) Dibujar el árbol de llamadas recursivas para la entrada $C = \{6, 12, 6\}$ y $k = 12$, y compararlo con el árbol de backtracking. 
+
+>Árbol de llamadas recursivas: Llamada: $ss(C, |C|, k)$
+>
+    Llamada recursiva: ss(C, i - 1, j) V ss(C, i - 1, j - C[i])
+
+    ss(C, 3, 12)-> ss(C, 2, 12)                                                  
+                -> ss(C, 1, 12)                   V                       ss(C, 1, 0)
+                    -> ss(C, 0, 12) V ss(C, 0, 6)                             -> ss(C, 0, 0)   V ss(C, 0, -6)
+                        false       V     false                                   true (0,1,0) V  false
+                V
                 -> ss(C, 2, 6)
-                -> ss(C, 1, 6)                   v                       ss(C, 1, -6)
-                    -> ss(C, 0, 6) v ss(C, 0, 0)                             -> ss(C, 0, -6) v ss(C, 0, -12)
-                        false       v true (1,0,1)                                false      v  false
+                -> ss(C, 1, 6)                    V                       ss(C, 1, -6)
+                    -> ss(C, 0, 6) V ss(C, 0, 0)                             -> ss(C, 0, -6) V ss(C, 0, -12)
+                        false      V true (1,0,1)                                 false      V  false
 
 
+(h) Considerar la siguiente regla de factibilidad: $p = (a_1 , ... , a_i)$ se puede extender a una solución válida sólo si $\sum_{q=1}^i a_q c_q \leq k$. Convencerse de que la siguiente implementación incluye la regla de factibilidad.
+1. $subset_sum(C, i, j):$ // implementa $ss(\{c_1 , ... , c_i\}, j)$
+2. Si $j < 0$, retornar $falso$ // regla de factibilidad
+3. Si $i = 0$, retornar $(j = 0)$
+4. Si no, retornar $subset\_sum(C, i − 1, j) ∨ subset_sum(C, i − 1, j − C[i])$
 
-    (h) Me convence x3 :)
+>Me convence x3 :)
 
-    (i) Factibilidad: detener la exploración si la suma parcial supera T.
-    Optimalidad: si alcanzamos T antes de considerar todos los elementos, detenemos esa rama.
+(i) Definir otra regla de factibilidad, mostrando que la misma es correcta; no es necesario implementarla.
 
-    Poda de factibilidad: la suma de lo actual mas los restantes sean menor que k
+>- Factibilidad: detener la exploración si la suma parcial supera T.
+>- Optimalidad: si alcanzamos T antes de considerar todos los elementos, detenemos esa rama.
+>
+>Poda de factibilidad: la suma de lo actual mas los restantes sean menor que k
 
-    (j) codeado
+(j) Modificar la implementación para imprimir el subconjunto de C que suma k, si existe.
 
-2) MagiCuadrados
+>[Codeado](https://github.com/malei-dc/TDA/blob/main/Guia-Ejercicios/Practica1/codes/P1Ej1-SumaSubconjuntosBT.cpp)
 
-    (a) Habría que generar n²! cuadrados para encontrar todos los cuadrados magicos con fuerza bruta.
+### 2) MagiCuadrados
 
-    (b) Foto 2b
+Un cuadrado mágico de orden $n$, es un cuadrado con los números $\{1, . . . , n^2\}$, tal que todas sus filas, columnas y las dos diagonales suman lo mismo. El número que suma cada fila es llamado número mágico. El objetivo de este ejercicio es contar cuántos cuadrados mágicos de orden n existen.
 
-    (c) El primer nivel tiene n² nodos, cada nodo del primer nivel tiene n²-1 hijos, por lo que el segundo nivel tiene n²*(n²-1) nodos
-    y asi...n²*(n²-1)*(n²-2)*(n²-3)*...*1, luego el arbol de backtracking queda n²! nodos el peor caso.
+(a) ¿Cuántos cuadrados habría que generar para encontrar todos los cuadrados mágicos si se utiliza una solución de fuerza bruta?
 
-    (d) Se puede hacer para las columnas si se supiera el numero magico de forma precalculado.
+>Habría que generar $n²!$ cuadrados para encontrar todos los cuadrados magicos con fuerza bruta.
 
-    (e) Demostrar que el número mágico de un cuadrado mágico de orden n es siempre (n³ + n)/2.
+(b) Enunciar un algoritmo que use backtracking para resolver este problema que se base en la siguientes ideas:
+- La solución parcial tiene los valores de las primeras $i − 1$ filas establecidos, al igual que los valores de las primeras $j$ columnas de la fila $i$.
+- Para establecer el valor de la posición $(i, j +1)$ (o $(i+1, 1)$ si $j = n$ e $i \neq n$) se consideran todos los valores que aún no se encuentran en el cuadrado. Para cada valor posible, se establece dicho valor en la posición y se cuentan todos los cuadrados mágicos con esta
+nueva solución parcial.
 
-    d/ Vamos a sumar de distinta forma todos los numeros de 1 a n².
-        -1- sumar todos los numeros de 1 a n² se puede hacer con la suma de gauss: sumaTotal = (n²(n²+1))/2
-        -2- como un cuadrado magico de orden n tiene n filas, entonces se puede: sumaTotal = nro magico * n
-        Igualamos ambas formulas y dividimos ambos lados n, queda (n³+n)/2 
+Mostrar los primeros dos niveles del árbol de backtracking para n = 3.
 
-3) MaxiSubconjunto
+![](https://github.com/malei-dc/TDA/blob/main/Guia-Ejercicios/Practica1/imgs/ej2b.png)
 
-    (a) Si tenemos orden 4, k = 3:
-                        las soluciones candidatas son: (1, 1, 1, 0), (1, 1, 0, 1), (1, 0, 1, 1), (0, 1, 1, 1)
-                        cada elem representa si el indice de su posicion esta o no esta
-                        las solucion/es validas son el conjunto de indices que maximice evaluando a la matriz
-                        las soluciones parciales son los conjuntos de indices que tienen menos que k elementos y aun hay para agregar
+(c) Demostrar que el árbol de backtracking tiene $O((n^2)!)$ nodos en peor caso.
 
-    (b) Complejidad temporal: cada indice puede estar o no estar O(2^k) y cuando llego a una hoja calculo la sumatoria en O(n²) un total del
-        numero combinatorio(n,k). Luego en total queda: O(2^k * comb(n,k) * n²) //esto no se si esta bien
+>El primer nivel tiene $n$² nodos, cada nodo del primer nivel tiene $n²-1$ hijos, por lo que el segundo nivel tiene $n²*(n²-1)$ nodos y asi... $n²*(n²-1)*(n²-2)*(n²-3)*...*1$, luego el arbol de backtracking queda $n²!$ nodos el peor caso.
 
-        Complejidad espacial: uso solo un vector de booleanos de tamaño k, y una matriz de tamaño n*n. Queda O(k + n²)
+(d) Considere la siguiente poda al árbol de backtracking: al momento de elegir el valor de una nueva posición, verificar que la suma parcial de la fila no supere el número mágico. Verificar también que la suma parcial de los valores de las columnas no supere el número mágico. Introducir estas podas al algoritmo e implementarlo en la computadora. ¿Puede mejorar estas podas?
 
-    (c) Poda de Optimalidad: si agregando todos los indices restantes no llego a k, detengo esa rama. Eso quiere decir que siguiendo por
-        esa rama no se llega a tener un conjunto de indices de tamaño k. 
-        
-        (edit+) Esta poda es correcta porque se basa en una cota superior del valor que podría alcanzar una solución parcial. 
-        Si esta cota no es mejor que la mejor solución encontrada hasta el momento, entonces sabemos que no necesitamos seguir 
-        explorando esa rama del espacio de soluciones.
+>Se puede hacer para las columnas si se supiera el numero magico de forma precalculado.
 
-4) RutaMinima
+(e) Demostrar que el número mágico de un cuadrado mágico de orden $n$ es siempre $\frac{(n³ + n)}{2}$.
 
-    (a) Una solucion candidata es un vector de tamaño n que contiene indices.
-        La solucion valida es la que minimiza la formula del ejercicio evaluando los indices del vector en la matriz. 
-        Una solucion parcial es cuando aun tengo indices para agregar cuando el tamaño del vector solucion no llega a n.
+>d/ Vamos a sumar de distinta forma todos los numeros de $1$ a $n²$.
+>1. Sumar todos los numeros de $1$ a $n²$ se puede hacer con la suma de gauss: $sumaTotal = \frac{n²(n²+1)}{2}$.
+>2. Como un cuadrado magico de orden $n$ tiene $n$ filas, entonces se puede: $sumaTotal = Nro\_magico * n$
+>
+>Igualamos ambas formulas y dividimos ambos lados $n$, queda $\frac{n³+n}{2} \square$ 
+>
+>>[Codigo](https://github.com/malei-dc/TDA/blob/main/Guia-Ejercicios/Practica1/codes/P1Ej2-MagiCuadrados.cpp)
 
-    (b) La complejidad temporal es O(n!) en el peor caso ya que exploramos todas las permutaciones posibles de n elem.
-        La complejidad espacial es O(n) ya que almaceno solo una permutacion a la vez.
+### 3) MaxiSubconjunto
+Dada una matriz simétrica $M$ de $n \times n$ números naturales y un número $k$, queremos encontrar un subconjunto $I$ de $\{1, . . . , n\}$ con $|I| = k$ que maximice $\sum_{i,j \in I} M_{ij}$.
 
-    (c) Una poda por optimalidad podría ser descartar cualquier solución parcial cuyo valor ya exceda el valor de la mejor solución 
-        encontrada hasta el momento. Esto es correcto porque estamos buscando minimizar el valor, así que cualquier solución parcial 
-        que ya sea peor que una solución completa encontrada anteriormente no puede llevar a una solución óptima.
+(a) Diseñar un algoritmo de backtracking para resolver el problema, indicando claramente cómo se codifica una solución candidata, cuáles soluciones son válidas y qué valor tienen, qué es una solución parcial y cómo se extiende cada solución parcial.
 
-Programación dinámica
+>Si tenemos orden $4$, $k = 3:$ 
+>- Las soluciones candidatas son: $(1, 1, 1, 0), (1, 1, 0, 1), (1, 0, 1, 1), (0, 1, 1, 1)$ cada elem representa si el indice de su posicion esta o no esta.
+>- Las solucion/es validas son el conjunto de indices que maximice evaluando a la matriz
+>- Las soluciones parciales son los conjuntos de indices que tienen menos que $k$ elementos y aun hay para agregar
+>
+>[Codigo](https://github.com/malei-dc/TDA/blob/main/Guia-Ejercicios/Practica1/codes/P1Ej3-MaxiSubconjunto.cpp)
 
-5) SumaDinámica
+(b) Calcular la complejidad temporal y espacial del mismo.
 
-    (a) Me convence ;)
+>- Complejidad temporal: cada indice puede estar o no estar $O(2^k)$ y cuando llego a una hoja calculo la sumatoria en $O(n²)$ un total del $\binom{n}{k}$ veces. Luego en total queda: $O(2^k * \binom{n}{k} * n²)$ //esto no se si esta bien
+>
+>Complejidad espacial: uso solo un vector de booleanos de tamaño $k$, y una matriz de tamaño $n*n$. Queda $O(k + n²)$
 
-    (b) Si tenemos {1, 2, 5, 5, 5} los elementos 5+1 se suman minimo 3 veces. 
+(c) Proponer una poda por optimalidad y mostrar que es correcta.
 
-    (c) Considerado ;)
+>Poda de Optimalidad: si agregando todos los indices restantes no llego a $k$, detengo esa rama. Eso quiere decir que siguiendo por esa rama no se llega a tener un conjunto de indices de tamaño $k$. 
+>        
+>(edit+) Esta poda es correcta porque se basa en una cota superior del valor que podría alcanzar una solución parcial. Si esta cota no es mejor que la mejor solución encontrada hasta el momento, entonces sabemos que no necesitamos seguir explorando esa rama del espacio de soluciones.
 
-    (d) La complejidad con enfoque dinamico tiene complejidad O(n*k) mientras que con backtracking es de O(2^n).
+### 4) RutaMinima
+Dada una matriz $D$ de $n \times n$ números naturales, queremos encontrar una permutación $\pi$ de $\{1, . . . , n\}$ que minimice $D_{\pi (n)\pi (1)}+ \sum_{i=1}^{n-1} D_{\pi (i)\pi (i+1)}$
+
+(a) Diseñar un algoritmo de backtracking para resolver el problema, indicando claramente cómo se codifica una solución candidata, cuáles soluciones son válidas y qué valor tienen, qué es una solución parcial y cómo se extiende cada solución parcial.
+
+>- Una solucion candidata es un vector de tamaño n que contiene indices.
+>- La solucion valida es la que minimiza la formula del ejercicio evaluando los indices del vector en la matriz. 
+>- Una solucion parcial es cuando aun tengo indices para agregar cuando el tamaño del vector solucion no llega a $n$.
+>
+>>[Codigo](https://github.com/malei-dc/TDA/blob/main/Guia-Ejercicios/Practica1/codes/P1Ej4-RutaMinima.cpp)
+
+(b) Calcular la complejidad temporal y espacial del mismo.
+
+>- La complejidad temporal es $O(n!)$ en el peor caso ya que exploramos todas las permutaciones posibles de $n$ elem.
+>- La complejidad espacial es $O(n)$ ya que almaceno solo una permutacion a la vez.
+
+(c) Proponer una poda por optimalidad y mostrar que es correcta.
+
+>Una poda por optimalidad podría ser descartar cualquier solución parcial cuyo valor ya exceda el valor de la mejor solución encontrada hasta el momento. Esto es correcto porque estamos buscando minimizar el valor, así que cualquier solución parcial que ya sea peor que una solución completa encontrada anteriormente no puede llevar a una solución óptima.
+
+## Programación dinámica
+
+### 5) SumaDinámica
+En este ejercicio vamos a resolver el problema de suma de subconjuntos usando la técnica de programación dinámica.
+
+(a) Me convence ;)
+
+(b) Si tenemos {1, 2, 5, 5, 5} los elementos 5+1 se suman minimo 3 veces. 
+
+(c) Considerado ;)
+
+(d) La complejidad con enfoque dinamico tiene complejidad O(n*k) mientras que con backtracking es de O(2^n).
         Si k<<2^n es mejor con dinamica, cuando k>>2^n es mejor con backtraking.
 
-    (e) :)
+(e) :)
 
-    (f) No vimos bottom up aun :)
+(f) No vimos bottom up aun :)
 
-    (g) Demostrar que la función recursiva del inciso a) es correcta.
+(g) Demostrar que la función recursiva del inciso a) es correcta.
                       _
                      |  j == 0                                  si i = 0
         ss’C(i,j) = <   ss’C(i-1, j)                            si i!=0 && c[i]>j
@@ -150,7 +198,7 @@ Programación dinámica
                     Si ss’C(k,j) es V uno de los dos casos de arriba es V, si tomamos ambos subconjuntos alguno suma j.
                     Si ss’C(k,j) es F entonces no hay un subconjunto que sume j.
 
-6) OptiPago
+### 6) OptiPago
 
     (a)función recursiva cc(B, c) para resolver el problema, donde cc(B, c) = (c′ , q) cuando el mínimo costo mayor o igual a c 
     que es posible pagar con los billetes de B es c′ y la cantidad de billetes mínima es q
@@ -209,7 +257,7 @@ Programación dinámica
 
     (f) La llamada para resolver es cc’B(|B|-1, costo) y la complejidad del nuevo algoritmo es O(|B| * costo)
 
-7) AstroTrade
+### 7) AstroTrade
 
     (a) Quiero maximizar ganancia. Empezar y terminar sin asteroides.
         si Astro Void tiene c asteroides al fin del día j, es:
@@ -239,7 +287,7 @@ Programación dinámica
         Otro cambio que hice en el código fue que la la llamada de recursion es de: MGN(0, 0) empezando en dia 0 con 0 asteroides.
         No me salio hacerlo como en la recursion de arriba.
 
-8) CortesEconomicos
+### 8) CortesEconomicos
 
     (a) Queremos encontrar el mínimo costo posible de cortar una vara de longitud ℓ. Me convence :)
 
@@ -261,7 +309,7 @@ Programación dinámica
 
     (d) ...
 
-9) Travesía vital
+### 9) Travesía vital
 
     (a) Un algoritmo backtracking seria recorrer todos los posibles caminos y al llegar a la meta checkear si la solucion es menor al menor actual.
         En cada paso recursivo iría hacia abajo o hacia la derecha, si esta al extremo solo tiene una posibilidad, abajo o derecha.
@@ -298,9 +346,9 @@ Programación dinámica
 
     (e) -pendiente-
 
-Golosos
+## Golosos
 
-13) ParejasdeBaile
+### 13) ParejasdeBaile
     Tenemos dos conjuntos de personas y para cada persona sabemos su habilidad de baile. Queremos
     armar la máxima cantidad de parejas de baile, sabiendo que para cada pareja debemos elegir
     exactamente una persona de cada conjunto de modo que la diferencia de habilidad sea menor o
@@ -349,7 +397,7 @@ Golosos
           El ciclo termina ya se avanza el iterador correspondiente en cada caso de a 1 y en algún momento terminará de recorrer algun vector cuando la guarda
           no se cumpla.
 
-14) SumaSelectiva
+### 14) SumaSelectiva
     Dado un conjunto X con |X| = n y un entero k ≤ n queremos encontrar el máximo valor que pueden sumar los elementos de un subconjunto S de X 
     de tamaño k.
 
@@ -397,7 +445,7 @@ Golosos
     (c) Dar una implementación del algoritmo del inciso a) con complejidad temporal O(n log k).
     -Te la debo- :(
         
-15) SumaGolosa
+### 15) SumaGolosa
     Queremos encontrar la suma de los elementos de un multiconjunto de números naturales. Cada suma se realiza exactamente entre
     dos números x e y y tiene costo x + y.
     Por ejemplo, si queremos encontrar la suma de {1, 2, 5} tenemos 3 opciones:
@@ -444,7 +492,7 @@ Golosos
             return total_cost;
         }
 
-16) RutaEficiente
+### 16) RutaEficiente
     Tomás quiere viajar de Buenos Aires a Mar del Plata en su flamante Renault 12. Como está
     preocupado por la autonomía de su vehículo, se tomó el tiempo de anotar las distintas estaciones
     de servicio que se encuentran en el camino. Modeló el mismo como un segmento de 0 a M , donde
