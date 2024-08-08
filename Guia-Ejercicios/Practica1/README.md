@@ -24,7 +24,7 @@ la secuencia $c_1 , ... , c_n$ o, análogamente, tenemos un iterador de $C$).Las
 
 (c) Escribir el conjunto de soluciones parciales para $C = \{6, 12, 6\}$ y $k = 12$.
 
-![]()
+![](https://github.com/malei-dc/TDA/blob/main/Guia-Ejercicios/Practica1/imgs/ej1parciales.png)
       
 
     (d) El arbol de backtracking es similar a las soluciones parciales, se empieza con la solucion vacia y se van agregando o no
