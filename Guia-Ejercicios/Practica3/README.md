@@ -208,23 +208,23 @@ En este ejercicio diseñamos un algoritmo para encontrar ciclos en un digrafo. D
 
 (b) Diseñar un algoritmo que permita encontrar un ciclo en un digrafo D cuyos vértices tengan todos grado de salida mayor a 0.
 
-  vector<bool> visitados                 <- vector tamaño n inicializado todo false 
-  vector<bool> enPila                    <- vector tamaño n inicializado todo false para mantener registro del recorrido actual.
-  bool hayCiclo(vector<list<int>> &lista_adyacencias, int vertice, vector<bool> &visitados, vector<bool> &enPila) {
-    visitados[vertice] = true; 
-    enPila[vertice] = true; 
-    for (int hijo : lista_adyacencias[vertice]) { 
-      if (!visitados[hijo]) { 
-        if (hayCiclo(lista_adyacencias, hijo, visitados, enPila)) 
+    vector<bool> visitados                 <- vector tamaño n inicializado todo false 
+    vector<bool> enPila                    <- vector tamaño n inicializado todo false para mantener registro del recorrido actual.
+    bool hayCiclo(vector<list<int>> &lista_adyacencias, int vertice, vector<bool> &visitados, vector<bool> &enPila) {
+      visitados[vertice] = true; 
+      enPila[vertice] = true; 
+      for (int hijo : lista_adyacencias[vertice]) { 
+        if (!visitados[hijo]) { 
+          if (hayCiclo(lista_adyacencias, hijo, visitados, enPila)) 
+            return true; 
+        } 
+        else if (enPila[hijo]) { 
           return true; 
+        } 
       } 
-      else if (enPila[hijo]) { 
-        return true; 
-      } 
-    } 
-    enPila[vertice] = false; 
-    return false; 
-  }
+      enPila[vertice] = false; 
+      return false; 
+    }
 
 (c) Explicar detalladamente (sin usar código) cómo se implementa el algoritmo del inciso anterior. El algoritmo resultante tiene que tener complejidad temporal $O(n + m)$.
 
@@ -251,28 +251,28 @@ En este ejercicio diseñamos un algoritmo para encontrar ciclos en un digrafo. D
 
 (e) A partir del inciso anterior, diseñar un algoritmo que permita determinar si un grafo $D$ tiene ciclos. En caso negativo, el algoritmo debe retornar una lista $v_1 , ... , v_n$ de vértices tales que $d_{out}(v_i) = 0$ en $D - \{v_1 , ... , v_{i−1}\} \forall i$. En caso afirmativo, el algoritmo debe retornar un ciclo.
 
-  vector<bool> noSucesores               <- vector tamaño n inicializado todo false
-  vector<bool> visitados                 <- vector tamaño n inicializado todo false 
-  vector<bool> enPila                    <- vector tamaño n inicializado todo false para mantener registro del recorrido actual.
-  bool hayCiclo(vector<list<int>> &lista_adyacencias, int vertice, vector<bool> &visitados, vector<bool> &enPila) {
-    visitados[vertice] = true; 
-    if (lista_adyacencias[vertice].size() == 0)
-      noSucesores[vertice] = true
-    else{
-      enPila[vertice] = true; 
-      for (int hijo : lista_adyacencias[vertice]) { 
-        if (!visitados[hijo]) { 
-          if (hayCiclo(lista_adyacencias, hijo, visitados, enPila)) 
+    vector<bool> noSucesores               <- vector tamaño n inicializado todo false
+    vector<bool> visitados                 <- vector tamaño n inicializado todo false 
+    vector<bool> enPila                    <- vector tamaño n inicializado todo false para mantener registro del recorrido actual.
+    bool hayCiclo(vector<list<int>> &lista_adyacencias, int vertice, vector<bool> &visitados, vector<bool> &enPila) {
+      visitados[vertice] = true; 
+      if (lista_adyacencias[vertice].size() == 0)
+        noSucesores[vertice] = true
+      else{
+        enPila[vertice] = true; 
+        for (int hijo : lista_adyacencias[vertice]) { 
+          if (!visitados[hijo]) { 
+            if (hayCiclo(lista_adyacencias, hijo, visitados, enPila)) 
+              return true; 
+          } 
+          else if (enPila[hijo]) { 
             return true; 
+          } 
         } 
-        else if (enPila[hijo]) { 
-          return true; 
-        } 
-      } 
-      enPila[vertice] = false; 
-      return false; 
+        enPila[vertice] = false; 
+        return false; 
+      }
     }
-  }
 
 (f) Explicar detalladamente (sin usar código) cómo se implementa el algoritmo del inciso anterior. El algoritmo resultante tiene que tener complejidad temporal $O(n + m)$.
 
