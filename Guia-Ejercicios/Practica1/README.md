@@ -37,9 +37,9 @@ la secuencia $c_1 , ... , c_n$ o, análogamente, tenemos un iterador de $C$).Las
 
 (f) Convencerse de que la siguiente es una implementación recursiva de ss en un lenguaje imperativo y de que retorna la solución para $C$, $k$ cuando se llama con $C$, $|C|$, $k$. ¿Cuál es su complejidad?
 
-1. $subset\_sum(C, i, j)$:  // implementa $ss(\{c_1 ,... , c_i\}, j)$
+1. $subset\_ sum(C, i, j)$:  // implementa $ss(\{c_1 ,... , c_i\}, j)$
 2. Si $i = 0$, retornar $(j = 0)$
-3. Si no, retornar $subset\_sum(C, i − 1, j) \lor subset\_sum(C, i − 1, j − C[i])$
+3. Si no, retornar $subset\_ sum(C, i − 1, j) \lor subset\_ sum(C, i − 1, j − C[i])$
 
 >Me convence también :)
 
@@ -61,10 +61,10 @@ la secuencia $c_1 , ... , c_n$ o, análogamente, tenemos un iterador de $C$).Las
 
 
 (h) Considerar la siguiente regla de factibilidad: $p = (a_1 , ... , a_i)$ se puede extender a una solución válida sólo si $\sum_{q=1}^i a_q c_q \leq k$. Convencerse de que la siguiente implementación incluye la regla de factibilidad.
-1. $subset_sum(C, i, j):$ // implementa $ss(\{c_1 , ... , c_i\}, j)$
+1. $subset\_ sum(C, i, j):$ // implementa $ss(\{c_1 , ... , c_i\}, j)$
 2. Si $j < 0$, retornar $falso$ // regla de factibilidad
 3. Si $i = 0$, retornar $(j = 0)$
-4. Si no, retornar $subset\_sum(C, i − 1, j) ∨ subset_sum(C, i − 1, j − C[i])$
+4. Si no, retornar $subset\_ sum(C, i − 1, j) ∨ subset\_ sum(C, i − 1, j − C[i])$
 
 >Me convence x3 :)
 
@@ -98,7 +98,7 @@ Mostrar los primeros dos niveles del árbol de backtracking para n = 3.
 
 (c) Demostrar que el árbol de backtracking tiene $O((n^2)!)$ nodos en peor caso.
 
->El primer nivel tiene $n$² nodos, cada nodo del primer nivel tiene $n²-1$ hijos, por lo que el segundo nivel tiene $n²*(n²-1)$ nodos y asi... $n²*(n²-1)*(n²-2)*(n²-3)*...*1$, luego el arbol de backtracking queda $n²!$ nodos el peor caso.
+>El primer nivel tiene $n$² nodos, cada nodo del primer nivel tiene $n²-1$ hijos, por lo que el segundo nivel tiene $n²*(n²-1)$ nodos y asi... $n²*(n²-1)*(n²-2)*(n²-3)* ... *1$ , luego el arbol de backtracking queda $n²!$ nodos el peor caso.
 
 (d) Considere la siguiente poda al árbol de backtracking: al momento de elegir el valor de una nueva posición, verificar que la suma parcial de la fila no supere el número mágico. Verificar también que la suma parcial de los valores de las columnas no supere el número mágico. Introducir estas podas al algoritmo e implementarlo en la computadora. ¿Puede mejorar estas podas?
 
