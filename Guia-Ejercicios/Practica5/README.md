@@ -73,7 +73,7 @@ Demostrar que el algoritmo es correcto.
 
 >Complejidad: $O(|E| * min(n², m log(n)))$ ya que hago Dijkstra $|E|$ veces.
 >
->(alternativa mejor): si calculamos d(s,v) y d(v,w) para todos los nodos v en G reduce drasticamente la cantidad de ejecución de Dijkstra. Entonces por cada arista de E, al tener los dos extremos y el costo, calcular el CM de dG+e(s,t) es O(1) ya que es una cuenta y no es necesario la inserción/sacado de la arista en sí. 
+>(alternativa mejor): si calculamos $d(s,v)$ y $d(v,w)$ para todos los nodos $v$ en $G$ reduce drasticamente la cantidad de ejecución de Dijkstra. Entonces por cada arista de $E$, al tener los dos extremos y el costo, calcular el CM de $d_{G+e}(s,t)$ es $O(1)$ ya que es una cuenta y no es necesario la inserción/sacado de la arista en sí. 
         
 >Demostración: pruebo cada arista de |E| y veo si mejora el camino minimo.
 
@@ -85,7 +85,7 @@ Demostrar que el algoritmo es correcto. Ayuda: pensar en el subgrafo $P$ de $G$ 
 >1. Ejecuto Dijkstra de $s$ a $t$ para obtener $d(s,v)$ para todos los $v$ en $G$.
 >2. Ejecuto Dijkstra de $t$ a $s$ con las aristas invertidas para obtener $d(v,t)$ para todos los $v$ en $G$.
 >3. Para cada arista de $G$, recorremos verificando la ecuación de $d(s,v) + c(v \rightarrow w) + d(w,t) = d(s,t)$. Las aristas que cumplen serán posibles aristas críticas. Usamos esta info para construir un subgrafo $P$ que consiste exclusivamente en las aristas que forman parte de algún camino mínimo de $s$ a $t$. Todas las aristas de $P$ son candidatas a ser críticas, la razón es que, por definición, si una arista no está en un camino mínimo desde $s$ a $t$, su eliminación no puede afectar la distancia mínima entre estos dos puntos.
->4. Usamos la propiedad de los predecesores/sucesores, para cada arista $(v, w)$ en el camino mínimo, mira si existe otra ruta de v a w que no sea más larga que la arista original. Esto puede hacerse manteniendo y consultando una estructura de datos que almacene caminos alternativos y sus respectivos pesos durante la construcción de $P$. Si no existe tal ruta alternativa, entonces la arista es crítica.
+>4. Usamos la propiedad de los predecesores/sucesores, para cada arista $(v, w)$ en el camino mínimo, mira si existe otra ruta de $v$ a $w$ que no sea más larga que la arista original. Esto puede hacerse manteniendo y consultando una estructura de datos que almacene caminos alternativos y sus respectivos pesos durante la construcción de $P$. Si no existe tal ruta alternativa, entonces la arista es crítica.
 >
 >(optimización): Para evitar la reconstrucción del grafo y la repetición de Dijkstra, se puede precalcular y almacenar las distancias mínimas entre todos los pares de vértices usando el algoritmo de Floyd-Warshall o repetir Dijkstra desde cada vértice. Aunque esto tiene una complejidad temporal mayor ($O(n³)$ para Floyd-Warshall y $O(n*m/log(n))$ para Dijkstra repetido), te permite responder inmediatamente si la eliminación de cualquier arista aumentaría la distancia mínima de $s$ a $t$. Esta estrategia es especialmente útil si el grafo no cambia frecuentemente y se hacen muchas consultas sobre aristas críticas.
         
@@ -125,7 +125,7 @@ El sistema arrojó que ninguna de las configuraciones deseadas para desincentiva
 >Para calcular ciclos negativos es la misma idea del inciso anterior agregando un nodo $(c0, false)$ ya que el primero se cobra.
 
 ### 8) SRD
-Un sistema de restricciones de diferencias (SRD) es un sistema $S$ que tiene $m$ inecuaciones y $n$ incógnitas $x1 ,... , xn$. Cada inecuación es de la forma $xi − xj \leq c_{ij}$ para una constante $c_{ij} \in R$; por cada par $i, j$ existe a lo sumo una inecuación (por qué?). Para cada SRD $S$ se puede definir un digrafo pesado $D(S)$ que tiene un vértice $v_i$ por cada incógnita $x_i$ de forma tal que $v_j \rightarrow v_i$ es una arista de peso $c_{ij}$ cuando $x_i − x_j \leq c_{ij}$ es una inecuación de $S$. Asimismo, $S$ tiene un vértice $v_0$ y una arista $v_0 \rightarrow v_i$ de peso 0 para todo $1 \leq i \leq n$.
+Un sistema de restricciones de diferencias (SRD) es un sistema $S$ que tiene $m$ inecuaciones y $n$ incógnitas $x_1 ,... , x_n$. Cada inecuación es de la forma $xi − xj \leq c_{ij}$ para una constante $c_{ij} \in R$; por cada par $i, j$ existe a lo sumo una inecuación (por qué?). Para cada SRD $S$ se puede definir un digrafo pesado $D(S)$ que tiene un vértice $v_i$ por cada incógnita $x_i$ de forma tal que $v_j \rightarrow v_i$ es una arista de peso $c_{ij}$ cuando $x_i − x_j \leq c_{ij}$ es una inecuación de $S$. Asimismo, $S$ tiene un vértice $v_0$ y una arista $v_0 \rightarrow v_i$ de peso 0 para todo $1 \leq i \leq n$.
 
 (a) Demostrar que si $D(S)$ tiene un ciclo de peso negativo, entonces $S$ no tiene solución.
 
@@ -148,7 +148,7 @@ Supongamos que el ciclo incluye los nodos $c = (v_1, v_2, ..., v_k)$ donde $v_k 
 >
 >Entonces si $D(S)$ tiene ciclo negativo, no tiene solución.
 
-(b) Demostrar que si $D(S)$ no tiene ciclos de peso negativo, entonces {$xi = d(v_0 , v_i ) | 1 \leq i \leq n$} es una solución de $D(S)$. Acá $d(v_0 , v_i)$ es la distancia desde $v_0$ a $v_i$ en $D(S)$.
+(b) Demostrar que si $D(S)$ no tiene ciclos de peso negativo, entonces $\{xi = d(v_0 , v_i ) | 1 \leq i \leq n\}$ es una solución de $D(S)$. Acá $d(v_0 , v_i)$ es la distancia desde $v_0$ a $v_i$ en $D(S)$.
 
 >Consideremos cualquier arista $(v_i, v_j)$ en $E(S)$. Por la inecuación $d(v_0, v_j) <= d(v_0,v_i) + w(v_i,v_j)$ entonces $d(v_0, v_j) - d(v_0,v_i) <= w(v_i,v_j)$. Si igualamos $x_i = d(v_0,v_i)$ y $x_j = d(v_0, v_j)$ satisface la inecuación $x_j - x_i <= w(v_i,v_j)$ que corresponde a la arista $(v_i,v_j)$.
 
