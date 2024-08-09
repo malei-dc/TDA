@@ -19,15 +19,15 @@ Dado un digrafo $D$ con pesos $c : E(D) \rightarrow N$ y dos vértices $s$ y $t$
 >4. Marcar estas aristas como no elegibles para el cálculo de la ruta mínima en el siguiente paso.
 >5. Corro Dijkstra otra vez en $D$ desde $s$ a $t$ y es el resultado.  Antes de hacer esto, necesito asegurarme de que el grafo ha sido modificado para reflejar la exclusión (o la no elección) de las aristas $st$-eficientes. Esto podría implicar ajustar el algoritmo de Dijkstra para que ignore estas aristas marcadas durante su ejecución.
     
-### 2) Arista max en ruta de peso c
+### 2) Arista max en ruta de peso $c$
 Diseñar un algoritmo eficiente que, dado un digrafo $G$ con pesos no negativos, dos vértices $s$ y $t$ y una cota $c$, determine una arista de peso máximo de entre aquellas que se encuentran en algún recorrido de $s$ a $t$ cuyo peso (del recorrido, no de la arista) sea a lo sumo $c$. 
 Demostrar que el algoritmo propuesto es correcto.
 
 >Algoritmo:
->1. Dijkstra desde s en G para calcular d(s,v) para todo v con arista menor a c. (ya que los pesos son positivos)
->2. Dijkstra desde t en G con las aristas invertidas para calcular d(w,t) para todo w con arista menor a c. (ya que los pesos son positivos)
->3. Ordenar todas las aristas (v,w) según peso decreciente.
->4. Para cada arista ordenado: si d(s,v) + c(v,w) + d(w,t) <= c devolver arista.
+>1. Dijkstra desde $s$ en $G$ para calcular $d(s,v)$ para todo $v$ con arista menor a $c$. (ya que los pesos son positivos)
+>2. Dijkstra desde $t$ en $G$ con las aristas invertidas para calcular $d(w,t)$ para todo $w$ con arista menor a $c$. (ya que los pesos son positivos)
+>3. Ordenar todas las aristas $(v,w)$ según peso decreciente.
+>4. Para cada arista ordenado: si $d(s,v) + c(v,w) + d(w,t) \leq c$ devolver arista.
 >5. Devolver null.
         
 >Demostración:
