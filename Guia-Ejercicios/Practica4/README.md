@@ -89,7 +89,7 @@ Modelar este problema como un problema de grafos que se resuelva usando BFS en $
 ## Árbol generador mínimo, camino minimax y maximin
 
 ### 10) SecuenciasConectadas
-Se define la distancia entre dos secuencias de naturales $X = x_1 , ..., x_k$ e $Y = y_1 , ..., y_k$ como $d(X, Y) = \sum_{i = 1}^{k} |x_i − y_i|$. Dado un conjunto de secuencias $X_1 , ..., X_n$ , cada una de tamaño $k$, su grafo asociado $G$ tiene un vértice $v_i$ por cada $1 \leq i \leq n$ y una arista $v_i v_j$ de peso $d(X_i , X_j)$ para cada $1 \leq i < j \leq n$. Proponer un algoritmo de complejidad $O(kn²)$ que dado un conjunto de secuencias encuentre el árbol generador mínimo de su grafo asociado.
+Se define la distancia entre dos secuencias de naturales $X = \{x_1 , ..., x_k\}$ e $Y = \{y_1 , ..., y_k\}$ como $d(X, Y) = \sum_{i = 1}^{k} |x_i − y_i|$. Dado un conjunto de secuencias $X_1 , ..., X_n$ , cada una de tamaño $k$, su grafo asociado $G$ tiene un vértice $v_i$ por cada $1 \leq i \leq n$ y una arista $v_i v_j$ de peso $d(X_i , X_j)$ para cada $1 \leq i < j \leq n$. Proponer un algoritmo de complejidad $O(kn²)$ que dado un conjunto de secuencias encuentre el árbol generador mínimo de su grafo asociado.
 
 >Modelamos las secuencias $X_1 , ..., X_n$ como nodos, y para calcular la distancia entre nodos hacemos la sumatoria para el peso de las aristas. Enlazamos todos con todos lo que nos cuesta $O(kn²)$ y luego corremos prim o kruskal que es $O(n²)$. Nos queda complejidad $O(kn²)$.
 
@@ -105,7 +105,7 @@ Una empresa de comunicaciones modela su red usando un grafo $G$ donde cada arist
 
 La empresa está dispuesta a hacer una inversión que consiste en actualizar algunos enlaces (aristas) a un ancho de banda que, para la tecnología existente, es virtualmente infinito. Antes de decidir la inversión, quieren determinar cuál es el ancho de banda que se podría obtener si se reemplazan $i$ aristas para todo $0 \leq i < n$.
 
-(b) Proponer un algoritmo que dado $G$ determine el vector $a_0 , ..., a_{n−1}$ tal que $a_i$ es el ancho de banda máximo que se puede obtener si se reemplazan $i$ aristas de $G$.
+(b) Proponer un algoritmo que dado $G$ determine el vector $(a_0 , ..., a_{n−1})$ tal que $a_i$ es el ancho de banda máximo que se puede obtener si se reemplazan $i$ aristas de $G$.
 
 >Reemplazar $i$ aristas por otras con "ancho de banda infinito", estamos, de hecho, asegurando que ciertos caminos dentro del grafo permanecerán siempre conectados, sin importar el valor de $k$ que elijamos para el subgrafo $G_k$. Esto podría mejorar significativamente el ancho de banda de la red al permitir que más nodos permanezcan conectados incluso cuando se eliminan aristas de menor capacidad.
 >
