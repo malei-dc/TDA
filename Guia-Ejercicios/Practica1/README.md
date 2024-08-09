@@ -98,7 +98,7 @@ Mostrar los primeros dos niveles del árbol de backtracking para n = 3.
 
 (c) Demostrar que el árbol de backtracking tiene $O((n^2)!)$ nodos en peor caso.
 
->El primer nivel tiene $n$² nodos, cada nodo del primer nivel tiene $n²-1$ hijos, por lo que el segundo nivel tiene $n²*(n²-1)$ nodos y asi... $n²*(n²-1)*(n²-2)*(n²-3)* ... *1$ , luego el arbol de backtracking queda $n²!$ nodos el peor caso.
+>El primer nivel tiene $n$² nodos, cada nodo del primer nivel tiene $n²-1$ hijos, por lo que el segundo nivel tiene $n² \times (n²-1)$ nodos y asi... $n²\times (n²-1)\times (n²-2)\times (n²-3)\times ... \times 1$ , luego el arbol de backtracking queda $n²!$ nodos el peor caso.
 
 (d) Considere la siguiente poda al árbol de backtracking: al momento de elegir el valor de una nueva posición, verificar que la suma parcial de la fila no supere el número mágico. Verificar también que la suma parcial de los valores de las columnas no supere el número mágico. Introducir estas podas al algoritmo e implementarlo en la computadora. ¿Puede mejorar estas podas?
 
