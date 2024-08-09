@@ -84,7 +84,7 @@ $$2 + \frac{(n − 1)(n − 2)}{2} - \frac{(n − 2)(n − 3)}{2} = 2 + \frac{n�
 >
 >- Esto quiere decir que como inicialmente se tiene esa cantidad de aristas, sacando el punto de articulación (aunque éste esté conectado con todos los demás vértices con $n-1$ aristas) se sigue cumpliendo que el grafo resultante tiene más de $\frac{(n − 2)(n − 3)}{2}$ aristas cumpliendo así como un grafo conexo por (a) *ABS*! 
 >
->- Con esto queda demostrado que todo grafo de n vértices que tenga al menos $2 + \frac{(n − 1)(n − 2)}{2} aristas es biconexo
+>- Con esto queda demostrado que todo grafo de n vértices que tenga al menos $2 + \frac{(n − 1)(n − 2)}{2}$ aristas es biconexo
 
 (c) ¿Se pueden dar cotas mejores que funcionen a partir de algún $n_0$? Es decir, ¿existe $c(n) < 1 + \frac{(n − 1)(n − 2)}{2}$ (resp. $c(n) < 2 + \frac{(n − 1)(n − 2)
 }{2}$) tal que todo grafo de $n >= n_0$ vértices que tenga al menos $c(n)$ aristas sea conexo (resp. biconexo)?
