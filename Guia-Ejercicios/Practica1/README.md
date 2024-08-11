@@ -70,12 +70,12 @@ la secuencia $c_1 , ... , c_n$ o, análogamente, tenemos un iterador de $C$).Las
 
 (i) Definir otra regla de factibilidad, mostrando que la misma es correcta; no es necesario implementarla.
 
->- Factibilidad: detener la exploración si la suma parcial supera T.
->- Optimalidad: si alcanzamos T antes de considerar todos los elementos, detenemos esa rama.
+>- Factibilidad: detener la exploración si la suma parcial supera $T$.
+>- Optimalidad: si alcanzamos $T$ antes de considerar todos los elementos, detenemos esa rama.
 >
->Poda de factibilidad: la suma de lo actual mas los restantes sean menor que k
+>Poda de factibilidad: la suma de lo actual mas los restantes sean menor que $k$
 
-(j) Modificar la implementación para imprimir el subconjunto de C que suma k, si existe.
+(j) Modificar la implementación para imprimir el subconjunto de $C$ que suma $k$, si existe.
 
 >[Codeado](https://github.com/malei-dc/TDA/blob/main/Guia-Ejercicios/Practica1/codes/P1Ej1-SumaSubconjuntosBT.cpp)
 
@@ -265,10 +265,10 @@ fin de minimizar nuestra pérdida. Más aún, queremos gastar el menor tiempo po
 >
 >- Casos base: explicado en comentarios
 >- Caso recursivo: calcula el minimo entre contar el i-esimo billete o no. 
->   - Si cuenta el i-esimo billete en la tupla_1 le resto a e el valor del i-esimo billete y a tupla_2 sumo uno la cantidad de billetes, y a ambos le resto el indice para seguir iterando.
+>   - Si cuenta el i-esimo billete en la $tupla_1$ le resto a e el valor del i-esimo billete y a $tupla_2$ sumo uno la cantidad de billetes, y a ambos le resto el indice para seguir iterando.
 >   - Si no cuenta el i-esimo billete simplemente le resto un indice.
 >
->$cc’_B$ tiene la propiedad de superposición de subproblemas cuando tenemos que calcular valores de billetes repetidos para un mismo estado de $e$, ya que como estamos viendo el caso de usar o no usar tal billete, con los billetes del mismo valor, voy a estar calculando lo mismo varias veces. En el peor caso es que sean $|B|$ cantidad de billetes diferentes con un estado e diferente. La cantidad de estados en el peor caso es $|B|*e \ll 2^{(\frac{|B|}{2})}$. Conviene dinamica :)
+>$cc’_B$ tiene la propiedad de superposición de subproblemas cuando tenemos que calcular valores de billetes repetidos para un mismo estado de $e$, ya que como estamos viendo el caso de usar o no usar tal billete, con los billetes del mismo valor, voy a estar calculando lo mismo varias veces. En el peor caso es que sean $|B|$ cantidad de billetes diferentes con un estado e diferente. La cantidad de estados en el peor caso es $|B|*e \ll 2^{(|B|/2)}$. Conviene dinamica :)
 
 (d) Definir una estructura de memoización para $cc’_B$ que permita acceder a $cc’_B (i, j)$ en $O(1)$ tiempo para todo $0 ≤ i ≤ n$ y $0 ≤ j ≤ k$.
 
