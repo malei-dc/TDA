@@ -1,6 +1,6 @@
 # Bienvenidos 
 
-Si estás en una PC, en el display del README (esquina superior derecha) hay un menú donde se mostrarán todas las secciones, que corresponden a cada ejercicio realizado. Aunque algunos ejercicios fueron consultados en clase, la gran mayoría están sujetos a errores y podrían no estar completamente justificados.
+Si estás en una PC, en el display de cada README (esquina superior derecha) hay un menú donde se mostrarán todas las secciones, que (en las guías prácticas) corresponden a cada ejercicio realizado. Aunque algunos ejercicios fueron consultados en clase, la gran mayoría están sujetos a errores y podrían no estar completamente justificados.
 
 Los entregables y los ej para practicar los hice en c++, para los entregables se podía elegir cualquier lenguaje de programación, solo que en python algún que otro juez no pasaba.
 
@@ -72,6 +72,7 @@ Espero que sea de ayuda :)
 - Leandro Raffo (Ay2)
 - Alfredo Umfurer (Ay2)
 
-
+# Contribuir
+Si ves un error, queres completar/corregir un ejercicio o compartir una mejor resolución en el repo, podes abrir un issue o hacer un pull request sin drama, o incluso me podes mandar mail y con gusto le hecho un ojo. :D
 
 
