@@ -15,9 +15,13 @@ $$ \sum_{v \in V(D)}d_{in}(v) = \sum_{v \in V(D)} d_{out}(v) = |E(D)| $$
 >- La HI es que vale $\sum_{v \in V(D)} d_{in}(v) = \sum_{v \in V(D)} d_{out}(v) = |E(D)|$. 
 >- Llamemos $(s,t)$ a la nueva arista y sin perdida de generalidad nombremos a $s$ como su nodo de salida y a $t$ como su nodo de entrada. Y tenemos $D'$ al nuevo grafo, es decir $D' = (V(D), E(D) + (s,t))$.
 > Por renombre, probar que vale $P(|E(D)| + 1)$ es lo mismo que: $\sum_{v \in V(D')} d_{in}(v) = \sum_{v \in V(D')} d_{out}(v) = |E(D')|$
->   - $|E(D')| = |E(D) \cup (s,t)| = |E(D)| + 1$
->   - $\sum_{v \in V(D')} d_{in}(v) = d_{in}(t_{D'}) + \sum_{v \in V(D'-t_{D'})}d_{in}(v) = 1 + [d_{in}(t_D) + \sum_{v \in V(D-t_{D})}d_{in}(v)] = 1 + \sum_{v \in V(D)} d_{in}(v) $
->   - $\sum_{v \in V(D')} d_{out}(v) = d_{out}(t_{D'}) + \sum_{v \in V(D'-t_{D'})}d_{out}(v) = 1 + [d_{out}(t_D) + \sum_{v \in V(D-t_{D})}d_{out}(v)] = 1 + \sum_{v \in V(D)} d_{out}(v) $
+>
+>> $$|E(D')| = |E(D) \cup (s,t)| = |E(D)| + 1$$
+>> 
+>> $$\sum_{v \in V(D')} d_{in}(v) = d_{in}(t_{D'}) + \sum_{v \in V(D'-t_{D'})}d_{in}(v) = 1 + [d_{in}(t_D) + \sum_{v \in V(D-t_{D})}d_{in}(v)] = 1 + \sum_{v \in V(D)} d_{in}(v)$$
+>> 
+>> $$\sum_{v \in V(D')} d_{out}(v) = d_{out}(t_{D'}) + \sum_{v \in V(D'-t_{D'})}d_{out}(v) = 1 + [d_{out}(t_D) + \sum_{v \in V(D-t_{D})}d_{out}(v)] = 1 + \sum_{v \in V(D)} d_{out}(v)$$
+>> 
 >- Por HI sabemos que $\sum_{v \in V(D)} d_{in}(v) = \sum_{v \in V(D)} d_{out} = |E(D)|$
 >- Sumamos 1 en cada lado: $\sum_{v \in V(D)} d_{in}(v) + 1 = \sum_{v \in V(D)} d_{out} +1 = |E(D)|$
 >- Reemplazamos y nos queda que: $\sum_{v \in V(D')} d_{in}(v) = \sum_{v \in V(D')} d_{out} = |E(D')|$
