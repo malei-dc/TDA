@@ -9,7 +9,7 @@ Espero que sea de ayuda :)
 ## Guía de ejercicios
 
 - [Práctica 1:](https://github.com/malei-dc/TDA/tree/main/Guia-Ejercicios/Practica1) Técnicas algoritmicas
-- Práctica 2: Dividir y conquistar 
+- [Práctica 2:](https://github.com/malei-dc/TDA/tree/main/Guia-Ejercicios/Practica2) Dividir y conquistar 
 - [Práctica 3:](https://github.com/malei-dc/TDA/tree/main/Guia-Ejercicios/Practica3) Introducción a la teoría algorítmica de grafos
 - [Práctica 4:](https://github.com/malei-dc/TDA/tree/main/Guia-Ejercicios/Practica4) Recorridos y Árboles
 - [Práctica 5:](https://github.com/malei-dc/TDA/tree/main/Guia-Ejercicios/Practica5) Recorrido mínimo

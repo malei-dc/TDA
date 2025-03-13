@@ -27,7 +27,6 @@ Intente que su solución aproveche la técnica de modo que complejidad del algor
             return izquierdaDominante(valores, desde, mitad) && izquierdaDominante(valores, mitad + 1, hasta);
         else
             return false;
-    ------------------------------------------------------------------
 
 > El algoritmo utiliza un enfoque de dividir y conquistar, donde se divide el arreglo en mitades y se realiza una comparación recursiva de las sumas de las mitades. Los principales pasos del algoritmo:
 >
@@ -67,3 +66,54 @@ Tenemos un arreglo $a = [a_1, a_2, . . . , a_n]$ de $n$ enteros distintos (posit
 
 Diseñar un algoritmo dividir y conquistar eficiente (de complejidad de orden estrictamente menor que lineal) que resuelva el problema. Calcule y justifique la complejidad del algoritmo dado.
 
+    int indiceEspejo(int arr[], int izquierda, int derecha) {
+        while (izquierda <= derecha) {
+            int medio = izquierda + (derecha - izquierda) / 2;
+
+            if (arr[medio] == medio)
+                return medio;
+
+            // Si el objetivo es menor, ignorar la mitad derecha
+            if (arr[medio] > medio)
+                derecha = medio - 1;
+            // Si el objetivo es mayor, ignorar la mitad izquierda
+            else
+                izquierda = medio + 1;
+        }
+        return -1; //No se encuentra en el arreglo
+    }
+
+> Aprovechamos que el arreglo es estrictamente creciente, si en un indice el valor del arreglo es mayor, también será mayor para los elemento posteriores del arreglo; analogamente si es menor. De esta forma podemos usar la busqueda binaria para resolver este problema donde el objetivo es escontrar que la posición del medio en el arreglo tenga el valor del índice, y si no, descartar la mitad correspondiente. Sabemos que la búsqueda binaria tiene complejidad $O(log(n))$ donde $n$ es la longitud del arreglo.
+
+## 4) ComplexityQuest
+
+Calcule la complejidad de un algoritmo que utiliza $T(n)$ pasos para una entrada de tamaño $n$, donde $T$ cumple:
+
+1. $T(n) = T(n − 2) + 5$
+
+    > Expandimos la iteración $k$ veces: 
+    >
+    > - $T(n)=T(n−2)+5$
+    > - $T(n-2)=T(n−4)+5$
+    > - $T(n-4)=T(n−6)+5$
+    > - ...
+    > - $T(n-2k)=T(n−2k)+5k$
+    >
+    > Asumimos que caso base $T(0)=C$, entonces cuando $n-2k=0$ tenemos que $k = \frac{n}{2}$
+    >
+    > Reemplazando en la ecuación tenemos que:
+    > 
+    > $$T(n) = T(0) + 5 * \frac{n}{2}$$
+    >
+    > $$T(n) = C + \frac{5n}{2}$$
+    >
+    > La complejidad asitontica depende del término dominante, en este caso es $\frac{5n}{2}$ lo que implica que la complejidad de $T(n)$ es $O(n)$.
+
+
+2. $T(n) = T(n − 1) + n$
+3. $T(n) = T(n − 1) + \sqrt{n}$
+4. $T(n) = T(n − 1) + n^2$
+5. $T(n) = 2T(n − 1)$
+6. $T(n) = T(n/2) + n$
+7. $T(n) = T(n/2) + \sqrt{n}$
+8. $T(n) = T(n/2) + n^2$
