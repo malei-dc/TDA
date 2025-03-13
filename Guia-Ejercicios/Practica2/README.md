@@ -99,7 +99,7 @@ Calcule la complejidad de un algoritmo que utiliza $T(n)$ pasos para una entrada
     > - ...
     > - $T(n-2k)=T(n−2k)+5k$
     >
-    > Asumimos que caso base $T(0)=C$, entonces cuando $n-2k=0$ tenemos que $k = \frac{n}{2}$
+    > Asumimos que caso base $T(0)=C$, entonces cuando $n-2k=0$ (abarca todo el $n$) tenemos que $k = \frac{n}{2}$
     >
     > Reemplazando en la ecuación tenemos que:
     > 
@@ -109,8 +109,22 @@ Calcule la complejidad de un algoritmo que utiliza $T(n)$ pasos para una entrada
     >
     > La complejidad asitontica depende del término dominante, en este caso es $\frac{5n}{2}$ lo que implica que la complejidad de $T(n)$ es $O(n)$.
 
-
 2. $T(n) = T(n − 1) + n$
+
+    > Suguiendo la misma idea con el ejercicio de arriba, vamos a expandir la iteración.
+    >
+    > - $T(n) = T(n − 1) + n$
+    > - $T(n-1)=T(n−2)+(n-1)$
+    > - $T(n-2)=T(n−3)+(n-2)$
+    > - ...
+    > - $T(n)=T(1) + 2 +3 + ... + (n-1) + 1$
+    >
+    > Sabemos que la suma de $n$ numeros naturales es 
+    >
+    >$$\sum_{k=1}^{n}k = \frac{n(n+1)}{2} $$
+    >
+    > Si asumimos que $T(1)$ es una cte $C$ entonces nos queda que la complejidad de $T(n)$ es $O(n^2)$
+
 3. $T(n) = T(n − 1) + \sqrt{n}$
 4. $T(n) = T(n − 1) + n^2$
 5. $T(n) = 2T(n − 1)$
