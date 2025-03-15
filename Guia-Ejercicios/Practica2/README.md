@@ -119,15 +119,65 @@ Calcule la complejidad de un algoritmo que utiliza $T(n)$ pasos para una entrada
     > - ...
     > - $T(n)=T(1) + 2 +3 + ... + (n-1) + 1$
     >
-    > Sabemos que la suma de $n$ numeros naturales es 
+    > Sabemos que la suma de $n$ numeros naturales es:
     >
     >$$\sum_{k=1}^{n}k = \frac{n(n+1)}{2} $$
     >
     > Si asumimos que $T(1)$ es una cte $C$ entonces nos queda que la complejidad de $T(n)$ es $O(n^2)$
 
 3. $T(n) = T(n − 1) + \sqrt{n}$
+
+    > Acá vamos a empezar a ser más "brutos", para no caer con muchas formalidades, pero solo por esta vez lo desarrollo de ambas formas. (como hacen los profes (? )
+
+    > Si extendemos la recurrencia el término promedio de la raíz cuadrada está en el orden de $\sqrt{n}$  y hay aproximadamente $n$ términos. Entonces la aproximación gruesa que podemos hacer es que:
+    >
+    > $$T(n) \approx n * \sqrt{n} = n^{\frac{3}{2}}$$
+    >
+    > Conluyendo así que $T(n) = O(n^{\frac{3}{2}})$
+
+    >De la forma más formal como venimos haciendo arriba expandiendo la recursión nos queda:
+    >
+    > - $T(n) = T(n − 1) + \sqrt{n}$
+    > - $T(n-1) = T(n − 2) + \sqrt{n-1}$
+    > - ...
+    > - $T(n) = T(1) + \sum_{k=2}^{n} \sqrt{n}$
+    >
+    > Podemos aproximar la sumatoria con una integral:
+    >
+    > $$\sum_{k=2}^{n} \sqrt{n} \approx \int_{1}^{n}\sqrt{n} = \int_{1}^{n} n^{\frac{1}{2}} = \frac{2}{3} x^{\frac{3}{2}}$$
+    >
+    > Evaluando de $1$ a $n$:
+    >
+    > $$\frac{2}{3} n^{\frac{3}{2}} - \frac{2}{3} (1)^{\frac{3}{2}} = \frac{2}{3} n^{\frac{3}{2}} - \frac{2}{3}$$
+    >
+    > Dado que el término dominante es $O(n^{\frac{3}{2}})$ concluimos que $T(n) = O(n^{\frac{3}{2}})$
+
 4. $T(n) = T(n − 1) + n^2$
+
+    > Si extendemos la recurrencia el término promedio está en el orden de $n^2$  y hay aproximadamente $n$ términos. Entonces la aproximación gruesa que podemos hacer es que:
+    >
+    > $$T(n) \approx n * n^2 = n^3$$
+    >
+    > Conluyendo así que $T(n) = O(n^3)$
+
+    > De la forma formal sale usando la fórmula cerrada de suma de cuadrados: $\sum_{k=1}^{n} k^2 = \frac{n(n+1)(2n+1)}{6}$
+
 5. $T(n) = 2T(n − 1)$
+
+    > Si extendemos la recurrencia vemos que va apareciendo un $2$ multiplicando en cada paso recursivo. Lo que nos queda que:
+    >
+    > $$T(n) \approx 2^{n}$$
+    >
+    > Así que $T(n) = O(2^n)$
+
 6. $T(n) = T(n/2) + n$
+
+    > En estos ejercicios donde tenemos todos las condiciones podemos usar el [teorema del maestro](/Guia-Ejercicios/Practica2/teorema_maestro.pdf), NO se puede usar si:
+    >
+    > - No hay reducción de tamaño del problema como $T(n) = T(n − 1) + f(n)$
+    > - La estructura de la recurrencia no encaja con el patrón $aT(\frac{n}{c})+f(n) $
+    >
+    > Tenemos que $a = 1$, $c = 2$, $f(n) = n$ estamos en el segundo caso donde $f(n) \in \theta(n^{log_2(1)}) = \theta(n) \Rightarrow \theta(n*log(n))$
+
 7. $T(n) = T(n/2) + \sqrt{n}$
 8. $T(n) = T(n/2) + n^2$
