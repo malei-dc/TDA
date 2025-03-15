@@ -188,7 +188,7 @@ Calcule la complejidad de un algoritmo que utiliza $T(n)$ pasos para una entrada
     >
     > - Reemplazando con los datos de nuestro caso nos queda:
     >
-    > $$1*f(\frac{n}{2}) \leq \delta * f(n) \Rightarrow 1*\frac{n}{2} \leq \delta * n$$
+    > $$1*f(\frac{n}{2}) \leq \delta*f(n) \Rightarrow 1*\frac{n}{2} \leq \delta*n$$
     >
     > Si tomamos $\delta = \frac{1}{2}$ vemos que se cumple esta condición, y como $\frac{1}{2} < 1$ cumple con todo. Concluimos así por el teorema del maestro que $T(n) = O(f(n))= O(n)$ 
 
@@ -200,11 +200,11 @@ Calcule la complejidad de un algoritmo que utiliza $T(n)$ pasos para una entrada
     > - Comparamos $f(n)$ con $O(1)$, en este caso tenemos que $O(\sqrt{n}) > O(1)$ por lo tanto estamos en el caso 3 del teorema del maestro
     > - Para aplicar el caso 3, $f(n)$ tiene que cumplir que:
     > 
-    > $$\exists \delta < 1 \diagup a*f(\frac{n}{c}) \leq \delta * f(n)$$ 
+    > $$\exists \delta < 1 \diagup a*f(\frac{n}{c}) \leq \delta*f(n)$$ 
     >
     > - Reemplazando con los datos de nuestro caso nos queda:
     >
-    > $$1*f(\frac{n}{2}) \leq \delta * f(n) \Rightarrow 1*\sqrt{\frac{n}{2}} \leq \delta * \sqrt{n} \Rightarrow \frac{\sqrt{n}}{\sqrt{2}} \leq \delta * \sqrt{n}$$
+    > $$1*f(\frac{n}{2}) \leq \delta *f(n) \Rightarrow 1*\sqrt{\frac{n}{2}} \leq \delta *\sqrt{n} \Rightarrow \frac{\sqrt{n}}{\sqrt{2}} \leq \delta *\sqrt{n}$$
     >
     > Si tomamos $\delta = \frac{1}{\sqrt{2}}$ vemos que se cumple esta condición, y como $\frac{1}{\sqrt{2}} < 1$ cumple con todo. Concluimos así por el teorema del maestro que $T(n) = O(f(n))= O(\sqrt{n})$ 
 
@@ -216,11 +216,11 @@ Calcule la complejidad de un algoritmo que utiliza $T(n)$ pasos para una entrada
     > - Comparamos $f(n)$ con $O(1)$, en este caso tenemos que $O(n^2) > O(1)$ por lo tanto estamos en el caso 3 del teorema del maestro
     > - Para aplicar el caso 3, $f(n)$ tiene que cumplir que:
     > 
-    > $$\exists \delta < 1 \diagup a*f(\frac{n}{c}) \leq \delta * f(n)$$ 
+    > $$\exists \delta < 1 \diagup a*f(\frac{n}{c}) \leq \delta *f(n)$$ 
     >
     > - Reemplazando con los datos de nuestro caso nos queda:
     >
-    > $$1*f(\frac{n}{2}) \leq \delta * f(n) \Rightarrow 1*\frac{n^2}{4} \leq \delta * n^2 $$
+    > $$1*f(\frac{n}{2}) \leq \delta *f(n) \Rightarrow 1*\frac{n^2}{4} \leq \delta *n^2 $$
     >
     > Si tomamos $\delta = \frac{1}{4}$ vemos que se cumple esta condición, y como $\frac{1}{4} < 1$ cumple con todo. Concluimos así por el teorema del maestro que $T(n) = O(f(n))= O(n^2)$ 
 
