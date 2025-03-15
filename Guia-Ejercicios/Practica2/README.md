@@ -172,12 +172,62 @@ Calcule la complejidad de un algoritmo que utiliza $T(n)$ pasos para una entrada
 
 6. $T(n) = T(n/2) + n$
 
-    > En estos ejercicios donde tenemos todos las condiciones podemos usar el [teorema del maestro](/Guia-Ejercicios/Practica2/teorema_maestro.pdf), NO se puede usar si:
+    > ---
+    > En estos ejercicios donde tenemos todas las condiciones podemos usar el [teorema del maestro](/Guia-Ejercicios/Practica2/teorema_maestro.pdf), NO se puede usar si:
     >
     > - No hay reducción de tamaño del problema como $T(n) = T(n − 1) + f(n)$
     > - La estructura de la recurrencia no encaja con el patrón $aT(\frac{n}{c})+f(n) $
+    > ---
+    > Tenemos que $a = 1$, $c = 2$, $f(n) = n$ 
     >
-    > Tenemos que $a = 1$, $c = 2$, $f(n) = n$ estamos en el segundo caso donde $f(n) \in \theta(n^{log_2(1)}) = \theta(n) \Rightarrow \theta(n*log(n))$
+    > - Calculamos $O(n^{log_2(1)}) = O(n^0) = O(1)$.
+    > - Comparamos $f(n)$ con $O(1)$, en este caso tenemos que $O(n) > O(1)$ por lo tanto estamos en el caso 3 del teorema del maestro
+    > - Para aplicar el caso 3, $f(n)$ tiene que cumplir que:
+    > 
+    > $$\exists \delta < 1 \diagup a*f(\frac{n}{c}) \leq \delta * f(n)$$ 
+    >
+    > - Reemplazando con los datos de nuestro caso nos queda:
+    >
+    > $$ 1*f(\frac{n}{2}) \leq \delta * f(n) \Rightarrow 1*\frac{n}{2} \leq \delta * n$$
+    >
+    > Si tomamos $\delta = \frac{1}{2}$ vemos que se cumple esta condición, y como $\frac{1}{2} < 1$ cumple con todo. Concluimos así por el teorema del maestro que $T(n) = O(f(n))= O(n)$ 
 
 7. $T(n) = T(n/2) + \sqrt{n}$
+
+    > Tenemos que $a = 1$, $c = 2$, $f(n) = \sqrt{n}$
+    >
+    > - Calculamos $O(n^{log_2(1)}) = O(n^0) = O(1)$.
+    > - Comparamos $f(n)$ con $O(1)$, en este caso tenemos que $O(\sqrt{n}) > O(1)$ por lo tanto estamos en el caso 3 del teorema del maestro
+    > - Para aplicar el caso 3, $f(n)$ tiene que cumplir que:
+    > 
+    > $$\exists \delta < 1 \diagup a*f(\frac{n}{c}) \leq \delta * f(n)$$ 
+    >
+    > - Reemplazando con los datos de nuestro caso nos queda:
+    >
+    > $$ 1*f(\frac{n}{2}) \leq \delta * f(n) \Rightarrow 1*\sqrt{\frac{n}{2}} \leq \delta * \sqrt{n} \Rightarrow \frac{\sqrt{n}}{\sqrt{2}} \leq \delta * \sqrt{n}$$
+    >
+    > Si tomamos $\delta = \frac{1}{\sqrt{2}}$ vemos que se cumple esta condición, y como $\frac{1}{\sqrt{2}} < 1$ cumple con todo. Concluimos así por el teorema del maestro que $T(n) = O(f(n))= O(\sqrt{n})$ 
+
 8. $T(n) = T(n/2) + n^2$
+
+    > Tenemos que $a = 1$, $c = 2$, $f(n) = n^2$
+    >
+    > - Calculamos $O(n^{log_2(1)}) = O(n^0) = O(1)$.
+    > - Comparamos $f(n)$ con $O(1)$, en este caso tenemos que $O(n^2) > O(1)$ por lo tanto estamos en el caso 3 del teorema del maestro
+    > - Para aplicar el caso 3, $f(n)$ tiene que cumplir que:
+    > 
+    > $$\exists \delta < 1 \diagup a*f(\frac{n}{c}) \leq \delta * f(n)$$ 
+    >
+    > - Reemplazando con los datos de nuestro caso nos queda:
+    >
+    > $$ 1*f(\frac{n}{2}) \leq \delta * f(n) \Rightarrow 1*\frac{n^2}{4} \leq \delta * n^2 $$
+    >
+    > Si tomamos $\delta = \frac{1}{4}$ vemos que se cumple esta condición, y como $\frac{1}{4} < 1$ cumple con todo. Concluimos así por el teorema del maestro que $T(n) = O(f(n))= O(n^2)$ 
+
+9. $T(n) = 2T(n-4)$
+
+    > Esto es $O(2^{\frac{n}{4}})$, asumiendo que $n$ es multiplo de 4 permitido por el enunciado. Muy parecido a 5 pero acá se reduce de a 4 por iteración.
+ 
+10. $T(n) = 2T(n/2) + log(n)$
+11. $T(n) = 3T(n/4)$
+12. $T(n) = 3T(n/4) +n$
