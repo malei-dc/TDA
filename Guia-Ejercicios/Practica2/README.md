@@ -261,3 +261,28 @@ Calcule la complejidad de un algoritmo que utiliza $T(n)$ pasos para una entrada
     > $$3 *f(\frac{n}{4}) \leq \delta *f(n) \Rightarrow \frac{3n}{4} \leq \delta *n $$
     >
     > Si tomamos $\delta = \frac{3}{4}$ vemos que se cumple esta condición, y como $\frac{3}{4} < 1$ cumple con todo. Concluimos así por el teorema del maestro que $T(n) = O(f(n))= O(n)$ 
+
+## 5) PotenciaSum
+
+Suponga que se tiene un método potencia que, dada un matriz cuadrada $A$ de orden $4 × 4$ y un número $n$, computa la matriz $A^n$. Dada una matriz cuadrada $A$ de orden $4 × 4$ y un número natural $n$ que es potencia de 2 (i.e $n=2^k$ para algún $k \geq 1$), desarrollar, utilizando la técnica de dividir y conquistar y el método potencia, un algoritmo que permita calcular: 
+
+$$A^1+A^2+A^3+...+A^n$$
+
+Procure que el algoritmo propuesto aplique el método potencia, sume y haga productos de matrices una cantidad estrictamente menor que $O(n)$ veces.
+
+    matriz potenciaSum(matriz A, int n) {
+            if (n == 1)
+                return A;
+            else
+                matriz sumMitadPot = potenciaSum(A, n/2)
+                matriz mediaPotencia = potencia(A, n/2)
+
+                return sumMitadPot + sumMitadPot * mediaPotencia
+    }
+
+> En cada llamada recursiva el tamaño del problema se reduce a la mitad, y la cantidad de llamados al metodo potencia, suma, y producto de matrices se puede aproximar por un árbol de recursión donde cada nivel tiene la mitad que la anterior. Por eso las llamadas a estas funciones es estrictamente menor como nos piden en la consigna.
+
+## 6) DistanciaMaxima
+
+Dado un árbol binario cualquiera, diseñar un algoritmo de dividir y conquistar que devuelva la máxima distancia entre dos nodos (es decir, máxima cantidad de ejes a atravesar). El algoritmo no debe hacer recorridos innecesarios sobre el árbol. Hint: para saber el camino más largo de un árbol, posiblemente necesite conocer más que sólo los caminos más largos de sus subárboles.
+
