@@ -286,3 +286,9 @@ Procure que el algoritmo propuesto aplique el método potencia, sume y haga prod
 
 Dado un árbol binario cualquiera, diseñar un algoritmo de dividir y conquistar que devuelva la máxima distancia entre dos nodos (es decir, máxima cantidad de ejes a atravesar). El algoritmo no debe hacer recorridos innecesarios sobre el árbol. Hint: para saber el camino más largo de un árbol, posiblemente necesite conocer más que sólo los caminos más largos de sus subárboles.
 
+$A_{m,n} = 
+ \begin{pmatrix}
+  a & b & c \\
+  d & e & f \\
+  g & h & i
+ \end{pmatrix}$
