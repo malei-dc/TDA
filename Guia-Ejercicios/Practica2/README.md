@@ -200,7 +200,7 @@ Calcule la complejidad de un algoritmo que utiliza $T(n)$ pasos para una entrada
     > - Comparamos $f(n)$ con $O(1)$, en este caso tenemos que $O(\sqrt{n}) > O(1)$ por lo tanto estamos en el caso 3 del teorema del maestro
     > - Para aplicar el caso 3, $f(n)$ tiene que cumplir que:
     > 
-    > $$\exists \delta < 1 \diagup a*f(\frac{n}{c}) \leq \delta*f(n)$$ 
+    > $$\exists \delta < 1 \diagup a*f(\frac{n}{c}) \leq \delta *f(n)$$ 
     >
     > - Reemplazando con los datos de nuestro caso nos queda:
     >
@@ -229,5 +229,35 @@ Calcule la complejidad de un algoritmo que utiliza $T(n)$ pasos para una entrada
     > Esto es $O(2^{\frac{n}{4}})$, asumiendo que $n$ es multiplo de 4 permitido por el enunciado. Muy parecido a 5 pero acá se reduce de a 4 por iteración.
  
 10. $T(n) = 2T(n/2) + log(n)$
+
+    > Tenemos que $a = 2$, $c = 2$, $f(n) = log(n)$
+    >
+    > - Calculamos $O(n^{log_2(2)}) = O(n^1) = O(n)$.
+    > - Comparamos $f(n)$ con $O(n)$, en este caso tenemos que $O(n) = O(n)$ por lo tanto estamos en el caso 2 del teorema del maestro.
+    >
+    > Entonces nos queda que $T(n) = O(n^{log_c(a)}log(n)) = O(n*log(n))$
+
 11. $T(n) = 3T(n/4)$
+
+    > Tenemos que $a = 3$, $c = 4$, $f(n) = 0$
+    >
+    > - Calculamos $O(n^{log_4(3)}) =  O(n^{0.792})$.
+    > - Acá no es necesario usar los casos del Teorema del Maestro, ya que no hay un término adicional $f(n)$ que modifique el crecimiento de la recurrencia.
+    >
+    > Así que nos queda que $T(n) = O(n^{0.792})$
+
 12. $T(n) = 3T(n/4) +n$
+
+    > Tenemos que $a = 3$, $c = 4$, $f(n) = n$
+    >
+    > - Calculamos $O(n^{log_4(3)}) =  O(n^{0.792})$.
+    > - Comparamos $f(n)$ con $O(n^{0.792})$, en este caso tenemos que $O(n^{0.792}) < O(n)$ por lo tanto estamos en el caso 3 del teorema del maestro.
+    > - Para aplicar el caso 3, $f(n)$ tiene que cumplir que:
+    > 
+    > $$\exists \delta < 1 \diagup a*f(\frac{n}{c}) \leq \delta *f(n)$$ 
+    >
+    > - Reemplazando con los datos de nuestro caso nos queda:
+    >
+    > $$3 *f(\frac{n}{4}) \leq \delta *f(n) \Rightarrow \frac{3n}{4} \leq \delta *n $$
+    >
+    > Si tomamos $\delta = \frac{3}{4}$ vemos que se cumple esta condición, y como $\frac{3}{4} < 1$ cumple con todo. Concluimos así por el teorema del maestro que $T(n) = O(f(n))= O(n)$ 
