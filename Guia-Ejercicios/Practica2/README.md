@@ -286,9 +286,24 @@ Procure que el algoritmo propuesto aplique el método potencia, sume y haga prod
 
 Dado un árbol binario cualquiera, diseñar un algoritmo de dividir y conquistar que devuelva la máxima distancia entre dos nodos (es decir, máxima cantidad de ejes a atravesar). El algoritmo no debe hacer recorridos innecesarios sobre el árbol. Hint: para saber el camino más largo de un árbol, posiblemente necesite conocer más que sólo los caminos más largos de sus subárboles.
 
-$A_{m,n} = 
- \begin{pmatrix}
-  a & b & c \\
-  d & e & f \\
-  g & h & i
- \end{pmatrix}$
+```c++ 
+int distanciaMax(Nodo nodo, int altura) { 
+    // Caso base: un nodo nulo tiene altura 0 y no contribuye a la distancia 
+    if (nodo == NULL) { 
+        *altura = 0; 
+        return 0; // La máxima distancia en un árbol vacío es 0 
+    }
+
+    int altIzq = 0, altDer = 0; // Inicializar alturas de subárboles
+    int distMaxIzq = distanciaMax(nodo->izq, &altIzq);
+    int distMaxDer = distanciaMax(nodo->der, &altDer);
+
+    // Actualiza la altura del nodo actual
+    *altura = 1 + max(altIzq, altDer);
+
+    // Calcula la distancia máxima pasando por el nodo actual
+    int distMaxActual = altIzq + altDer; // La distancia máxima a través del nodo actual
+
+    // Retorna el máximo entre las tres posibles distancias
+    return max(distMaxActual, max(distMaxIzq, distMaxDer));
+}
