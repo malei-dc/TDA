@@ -9,6 +9,7 @@ Escriba un algoritmo con dividir y conquistar que determine si un arreglo de tam
 
 Intente que su solución aproveche la técnica de modo que complejidad del algoritmo sea estrictamente menor a O(n2 ).
 
+```c++ 
     bool izquierdaDominante(vector &valores, int desde, int hasta)
         if (desde == hasta)     //caso base arreglo de 1 elemento
             return true
@@ -27,6 +28,7 @@ Intente que su solución aproveche la técnica de modo que complejidad del algor
             return izquierdaDominante(valores, desde, mitad) && izquierdaDominante(valores, mitad + 1, hasta);
         else
             return false;
+```
 
 > El algoritmo utiliza un enfoque de dividir y conquistar, donde se divide el arreglo en mitades y se realiza una comparación recursiva de las sumas de las mitades. Los principales pasos del algoritmo:
 >
@@ -66,6 +68,7 @@ Tenemos un arreglo $a = [a_1, a_2, . . . , a_n]$ de $n$ enteros distintos (posit
 
 Diseñar un algoritmo dividir y conquistar eficiente (de complejidad de orden estrictamente menor que lineal) que resuelva el problema. Calcule y justifique la complejidad del algoritmo dado.
 
+```c++
     int indiceEspejo(int arr[], int izquierda, int derecha) {
         while (izquierda <= derecha) {
             int medio = izquierda + (derecha - izquierda) / 2;
@@ -82,6 +85,7 @@ Diseñar un algoritmo dividir y conquistar eficiente (de complejidad de orden es
         }
         return -1; //No se encuentra en el arreglo
     }
+```
 
 > Aprovechamos que el arreglo es estrictamente creciente, si en un indice el valor del arreglo es mayor, también será mayor para los elemento posteriores del arreglo; analogamente si es menor. De esta forma podemos usar la busqueda binaria para resolver este problema donde el objetivo es escontrar que la posición del medio en el arreglo tenga el valor del índice, y si no, descartar la mitad correspondiente. Sabemos que la búsqueda binaria tiene complejidad $O(log(n))$ donde $n$ es la longitud del arreglo.
 
@@ -270,6 +274,7 @@ $$A^1+A^2+A^3+...+A^n$$
 
 Procure que el algoritmo propuesto aplique el método potencia, sume y haga productos de matrices una cantidad estrictamente menor que $O(n)$ veces.
 
+```c++
     matriz potenciaSum(matriz A, int n) {
             if (n == 1)
                 return A;
@@ -279,6 +284,7 @@ Procure que el algoritmo propuesto aplique el método potencia, sume y haga prod
 
                 return sumMitadPot + sumMitadPot * mediaPotencia
     }
+```
 
 > En cada llamada recursiva el tamaño del problema se reduce a la mitad, y la cantidad de llamados al metodo potencia, suma, y producto de matrices se puede aproximar por un árbol de recursión donde cada nivel tiene la mitad que la anterior. Por eso las llamadas a estas funciones es estrictamente menor como nos piden en la consigna.
 
